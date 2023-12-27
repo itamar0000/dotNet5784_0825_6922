@@ -14,7 +14,8 @@ namespace Stage0
         }
 
           private static void Welcome0825()
-        {
+        { 
+
             Console.WriteLine("Enter your name:");
             string? username = Console.ReadLine();
             Console.WriteLine("{0},welcome to my first console application", username);
