@@ -14,6 +14,7 @@ public record Engineer
     string Name,
     string Email,
     double Cost,
+    bool Active=false,
     DO.EngineerExperience Level = DO.EngineerExperience.Beginner
 )
 {

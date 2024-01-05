@@ -8,7 +8,7 @@
 /// <param name="DependensOnTask">current task depends on this task</param>
 public record Dependency
 (
-    int id,
+    int Id,
     int? DependentTask = null,
     int? DependensOnTask = null
 )
