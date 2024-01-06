@@ -1,7 +1,7 @@
-﻿using DalApi;
+﻿namespace Dal;
+using DalApi;
 using DO;
 
-namespace Dal;
 public class DependencyImplementation : IDependency
 {
     public int Create(Dependency item)
