@@ -27,7 +27,7 @@ public record Task
     DO.EngineerExperience? Complexity = null,
     DateTime? ScheduledDate = null,
     DateTime ?StartDate = null,
-    TimeSpan? RequiredEffortTime = null,
+    TimeSpan? RequiredEffortTime = null,    
     DateTime? DeadlineDate = null,
     DateTime? CompleteDate = null,
     string? Deliverables = null,

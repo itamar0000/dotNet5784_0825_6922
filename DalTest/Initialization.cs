@@ -53,14 +53,20 @@ public static class Initialization
 
             int level = s_rand.Next(1, 5);
             bool? _b = (id % 2) == 0 ? true : false;
-            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i],level*10000,(DO.EngineerExperience)level);
+            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i], level * 10000, (DO.EngineerExperience)level);
 
             s_dalEngineer!.Create(newEng);
         }
     }
     private static void createDependency()
     {
-      
+        int?[] dependentask = { 1, 2, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19 };
+        int?[] depenedsontask = { 0, 1, 2, 3, 2, 1, 2, 3, 4, 5, 6, 5, 7, 5, 8, 5, 9, 7, 10, 7, 11, 5, 12, 7, 13, 5, 14, 9, 15, 13, 16, 14, 5, 7, 4, 2 };
+        for (int i = 0; i < dependentask.Length; i++)
+        {
+            Dependency newDep = new(0, dependentask[i], depenedsontask[i]);
+            s_dalDependency!.Create(newDep);
+        }
     }
     private static void createTask()
     {
@@ -131,11 +137,24 @@ public static class Initialization
         for (int i = 0; i < tasks.Length; i++)
         {
             int level = s_rand.Next(5);
-            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now, false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(-s_rand.Next(60)));
-            s_dalTask!.Create(newTask); 
+            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now, false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(-s_rand.Next(60)), DateTime.Now.AddDays(s_rand.Next(60)), TimeSpan.FromDays(s_rand.Next(30, 60)), DateTime.Now.AddDays(120));
+            s_dalTask!.Create(newTask);
         }
-    }
 
+    }
+    public static void Do(IEngineer? dalEngineer, IDependency? dalDependency, ITask? dalTask)
+    {
+        s_dalEngineer = dalEngineer;
+        s_dalDependency = dalDependency;
+        s_dalTask = dalTask;
+        createDependency();
+        createEngineer();
+        createTask();
+    }
 }
+
+
+
+
 
 
