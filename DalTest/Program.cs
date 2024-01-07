@@ -21,7 +21,7 @@ internal class Program
             switch (a)
             {
                 case 1:
-                        Console.WriteLine("choose:\n" + "1.Create Engineer\n" + "2.Read Engineer\n" + "3.ReadAll Engineer\n" + "4.Update Engineer\n" + "5.Delete Engineer\n");
+                        Console.WriteLine("choose:\n" + "1.Create Engineer\n" + "2.Read Engineer\n" + "3.ReadAll Engineer\n" + "4.Update Engineer\n" + "5.Delete Engineer\n"+"6.Exit");
                         int b = int.Parse(Console.ReadLine()!);
                         switch (b)
                     {

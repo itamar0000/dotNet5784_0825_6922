@@ -51,9 +51,8 @@ public static class Initialization
                 id = s_rand.Next(100000000, 999999999);
             while (s_dalEngineer!.Read(id) != null);
 
-            int level = s_rand.Next(1, 5);
-            bool? _b = (id % 2) == 0 ? true : false;
-            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i], level * 10000, (DO.EngineerExperience)level);
+            int level = s_rand.Next(5);
+            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i], level * 10000+1000, (DO.EngineerExperience)level);
 
             s_dalEngineer!.Create(newEng);
         }
@@ -137,7 +136,7 @@ public static class Initialization
         for (int i = 0; i < tasks.Length; i++)
         {
             int level = s_rand.Next(5);
-            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now, false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(-s_rand.Next(60)), DateTime.Now.AddDays(s_rand.Next(60)), TimeSpan.FromDays(s_rand.Next(30, 60)), DateTime.Now.AddDays(120));
+            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now, false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(s_rand.Next(60)), DateTime.Now.AddDays(s_rand.Next(60)), TimeSpan.FromDays(s_rand.Next(30, 60)), DateTime.Now.AddDays(120));
             s_dalTask!.Create(newTask);
         }
 
