@@ -59,8 +59,8 @@ public static class Initialization
     }
     private static void createDependency()
     {
-        int?[] dependentask = { 1, 2, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19 };
-        int?[] depenedsontask = { 0, 1, 2, 3, 2, 1, 2, 3, 4, 5, 6, 5, 7, 5, 8, 5, 9, 7, 10, 7, 11, 5, 12, 7, 13, 5, 14, 9, 15, 13, 16, 14, 5, 7, 4, 2 };
+        int?[] dependentask = { 1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19,19 };
+        int?[] depenedsontask = { 0, 1, 2, 3, 3, 4, 5, 6, 5, 7, 5, 8, 5, 9, 7, 10, 7, 11, 5, 12, 7, 13, 5, 14, 9, 15, 13, 16, 14, 5, 7, 4, 2, 7 };
         for (int i = 0; i < dependentask.Length; i++)
         {
             Dependency newDep = new(0, dependentask[i], depenedsontask[i]);
