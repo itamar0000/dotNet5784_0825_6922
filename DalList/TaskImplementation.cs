@@ -50,7 +50,10 @@ public class TaskImplementation : ITask
     /// <param name="item"></param>
     public void Update(DO.Task item)
     {
+        Task? found = DataSource.Tasks.Find(task => item.Id == task.Id);
+        DateTime create = found.CreatedAtDate;
         Delete(item.Id);
+        item = item with { CreatedAtDate = create};
         DataSource.Tasks.Add(item);
     }
 }
