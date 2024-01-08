@@ -32,7 +32,8 @@ public record Task
     DateTime? CompleteDate = null,
     string? Deliverables = null,
     string? Remarks = null,
-    int? EngineerId = null
+    int? EngineerId = null,
+    bool isactive=true
 )
 {
     Task() : this(0, "", "", DateTime.Now) { }

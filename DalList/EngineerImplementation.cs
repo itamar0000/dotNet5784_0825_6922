@@ -62,6 +62,6 @@ public class EngineerImplementation : IEngineer
             throw new Exception($"Dependency with ID={item.Id} does not exist");
         }
         Delete(a.Id);
-        Create(a);
+        Create(item);
     }
 }

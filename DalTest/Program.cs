@@ -13,41 +13,55 @@ internal class Program
 
     static void Main(string[] args)
     {
-        try
-        {
+        
            Initialization.Do(s_dalEngineer,s_dalDependencys, s_dalTask);
             int a = 0;
             do
+            {
+            try
             {
                 Console.WriteLine("choose:\n" + "0.Exit\n" + "1.Open Engineer menu\n" + "2.Open Task menu\n" + "3.Open Dependency menu\n");
                 a = int.Parse(Console.ReadLine()!);
                 switch (a)
                 {
+                    case 0:
+                        {//exit
+                            break;
+                        }
                     case 1:
-                        {
+                        {//engineer menu
                             MenuEngineer();
                             break;
                         }
                     case 2:
-                        {
+                        {//Task menu
                             MenuTask();
                             break;
                         }
                     case 3:
-                        {
+                        {//dependency menu
                             MenuDependency();
+                            break;
+                        }
+                    default:
+                        {//invalid input
+                            Console.WriteLine("Invalid input");
                             break;
                         }
                 }
             }
+            catch (Exception e)
+            {//catch the exceptions that was thrown threw the try and print the message
+                Console.WriteLine(e.Message);
+            }
+            }
             while (a != 0);
-        }
-        catch (Exception)
-        {
-
-        }
+      
     }
-
+   /// <summary>
+   /// offers the user to choose what he wants to do with the task
+   /// 
+   /// </summary>
     private static void MenuTask()
     {
         Console.WriteLine("choose:\n" +
@@ -61,17 +75,17 @@ internal class Program
         switch (b)
         {
             case 1:
-                {
+                {//exit
                     break;
                 }
             case 2:
-                {
+                {//create
                     Task item = InputTask();
                     s_dalTask!.Create(item);
                     break;
                 }
             case 3:
-                {
+                {// read checks if task with this id exists and print the task if it exists and print error message if it doesnt
                     Console.WriteLine("Enter Task's id:\n");
                     int id = int.Parse(Console.ReadLine()!);
                     Task? item = s_dalTask!.Read(id);
@@ -81,7 +95,7 @@ internal class Program
                     break;
                 }
             case 4:
-                {
+                {// read all and print all the tasks
                     List<Task> newTasks = new();
                     newTasks = s_dalTask!.ReadAll();
                     foreach(Task item in newTasks)
@@ -91,22 +105,30 @@ internal class Program
                     break;
                 }
             case 5:
-                {
+                {// update checks if task with this id exists and if it does it updates it with the new values
                     int id = int.Parse(Console.ReadLine()!);
                     Task item = InputTask();
                     s_dalTask!.Update(item);
                     break;
                 }
             case 6:
-                {
+                {// delete checks if task with this id exists and if it does it deletes it
                     Console.WriteLine("Enter ID of task to delete: ");
                     int id = int.Parse(Console.ReadLine()!);
                     s_dalTask!.Delete(id);
                     break;
                 }
+            default:
+                {// invalid input
+                    Console.WriteLine("Invalid input");
+                    break;
+                }
         }
     }
-
+    /// <summary>
+    /// the function read all the values for the task 
+    /// </summary>
+    /// <returns></returns>
     private static Task InputTask()
     {
         Console.WriteLine("Enter Task's alias:\n");
@@ -134,7 +156,9 @@ internal class Program
                         remarks, engineerId);
         return item;
     }
-
+    /// <summary>
+    /// offers the user to choose what he wants to do with the engineer
+    /// </summary>
     private static void MenuEngineer()
     {
         Console.WriteLine("choose:\n" + "1.Create Engineer\n" + "2.Read Engineer\n" + "3.ReadAll Engineer\n" + "4.Update Engineer\n" + "5.Delete Engineer\n" + "6.Exit");
@@ -142,19 +166,8 @@ internal class Program
         switch (b)
         {
             case 1:
-                {
-                    Console.WriteLine("Enter your ID:");
-                    int id = int.Parse(Console.ReadLine()!);
-                    Console.WriteLine("Enter your name:");
-                    string username = Console.ReadLine()!;
-                    Console.WriteLine("Enter your email:");
-                    string useremail = Console.ReadLine()!;
-                    Console.WriteLine("Enter your experience:");
-                    int exp = int.Parse(Console.ReadLine()!);
-                    Console.WriteLine("Enter your salary:");
-                    int cost = int.Parse(Console.ReadLine()!);
-                    Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
-                    s_dalEngineer!.Create(engineer);
+                {// create
+                    InputEngineer();
                     break;
                 }
             case 2:
@@ -183,24 +196,80 @@ internal class Program
                 }
             case 4:
                 {
-                    Console.WriteLine("Enter your ID:");
-                    int id = int.Parse(Console.ReadLine()!);
-                    Console.WriteLine("Enter your name:");
-                    string username = Console.ReadLine()!;
-                    Console.WriteLine("Enter your email:");
-                    string useremail = Console.ReadLine()!;
-                    Console.WriteLine("Enter your experience:");
-                    int exp = int.Parse(Console.ReadLine()!);
-                    Console.WriteLine("Enter your salary:");
-                    int cost = int.Parse(Console.ReadLine()!);
-                    Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
-                    s_dalEngineer!.Update(engineer);
+                    updateEngineer();
                     break;
                 }
+            case 5:
+                {
+                    Console.WriteLine("Enter Engineer's ID to delete:");
+                    int del=int.Parse(Console.ReadLine()!);
+                    s_dalEngineer!.Delete(del);
+                    break;
+                }
+
             case 0:
                 break;
+            default:
+                {
+                    Console.WriteLine("Invalid input");
+                    break;
+                }
         }
     }
+
+    private static void updateEngineer()
+    {
+        Console.WriteLine("Enter your ID:");
+        int id = int.Parse(Console.ReadLine()!);
+        Engineer? a = s_dalEngineer.Read(id);
+        if(a!=null)
+        {
+            Console.WriteLine(a);
+        }
+        else
+        {
+            Console.WriteLine("Engineer with this ID does not exist");
+        }
+        Console.WriteLine("Enter your name:");
+        string username = Console.ReadLine()!;
+        if (username == "")
+        {
+            username = s_dalEngineer!.Read(id).Name;
+        }
+        Console.WriteLine("Enter your email:");
+        string useremail = Console.ReadLine()!;
+        if (useremail == "")
+        {
+            useremail = s_dalEngineer!.Read(id).Email;
+        }
+        Console.WriteLine("Enter your experience:");
+         int exp= (int.Parse(Console.ReadLine()));
+          Console.WriteLine("Enter your salary:");
+        int cost = int.Parse(Console.ReadLine()!);
+        Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
+        s_dalEngineer!.Update(engineer);
+    }
+    /// <summary>
+    /// get the values foe the engineer
+    /// </summary>
+    private static void InputEngineer()
+    {
+        Console.WriteLine("Enter your ID:");
+        int id = int.Parse(Console.ReadLine()!);
+        Console.WriteLine("Enter your name:");
+        string username = Console.ReadLine()!;
+        Console.WriteLine("Enter your email:");
+        string useremail = Console.ReadLine()!;
+        Console.WriteLine("Enter your experience:");
+        int exp = int.Parse(Console.ReadLine()!);
+        Console.WriteLine("Enter your salary:");
+        int cost = int.Parse(Console.ReadLine()!);
+        Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
+        s_dalEngineer!.Create(engineer);
+    }
+    /// <summary>
+    /// offer the user action to do on the Dependency
+    /// </summary>
     private static void MenuDependency()
     {
         Console.WriteLine("0.Exit\n" + "choose:\n" + "1.Create Dependency\n" + "2.Read Dependency\n" + "3.ReadAll Dependency\n" + "4.Update Dpenedency\n" + "5.Delete Dependency");
@@ -208,13 +277,13 @@ internal class Program
         switch (b)
         {
             case 1:
-                {
+                {//create
                     Dependency dependency = getInputDependency();
                     s_dalDependencys.Create(dependency);
                     break;
                 }
             case 2:
-                {
+                {// checks if dependency with this id exists if it is output it else write a message
                     Console.WriteLine("Enter Dependency ID");
                     Dependency? check = s_dalDependencys!.Read(int.Parse(Console.ReadLine()!));
                     if (check != null)
@@ -228,10 +297,10 @@ internal class Program
                     break;
                 }
             case 3:
-                {
+                {// print all the dependencies
                     List<DO.Dependency> newDependencies = new();
                     newDependencies = s_dalDependencys!.ReadAll();
-                    foreach(Dependency dependency in newDependencies)
+                    foreach (Dependency dependency in newDependencies)
                     {
                         Console.WriteLine(dependency);
                     }
@@ -239,7 +308,7 @@ internal class Program
                 }
             case 4:
                 {
-
+                    // checks if dependency with this id exists if it is update its values
                     Console.WriteLine("Enter Dependency ID");
                     int id = int.Parse(Console.ReadLine()!);
                     Dependency a = s_dalDependencys.Read(id);
@@ -248,30 +317,40 @@ internal class Program
                     s_dalDependencys.Update(x);
                     break;
                 }
+            case 5:
+                {// delete the dependency with this id if exsits
+                    Console.WriteLine("Enter Dependency's ID to delete:");
+                    int del = int.Parse(Console.ReadLine()!);
+                    s_dalDependencys!.Delete(del);
+                    break;
+                }
             case 0:
-                break;
+                {//exit
+                    break;
+                }
+            default:
+                {//invalid input
+                    Console.WriteLine("Invalid input");
+                    break;
+                }
+
         }
 
     }
-
+    /// <summary>
+    /// get the values for the dependency
+    /// </summary>
+    /// <returns></returns>
     private static Dependency getInputDependency()
     {
         Console.WriteLine("Enter task that depends ID");
-        int? id = int.Parse(Console.ReadLine());
+        int id = int.Parse(Console.ReadLine()!);
         Console.WriteLine("Enter the tas it depends on ID");
-        int? id2 = int.Parse(Console.ReadLine());
+        int id2 = int.Parse(Console.ReadLine()!);
         Dependency dependency = new(0, id, id2);
         return dependency;
     }
-}
 
-    private static Dependency getInputDependency()
-    {
-        Console.WriteLine("Enter task that depends ID");
-        int? id = int.Parse(Console.ReadLine());
-        Console.WriteLine("Enter the tas it depends on ID");
-        int? id2 = int.Parse(Console.ReadLine());
-        Dependency dependency = new(0, id, id2);
-        return dependency;
-    }
+
+   
 }
