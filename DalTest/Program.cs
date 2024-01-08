@@ -80,14 +80,36 @@ internal class Program
                 }
             case 2:
                 {//create
-                    Task item = InputTask();
+                    Console.WriteLine("Enter Task's alias:\n");
+                    string? alias = Console.ReadLine();
+                    Console.WriteLine("Enter Task's description:\n");
+                    string? description = Console.ReadLine();
+                    Console.WriteLine("Enter Task's complexity:\n");
+                    DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
+                    Console.WriteLine("Enter Task's scheduled date:\n");
+                    bool flag = DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate);
+                    Console.WriteLine("Enter Task's start date:\n");
+                    flag = DateTime.TryParse(Console.ReadLine(), out DateTime start);
+                    Console.WriteLine("Enter Task's required effort time:\n");
+                    flag = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required);
+                    Console.WriteLine("Enter Task's deadline date:\n");
+                    flag = DateTime.TryParse(Console.ReadLine(), out DateTime deadline);
+                    Console.WriteLine("Enter Task's deliverables:\n");
+                    string? deliverables = Console.ReadLine();
+                    Console.WriteLine("Enter Task's remarks:\n");
+                    string? remarks = Console.ReadLine();
+                    Console.WriteLine("Enter Task's engineer Id:\n");
+                    flag = int.TryParse(Console.ReadLine(), out int engineerId);
+                    Task item = new(0, alias, description, DateTime.Now, false, Complexity,
+                                    scheduledDate, start, required, deadline, null, deliverables,
+                                    remarks, engineerId);
                     s_dalTask!.Create(item);
                     break;
                 }
             case 3:
                 {// read checks if task with this id exists and print the task if it exists and print error message if it doesnt
                     Console.WriteLine("Enter Task's id:\n");
-                    int id = int.Parse(Console.ReadLine()!);
+                    bool flag = int.TryParse(Console.ReadLine(), out int id);
                     Task? item = s_dalTask!.Read(id);
                     if (item != null)
                         Console.WriteLine(item);
@@ -106,15 +128,71 @@ internal class Program
                 }
             case 5:
                 {// update checks if task with this id exists and if it does it updates it with the new values
+                    Console.WriteLine("Enter ID of task to update: ");
                     int id = int.Parse(Console.ReadLine()!);
-                    Task item = InputTask();
+
+                    Task? found = s_dalTask.Read(id);
+                    if (found == null)
+                    {
+                        Console.WriteLine("Task with this ID does not exist");
+                        break;
+                    }
+
+                    Console.WriteLine("Enter Task's alias:\n");
+                    string? alias = Console.ReadLine();
+                    if (alias == "")
+                        alias = found.Alias;
+                    Console.WriteLine("Enter Task's description:\n");
+                    string? description = Console.ReadLine();
+                    if (description == "")
+                        description = found.Description;
+                    Console.WriteLine("Enter Task's complexity:\n");
+                    DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
+                    Console.WriteLine("Enter Task's scheduled date:\n");
+                    DateTime? scheduledDate = found.ScheduledDate;
+                    bool flag = DateTime.TryParse(Console.ReadLine(), out DateTime temp);
+                    if (flag)
+                        scheduledDate = temp;
+                    Console.WriteLine("Enter Task's start date:\n");
+                    DateTime? start = found.StartDate;
+                    flag = DateTime.TryParse(Console.ReadLine(), out temp);
+                    if(flag)
+                        start = temp;
+                    Console.WriteLine("Enter Task's required effort time:\n");
+                    TimeSpan? required = found.RequiredEffortTime;
+                    flag = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan tempTS);
+                    if(flag)
+                        required = tempTS;
+                    Console.WriteLine("Enter Task's deadline date:\n");
+                    DateTime? deadline = found.DeadlineDate;
+                    flag = DateTime.TryParse(Console.ReadLine(), out temp);
+                    if(flag)
+                        deadline = temp;
+                    Console.WriteLine("Enter Task's deliverables:\n");
+                    string? deliverables = Console.ReadLine();
+                    if(deliverables == "")
+                        deliverables = found.Deliverables;
+                    Console.WriteLine("Enter Task's remarks:\n");
+                    string? remarks = Console.ReadLine();
+                    if(remarks == "")
+                        remarks = found.Remarks;
+                    Console.WriteLine("Enter Task's engineer Id:\n");
+                    int? engineerId = found.EngineerId;
+                    flag = int.TryParse(Console.ReadLine(), out int tempInt);
+                    if(flag)
+                        engineerId = tempInt;
+
+                    Task item = new(0, alias, description, DateTime.Now, false, Complexity,
+                                    scheduledDate, start, required, deadline, null, deliverables,
+                                    remarks, engineerId);
+                    
                     s_dalTask!.Update(item);
                     break;
                 }
             case 6:
                 {// delete checks if task with this id exists and if it does it deletes it
                     Console.WriteLine("Enter ID of task to delete: ");
-                    int id = int.Parse(Console.ReadLine()!);
+                    bool flag = int.TryParse(Console.ReadLine(), out int id);
                     s_dalTask!.Delete(id);
                     break;
                 }
