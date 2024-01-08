@@ -24,7 +24,7 @@ public class TaskImplementation : ITask
     public void Delete(int id)
     {
         Task? found = DataSource.Tasks.Find(task => id == task.Id);
-        if (found == null||found.isactive==false) throw new Exception($"Task with ID = {id} does not exist");
+        if (found == null||found.IsActive==false) throw new Exception($"Task with ID = {id} does not exist");
         else DataSource.Tasks.Remove(found);
     }
     /// <summary>
@@ -35,7 +35,7 @@ public class TaskImplementation : ITask
     public DO.Task? Read(int id)
     {
         Task? found = DataSource.Tasks.Find(task => id == task.Id);
-        if ((found != null) && (found.isactive == true)) return found;
+        if ((found != null) && (found.IsActive == true)) return found;
         return null;
     }
     /// <summary>
@@ -52,9 +52,9 @@ public class TaskImplementation : ITask
     /// <param name="item"></param>
     public void Update(DO.Task item)
     {
-        Task? found = DataSource.Tasks.Find(task =>( item.Id == task.Id && task.isactive==true));
+        Task? found = DataSource.Tasks.Find(task => (item.Id == task.Id && task.IsActive == true));
         DateTime create = found.CreatedAtDate;
-        Delete(item.Id);
+        DataSource.Tasks.Remove(found);
         item = item with { CreatedAtDate = create};
         DataSource.Tasks.Add(item);
     }

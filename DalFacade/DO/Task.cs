@@ -33,7 +33,7 @@ public record Task
     string? Deliverables = null,
     string? Remarks = null,
     int? EngineerId = null,
-    bool isactive=true
+    bool IsActive=true
 )
 {
     Task() : this(0, "", "", DateTime.Now) { }
