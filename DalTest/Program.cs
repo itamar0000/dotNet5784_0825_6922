@@ -132,6 +132,7 @@ internal class Program
                     int id = int.Parse(Console.ReadLine()!);
 
                     Task? found = s_dalTask.Read(id);
+                    Console.WriteLine(found);
                     if (found == null)
                     {
                         Console.WriteLine("Task with this ID does not exist");
@@ -182,7 +183,7 @@ internal class Program
                     if(flag)
                         engineerId = tempInt;
 
-                    Task item = new(0, alias, description, DateTime.Now, false, Complexity,
+                    Task item = new(id, alias, description, DateTime.Now, false, Complexity,
                                     scheduledDate, start, required, deadline, null, deliverables,
                                     remarks, engineerId);
                     
@@ -202,37 +203,6 @@ internal class Program
                     break;
                 }
         }
-    }
-    /// <summary>
-    /// the function read all the values for the task 
-    /// </summary>
-    /// <returns></returns>
-    private static Task InputTask()
-    {
-        Console.WriteLine("Enter Task's alias:\n");
-        string? alias = Console.ReadLine();
-        Console.WriteLine("Enter Task's description:\n");
-        string? description = Console.ReadLine();
-        Console.WriteLine("Enter Task's complexity:\n");
-        DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
-        Console.WriteLine("Enter Task's scheduled date:\n");
-        DateTime scheduledDate = DateTime.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter Task's start date:\n");
-        DateTime start = DateTime.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter Task's required effort time:\n");
-        TimeSpan required = TimeSpan.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter Task's deadline date:\n");
-        DateTime deadline = DateTime.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter Task's deliverables:\n");
-        string? deliverables = Console.ReadLine();
-        Console.WriteLine("Enter Task's remarks:\n");
-        string? remarks = Console.ReadLine();
-        Console.WriteLine("Enter Task's engineer Id:\n");
-        int? engineerId = int.Parse(Console.ReadLine());
-        Task item = new(0, alias, description, DateTime.Now, false, Complexity,
-                        scheduledDate, start, required, deadline, null, deliverables,
-                        remarks, engineerId);
-        return item;
     }
     /// <summary>
     /// offers the user to choose what he wants to do with the engineer
@@ -323,7 +293,11 @@ internal class Program
         Console.WriteLine("Enter your experience:");
          int exp= (int.Parse(Console.ReadLine()));
           Console.WriteLine("Enter your salary:");
-        int cost = int.Parse(Console.ReadLine()!);
+         bool flag=double.TryParse(Console.ReadLine()!,out double cost);
+        if (!flag)
+        {
+            cost = a.Cost;
+        }   
         Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
         s_dalEngineer!.Update(engineer);
     }
@@ -390,19 +364,21 @@ internal class Program
                     Console.WriteLine("Enter ID of task to update");
                     int id = int.Parse(Console.ReadLine()!);
                     Dependency x = s_dalDependencys!.Read(id);
+                    Console.WriteLine(x);
                     Console.WriteLine("Enter task that depends ID");
-                    bool flag= int.TryParse(Console.ReadLine()!,out int id1);
-                    if (!flag)
+                    int? id3= x.DependentTask,id4=x.DependensOnTask;
+                    bool flag = int.TryParse(Console.ReadLine()!, out int id1);
+                    if (flag)
                     {
-                       id1= x.Id;
+                        id3 = id1;
                     }
                     Console.WriteLine("Enter the task it depends on ID");
                     flag= int.TryParse(Console.ReadLine()!,out int id2);
-                    if (!flag)
+                    if (flag)
                     {
-                        id2 = x.Id;
+                        id4 = id2;
                     }
-                    Dependency dependency = new(x.Id, id1, id2);
+                    Dependency dependency = new(x.Id, id3, id4);
                     s_dalDependencys.Update(dependency);
                     break;
                 }

@@ -53,9 +53,8 @@ public class TaskImplementation : ITask
     public void Update(DO.Task item)
     {
         Task? found = DataSource.Tasks.Find(task => (item.Id == task.Id && task.IsActive == true));
-        DateTime create = found.CreatedAtDate;
         DataSource.Tasks.Remove(found);
-        item = item with { CreatedAtDate = create};
+        item = item with { CreatedAtDate = item.CreatedAtDate };
         DataSource.Tasks.Add(item);
     }
 }

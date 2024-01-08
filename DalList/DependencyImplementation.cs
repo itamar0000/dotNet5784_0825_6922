@@ -58,7 +58,7 @@ public class DependencyImplementation : IDependency
         {
             throw new Exception($"Dependency with ID={item.Id} does not exist");
         }
-        Delete(a.Id);
-        Create(a);
+        DataSource.Dependencys.Remove(a);
+        DataSource.Dependencys.Add(item);
     }
 }

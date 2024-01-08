@@ -29,7 +29,7 @@ public class EngineerImplementation : IEngineer
         {
             DataSource.Engineers.Remove(a);
         }
-        else { throw new Exception($"Dependency with ID={id} already exist"); }
+        else { throw new Exception($"Engineer with ID={id} already exist"); }
     }
     /// <summary>
     /// checks if an item with this id exists if it is returns the item otherwise return null
