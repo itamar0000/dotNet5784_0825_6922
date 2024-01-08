@@ -309,12 +309,23 @@ internal class Program
             case 4:
                 {
                     // checks if dependency with this id exists if it is update its values
-                    Console.WriteLine("Enter Dependency ID");
+                    Console.WriteLine("Enter ID of task to update");
                     int id = int.Parse(Console.ReadLine()!);
-                    Dependency a = s_dalDependencys.Read(id);
-                    Console.WriteLine(a);
-                    Dependency x = getInputDependency();
-                    s_dalDependencys.Update(x);
+                    Dependency x = s_dalDependencys!.Read(id);
+                    Console.WriteLine("Enter task that depends ID");
+                    bool flag= int.TryParse(Console.ReadLine()!,out int id1);
+                    if (!flag)
+                    {
+                       id1= x.Id;
+                    }
+                    Console.WriteLine("Enter the task it depends on ID");
+                    flag= int.TryParse(Console.ReadLine()!,out int id2);
+                    if (!flag)
+                    {
+                        id2 = x.Id;
+                    }
+                    Dependency dependency = new(x.Id, id1, id2);
+                    s_dalDependencys.Update(dependency);
                     break;
                 }
             case 5:
