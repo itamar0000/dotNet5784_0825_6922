@@ -53,7 +53,7 @@ public class TaskImplementation : ITask
         Task? found = DataSource.Tasks.Find(task => item.Id == task.Id);
         DateTime create = found.CreatedAtDate;
         Delete(item.Id);
-        item = item with { CreatedAtDate = create };
+        item = item with { CreatedAtDate = create};
         DataSource.Tasks.Add(item);
     }
 }

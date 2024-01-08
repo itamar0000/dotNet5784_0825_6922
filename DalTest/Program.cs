@@ -15,7 +15,7 @@ internal class Program
     {
         try
         {
-            Initialization.Do(s_dalEngineer, s_dalDependencys, s_dalTask);
+           Initialization.Do(s_dalEngineer,s_dalDependencys, s_dalTask);
             int a = 0;
             do
             {
@@ -84,7 +84,7 @@ internal class Program
                 {
                     List<Task> newTasks = new();
                     newTasks = s_dalTask!.ReadAll();
-                    foreach (Task item in newTasks)
+                    foreach(Task item in newTasks)
                     {
                         Console.WriteLine(item);
                     }
@@ -175,7 +175,7 @@ internal class Program
                 {
                     List<DO.Engineer> newEngineers = new();
                     newEngineers = s_dalEngineer!.ReadAll();
-                    foreach (Engineer item in newEngineers)
+                    foreach(Engineer item in newEngineers)
                     {
                         Console.WriteLine(item);
                     }
@@ -231,7 +231,7 @@ internal class Program
                 {
                     List<DO.Dependency> newDependencies = new();
                     newDependencies = s_dalDependencys!.ReadAll();
-                    foreach (Dependency dependency in newDependencies)
+                    foreach(Dependency dependency in newDependencies)
                     {
                         Console.WriteLine(dependency);
                     }
@@ -253,6 +253,17 @@ internal class Program
         }
 
     }
+
+    private static Dependency getInputDependency()
+    {
+        Console.WriteLine("Enter task that depends ID");
+        int? id = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter the tas it depends on ID");
+        int? id2 = int.Parse(Console.ReadLine());
+        Dependency dependency = new(0, id, id2);
+        return dependency;
+    }
+}
 
     private static Dependency getInputDependency()
     {
