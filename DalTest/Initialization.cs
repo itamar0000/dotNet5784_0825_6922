@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 
 /// <summary>
-/// 
+/// initialize the database
 /// </summary>
 public static class Initialization
 {
@@ -13,6 +13,10 @@ public static class Initialization
 
     private static readonly Random s_rand = new();
 
+    /// <summary>
+    /// the function does the creation of engineers with data
+    /// and adds them to the DAL while ensuring unique IDs for each engineer.
+    /// </summary>
     private static void createEngineer()
     {
         string[] EngineerNames =
@@ -65,8 +69,11 @@ public static class Initialization
             s_dalEngineer!.Create(newEng);
         }
     }
+
     /// <summary>
-    /// 
+    /// the function does the creation of dependencies between tasks and
+    /// adds them to the DAL. The dependencies are based on the relationships
+    /// specified in the 'dependentask' and 'depenedsontask' arrays.
     /// </summary>
     private static void createDependency()
     {
@@ -86,8 +93,9 @@ public static class Initialization
             s_dalDependency!.Create(newDep);
         }
     }
+
     /// <summary>
-    /// 
+    /// the function does the creation of tasks with data and adds them to the DAL.
     /// </summary>
     private static void createTask()
     {
@@ -200,16 +208,11 @@ public static class Initialization
 
             s_dalTask!.Create(newTask);
         }
-
     }
 
     /// <summary>
-    /// 
+    /// Initialize the entities of DAL
     /// </summary>
-    /// <param name="dalEngineer"></param>
-    /// <param name="dalDependency"></param>
-    /// <param name="dalTask"></param>
-    /// <exception cref="NullReferenceException"></exception>
     public static void Do(IEngineer? dalEngineer, IDependency? dalDependency, ITask? dalTask)
     {
         s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
