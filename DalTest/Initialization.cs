@@ -153,7 +153,18 @@ public static class Initialization
     3,  // Post-Implementation Review
     2,  // Project Closure
     3,  // Security Audit
-    2  // Capacity Planning
+    2,  // Capacity Planning
+    3,  //Usability Testing
+    4,  //Regulatory Compliance Assessment
+    4,  //Data Migration
+    0,  //Continuous Integration/Continuous Deployment (CI/CD) Implementation
+    2,  //Change Management
+    1,  //Stakeholder Communication
+    3,  //User Feedback Collection
+    4,  //Disaster Recovery Planning
+    3,  //Performance Monitoring and Optimization
+    1,  //Technology Stack Evaluation
+    4,  //Technology Stack Adjustment
         };
         for (int i = 0; i < tasks.Length; i++)
         {
