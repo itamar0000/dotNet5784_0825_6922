@@ -48,11 +48,11 @@ public static class Initialization
         {
             int id;
             do
-                id = s_rand.Next(100000000, 999999999);
+                id = s_rand.Next(200000000, 400000000);
             while (s_dalEngineer!.Read(id) != null);
 
             int level = s_rand.Next(5);
-            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i], level * 10000+1000, (DO.EngineerExperience)level);
+            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i], level * 100 + 30, (DO.EngineerExperience)level);
 
             s_dalEngineer!.Create(newEng);
         }
@@ -70,47 +70,69 @@ public static class Initialization
     private static void createTask()
     {
         string[] tasks = {"Requirement Analysis",
-    "Feasibility Study",
-    "System Architecture Design",
-    "Component Specification",
-    "Hardware Procurement",
-    "Software Development",
-    "Prototyping",
-    "Integration Testing",
-    "Quality Assurance Testing",
-    "User Training",
-    "System Deployment",
-    "Performance Testing",
-    "Bug Fixing",
-    "User Acceptance Testing",
-    "Final Documentation",
-    "Project Sign-off",
-    "Post-Implementation Review",
-    "Project Closure",
-    "Security Audit",
-    "Capacity Planning"
+  "Feasibility Study",
+  "System Architecture Design",
+  "Component Specification",
+  "Hardware Procurement",
+  "Software Development",
+  "Prototyping",
+  "Integration Testing",
+  "Quality Assurance Testing",
+  "User Training",
+  "System Deployment",
+  "Performance Testing",
+  "Bug Fixing",
+  "User Acceptance Testing",
+  "Final Documentation",
+  "Project Sign-off",
+  "Post-Implementation Review",
+  "Project Closure",
+  "Security Audit",
+  "Capacity Planning",
+  "Usability Testing",
+  "Regulatory Compliance Assessment",
+  "Data Migration",
+  "Continuous Integration/Continuous Deployment (CI/CD) Implementation",
+  "Change Management",
+  "Stakeholder Communication",
+  "User Feedback Collection",
+  "Disaster Recovery Planning",
+  "Performance Monitoring and Optimization",
+  "Technology Stack Evaluation",
+  "Technology Stack Adjustment"
         };
-        string[] descriptions = { "Understand what needs to be done in the project.",
-    "Check if it's possible and makes sense to do the project.",
-    "Plan how the system will be built.",
-    "Describe in detail what each part of the system should be like.",
-    "Buy the necessary hardware for the system.",
-    "Write the actual code for the software components.",
-    "Make a simple version of the system to test its basic features.",
-    "Put all the pieces together and make sure they work well.",
-    "Test the system thoroughly to find and fix any problems.",
-    "Create all the necessary documents about the system.",
-    "Teach the users how to use the system.",
-    "Put the system into use for everyone.",
-    "Test how well the system performs in different situations.",
-    "Fix any issues or problems in the system.",
-    "Let users try out the system to make sure they like it.",
-    "Finish all the documentation for the system.",
-    "Get formal approval to finish the project.",
-    "Look back at the project and see what went well and what can be improved.",
-    "Officially finish the project, making sure everything is done.",
-    "Check the security of the software.",
-    "Plan for the system's capacity and resources."};
+        string[] descriptions = {  "Understand what needs to be done in the project.",
+  "Check if it's possible and makes sense to do the project.",
+  "Plan how the system will be built.",
+  "Describe in detail what each part of the system should be like.",
+  "Buy the necessary hardware for the system.",
+  "Write the actual code for the software components.",
+  "Make a simple version of the system to test its basic features.",
+  "Put all the pieces together and make sure they work well.",
+  "Test the system thoroughly to find and fix any problems.",
+  "Create all the necessary documents about the system.",
+  "Teach the users how to use the system.",
+  "Put the system into use for everyone.",
+  "Test how well the system performs in different situations.",
+  "Fix any issues or problems in the system.",
+  "Let users try out the system to make sure they like it.",
+  "Finish all the documentation for the system.",
+  "Get formal approval to finish the project.",
+  "Look back at the project and see what went well and what can be improved.",
+  "Officially finish the project, making sure everything is done.",
+  "Check the security of the software.",
+  "Plan for the system's capacity and resources.",
+  "Evaluate the system's user interface and overall user experience.",
+  "Verify that the system complies with relevant regulations, standards, and legal requirements.",
+  "Plan and execute the transfer of data from existing systems to the newly developed system.",
+  "Establish automated processes for code integration, testing, and deployment.",
+  "Develop strategies and processes to manage and communicate changes effectively.",
+  "Maintain regular and transparent communication with project stakeholders.",
+  "Set up mechanisms to collect feedback from end-users during and after system deployment.",
+  "Develop a comprehensive plan for recovering the system in the event of unexpected disruptions.",
+  "Implement tools and processes to monitor the system's performance in real-time.",
+  "Assess and choose the appropriate technologies, frameworks, and tools for system development.",
+  "Adjust the technology stack based on evaluation and project requirements."};
 
         int[] complexity = {0,  // Requirement Analysis
     1,  // Feasibility Study
@@ -136,7 +158,7 @@ public static class Initialization
         for (int i = 0; i < tasks.Length; i++)
         {
             int level = s_rand.Next(5);
-            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now, false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(s_rand.Next(60)), DateTime.Now.AddDays(s_rand.Next(60)), TimeSpan.FromDays(s_rand.Next(30, 60)), DateTime.Now.AddDays(120));
+            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now.AddDays(-s_rand.Next(60)), false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(s_rand.Next(60)), DateTime.Now.AddDays(s_rand.Next(60)), TimeSpan.FromDays(s_rand.Next(30, 60)), DateTime.Now.AddDays(120));
             s_dalTask!.Create(newTask);
         }
 
