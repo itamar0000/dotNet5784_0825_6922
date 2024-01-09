@@ -1,11 +1,10 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
-using System.ComponentModel.Design;
-using System.Data.Common;
-using System.Net.Security;
-using System.Threading.Tasks;
 
+/// <summary>
+/// 
+/// </summary>
 public static class Initialization
 {
     private static IEngineer? s_dalEngineer; //stage 1
@@ -18,8 +17,13 @@ public static class Initialization
     {
         string[] EngineerNames =
         {
-            "Alex Turner", "Elena Rodriguez", "Oscar Chang", "Mia Patel", "Dylan Sullivan", "Grace Wang", "Jordan Foster", "Isabella Kim", "Nathan Carter", "Sophie Nguyen", "Ethan Murphy", "Ava Martinez", "Liam Williams", "Olivia Lee", "Logan Davis", "Emily Hernandez", "Caleb Brown", "Zoe Smith", "Mason Johnson", "Ella Jones"
+            "Alex Turner", "Elena Rodriguez", "Oscar Chang", "Mia Patel",
+            "Dylan Sullivan", "Grace Wang", "Jordan Foster", "Isabella Kim",
+            "Nathan Carter", "Sophie Nguyen", "Ethan Murphy", "Ava Martinez",
+            "Liam Williams", "Olivia Lee", "Logan Davis", "Emily Hernandez",
+            "Caleb Brown", "Zoe Smith", "Mason Johnson", "Ella Jones"
         };
+
         string[] Engineeremails =
         {
             "alex.turner@example.com",
@@ -52,21 +56,39 @@ public static class Initialization
             while (s_dalEngineer!.Read(id) != null);
 
             int level = s_rand.Next(5);
-            Engineer newEng = new(id, EngineerNames[i], Engineeremails[i], level * 100 + 30, (DO.EngineerExperience)level);
+            Engineer newEng = new(id,
+                EngineerNames[i],
+                Engineeremails[i],
+                level * 100 + 30,
+                (DO.EngineerExperience)level);
 
             s_dalEngineer!.Create(newEng);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private static void createDependency()
     {
-        int?[] dependentask = { 1, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19,19 };
-        int?[] depenedsontask = { 0, 1, 2, 3, 3, 4, 5, 6, 5, 7, 5, 8, 5, 9, 7, 10, 7, 11, 5, 12, 7, 13, 5, 14, 9, 15, 13, 16, 14, 5, 7, 4, 2, 7 };
+        
+        
+        int?[] dependentask = new int?[] { 1, 2, 3, 4, 4, 4, 5, 5, 5, 6, 7, 7, 8,
+            9, 10, 10, 11, 11, 11, 12, 13, 14, 14, 18, 19, 19, 19, 20, 20, 20, 23,
+            23, 23, 24, 24, 25, 25, 25, 26, 26, 27, 28, 28, 28, 29, 29, 29, 30, 30, 30, 30, 30 };
+
+        int?[] depenedsontask = new int?[] { 0, 1, 1, 1, 2, 3, 1, 2, 3, 5, 4, 5, 6,
+            6, 7, 8, 7, 8, 9, 10, 11, 11, 12, 13, 13, 14, 15, 13, 14, 16, 16, 17, 18,
+            17, 18, 18, 19, 20, 20, 21, 21, 21, 22, 23, 24, 25, 26, 25, 26, 27, 28, 29 };
+
         for (int i = 0; i < dependentask.Length; i++)
         {
             Dependency newDep = new(0, dependentask[i], depenedsontask[i]);
             s_dalDependency!.Create(newDep);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     private static void createTask()
     {
         string[] tasks = {"Requirement Analysis",
@@ -169,24 +191,32 @@ public static class Initialization
         for (int i = 0; i < tasks.Length; i++)
         {
             int level = s_rand.Next(5);
-            DO.Task newTask = new(0, tasks[i], descriptions[i], DateTime.Now.AddDays(-s_rand.Next(60)), false, (DO.EngineerExperience)complexity[i], DateTime.Now.AddDays(s_rand.Next(60)), DateTime.Now.AddDays(s_rand.Next(60)), TimeSpan.FromDays(s_rand.Next(30, 60)), DateTime.Now.AddDays(120));
+            DO.Task newTask = new(0,
+                tasks[i],
+                descriptions[i],
+                DateTime.Now.AddDays(-s_rand.Next(60)),
+                false,
+                (DO.EngineerExperience)complexity[i]);
+
             s_dalTask!.Create(newTask);
         }
 
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dalEngineer"></param>
+    /// <param name="dalDependency"></param>
+    /// <param name="dalTask"></param>
+    /// <exception cref="NullReferenceException"></exception>
     public static void Do(IEngineer? dalEngineer, IDependency? dalDependency, ITask? dalTask)
     {
-        s_dalEngineer = dalEngineer;
-        s_dalDependency = dalDependency;
-        s_dalTask = dalTask;
+        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         createDependency();
         createEngineer();
         createTask();
     }
 }
-
-
-
-
-
-
