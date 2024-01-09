@@ -133,7 +133,7 @@ internal class Program
 
                     Task? found = s_dalTask.Read(id);
                     Console.WriteLine(found);
-                    if (found == null)
+                    if (found == null)//checks if the parse succseeded if it didnt reassign the old value
                     {
                         Console.WriteLine("Task with this ID does not exist");
                         break;
@@ -141,46 +141,46 @@ internal class Program
 
                     Console.WriteLine("Enter Task's alias:\n");
                     string? alias = Console.ReadLine();
-                    if (alias == "")
+                    if (alias == "")////checks if the input is valid else assign previous value
                         alias = found.Alias;
                     Console.WriteLine("Enter Task's description:\n");
                     string? description = Console.ReadLine();
-                    if (description == "")
+                    if (description == "")////checks if the input is valid else assign previous value
                         description = found.Description;
                     Console.WriteLine("Enter Task's complexity:\n");
                     DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
                     Console.WriteLine("Enter Task's scheduled date:\n");
                     DateTime? scheduledDate = found.ScheduledDate;
                     bool flag = DateTime.TryParse(Console.ReadLine(), out DateTime temp);
-                    if (flag)
+                    if (flag)//checks if the parse succseeded if it didnt reassign the old value
                         scheduledDate = temp;
                     Console.WriteLine("Enter Task's start date:\n");
                     DateTime? start = found.StartDate;
                     flag = DateTime.TryParse(Console.ReadLine(), out temp);
-                    if(flag)
+                    if(flag)//checks if the parse succseeded if it didnt reassign the old value
                         start = temp;
                     Console.WriteLine("Enter Task's required effort time:\n");
                     TimeSpan? required = found.RequiredEffortTime;
                     flag = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan tempTS);
-                    if(flag)
+                    if(flag)//checks if the parse succseeded if it didnt reassign the old value
                         required = tempTS;
                     Console.WriteLine("Enter Task's deadline date:\n");
                     DateTime? deadline = found.DeadlineDate;
                     flag = DateTime.TryParse(Console.ReadLine(), out temp);
-                    if(flag)
+                    if(flag)//checks if the parse succseeded if it didnt reassign the old value
                         deadline = temp;
                     Console.WriteLine("Enter Task's deliverables:\n");
                     string? deliverables = Console.ReadLine();
-                    if(deliverables == "")
+                    if(deliverables == "")//checks if the input is valid else assign previous value
                         deliverables = found.Deliverables;
                     Console.WriteLine("Enter Task's remarks:\n");
                     string? remarks = Console.ReadLine();
-                    if(remarks == "")
+                    if(remarks == "")//checks if the input is valid else assign previous value
                         remarks = found.Remarks;
                     Console.WriteLine("Enter Task's engineer Id:\n");
                     int? engineerId = found.EngineerId;
                     flag = int.TryParse(Console.ReadLine(), out int tempInt);
-                    if(flag)
+                    if(flag)//checks if the parse succseeded if it didnt reassign the old value
                         engineerId = tempInt;
 
                     Task item = new(id, alias, description, DateTime.Now, false, Complexity,
@@ -219,7 +219,7 @@ internal class Program
                     break;
                 }
             case 2:
-                {
+                {// checks if engineer with this id exists if it is print it else print error message
                     Console.WriteLine("Enter your ID:");
                     Engineer? check = s_dalEngineer!.Read(int.Parse(Console.ReadLine()!));
                     if (check != null)
@@ -233,7 +233,7 @@ internal class Program
                     break;
                 }
             case 3:
-                {
+                {// print all the engineers
                     List<DO.Engineer> newEngineers = new();
                     newEngineers = s_dalEngineer!.ReadAll();
                     foreach(Engineer item in newEngineers)
@@ -243,12 +243,12 @@ internal class Program
                     break;
                 }
             case 4:
-                {
+                {// checks if engineer with this id exists if it is update its values
                     updateEngineer();
                     break;
                 }
             case 5:
-                {
+                {// delete the engineer with this id if exsits
                     Console.WriteLine("Enter Engineer's ID to delete:");
                     int del=int.Parse(Console.ReadLine()!);
                     s_dalEngineer!.Delete(del);
@@ -264,30 +264,32 @@ internal class Program
                 }
         }
     }
-
+    /// <summary>
+    /// gets the values for the engineer and cehck if he exists update it
+    /// </summary>
     private static void updateEngineer()
     {
         Console.WriteLine("Enter your ID:");
         int id = int.Parse(Console.ReadLine()!);
         Engineer? a = s_dalEngineer.Read(id);
         if(a!=null)
-        {
+        {//checks if the object exists if it is prints it
             Console.WriteLine(a);
         }
         else
-        {
+        {// if it deosnt output a message
             Console.WriteLine("Engineer with this ID does not exist");
         }
         Console.WriteLine("Enter your name:");
         string username = Console.ReadLine()!;
         if (username == "")
-        {
+        {// checks if the input is valid else assign previous value
             username = s_dalEngineer!.Read(id).Name;
         }
         Console.WriteLine("Enter your email:");
         string useremail = Console.ReadLine()!;
         if (useremail == "")
-        {
+        {// checks if the input is valid else assign previous value
             useremail = s_dalEngineer!.Read(id).Email;
         }
         Console.WriteLine("Enter your experience:");
@@ -295,14 +297,14 @@ internal class Program
           Console.WriteLine("Enter your salary:");
          bool flag=double.TryParse(Console.ReadLine()!,out double cost);
         if (!flag)
-        {
+        {// checks if the parse succseeded if it didnt reassign the old value
             cost = a.Cost;
         }   
         Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
         s_dalEngineer!.Update(engineer);
     }
     /// <summary>
-    /// get the values foe the engineer
+    /// get the values for the engineer
     /// </summary>
     private static void InputEngineer()
     {
@@ -339,11 +341,11 @@ internal class Program
                     Console.WriteLine("Enter Dependency ID");
                     Dependency? check = s_dalDependencys!.Read(int.Parse(Console.ReadLine()!));
                     if (check != null)
-                    {
+                    {//checks if the object exists if it is prnts it 
                         Console.WriteLine(check);
                     }
                     else
-                    {
+                    {//if it deosnt output a message
                         Console.WriteLine("Dependency with this ID does not exist");
                     }
                     break;
@@ -369,13 +371,13 @@ internal class Program
                     int? id3= x.DependentTask,id4=x.DependensOnTask;
                     bool flag = int.TryParse(Console.ReadLine()!, out int id1);
                     if (flag)
-                    {
+                    {// checks if the input is valid
                         id3 = id1;
                     }
                     Console.WriteLine("Enter the task it depends on ID");
                     flag= int.TryParse(Console.ReadLine()!,out int id2);
                     if (flag)
-                    {
+                    {// checks if the input is valid
                         id4 = id2;
                     }
                     Dependency dependency = new(x.Id, id3, id4);
