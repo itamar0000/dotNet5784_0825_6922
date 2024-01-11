@@ -7,11 +7,12 @@ using DO;
 /// </summary>
 public static class Initialization
 {
-    private static IEngineer? s_dalEngineer; //stage 1
-    private static IDependency? s_dalDependency; //stage 1
-    private static ITask? s_dalTask; //stage 1
+    private static IDal? s_dal;
 
     private static readonly Random s_rand = new();
+    private const int MIN_ID = 200000000;
+    private const int MAX_ID = 400000000;
+
 
     /// <summary>
     /// the function does the creation of engineers with data
@@ -56,8 +57,8 @@ public static class Initialization
         {
             int id;
             do
-                id = s_rand.Next(200000000, 400000000);
-            while (s_dalEngineer!.Read(id) != null);
+                id = s_rand.Next(MIN_ID, MAX_ID);   
+            while (s_dal!.Engineer.Read(id) != null);
 
             int level = s_rand.Next(5);
             Engineer newEng = new(id,
@@ -66,7 +67,7 @@ public static class Initialization
                 level * 100 + 30,
                 (DO.EngineerExperience)level);
 
-            s_dalEngineer!.Create(newEng);
+            s_dal!.Engineer.Create(newEng);
         }
     }
 
@@ -90,7 +91,7 @@ public static class Initialization
         for (int i = 0; i < dependentask.Length; i++)
         {
             Dependency newDep = new(0, dependentask[i], depenedsontask[i]);
-            s_dalDependency!.Create(newDep);
+            s_dal!.Dependency.Create(newDep);
         }
     }
 
@@ -206,18 +207,19 @@ public static class Initialization
                 false,
                 (DO.EngineerExperience)complexity[i]);
 
-            s_dalTask!.Create(newTask);
+           s_dal!.Task.Create(newTask);
         }
     }
 
     /// <summary>
     /// Initialize the entities of DAL
     /// </summary>
-    public static void Do(IEngineer? dalEngineer, IDependency? dalDependency, ITask? dalTask)
+    public static void Do(IDal dal)
     {
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalStudent = dalStudent ?? throw new NullReferenceException("DAL object can not be null!"); //stage 1
+        //s_dalCourse = dalCourse ?? throw new NullReferenceException("DAL object can not be null!"); //stage 1
+        //s_dalLink = dalStudentInCourse ?? throw new NullReferenceException("DAL object can not be null!"); //stage 1
+        s_dal = dal?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createDependency();
         createEngineer();
         createTask();

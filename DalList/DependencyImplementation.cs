@@ -2,7 +2,7 @@
 using DalApi;
 using DO;
 
-public class DependencyImplementation : IDependency
+internal class DependencyImplementation : IDependency
 {
     /// <summary>
     ///  check if item already exists if it doesnt it add this item to the list

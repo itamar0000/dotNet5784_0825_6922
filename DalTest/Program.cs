@@ -6,16 +6,13 @@ using System.Transactions;
 
 internal class Program
 {
-    private static IEngineer? s_dalEngineer = new EngineerImplementation();
-    private static ITask? s_dalTask = new TaskImplementation();
-    private static IDependency? s_dalDependencys = new DependencyImplementation();
-
+    static readonly IDal s_dal = new DalList();
     /// <summary>
     /// Initialize and manage the menu and catch exceptions
     /// </summary>
     static void Main(string[] args)
     {
-           Initialization.Do(s_dalEngineer,s_dalDependencys, s_dalTask);
+           Initialization.Do(s_dal);
 
             int a = 0;
             do
@@ -95,7 +92,7 @@ internal class Program
                     Console.WriteLine("Enter Task's id:\n");
                     bool flag = int.TryParse(Console.ReadLine(), out int id);
 
-                    Task? item = s_dalTask!.Read(id);
+                    Task? item = s_dal!.Task.Read(id);
 
                     if (item != null)
                         Console.WriteLine(item);
@@ -108,7 +105,7 @@ internal class Program
             case 4:
                 {// read all and print all the tasks
                     List<Task> newTasks = new();
-                    newTasks = s_dalTask!.ReadAll();
+                    newTasks = s_dal!.Task.ReadAll();
 
                     foreach(Task item in newTasks)
                     {
@@ -125,7 +122,7 @@ internal class Program
                 {// delete checks if task with this id exists and if it does it deletes it
                     Console.WriteLine("Enter ID of task to delete: ");
                     bool flag = int.TryParse(Console.ReadLine(), out int id);
-                    s_dalTask!.Delete(id);
+                    s_dal!.Task.Delete(id);
                     break;
                 }
             default:
@@ -180,7 +177,7 @@ internal class Program
                         scheduledDate, start, required, deadline, null, deliverables,
                         remarks, engineerId);
 
-        s_dalTask!.Create(item);
+        s_dal!.Task.Create(item);
     }
 
     /// <summary>
@@ -191,7 +188,7 @@ internal class Program
         Console.WriteLine("Enter ID of task to update: ");
         int id = int.Parse(Console.ReadLine()!);
 
-        Task? found = s_dalTask.Read(id);
+        Task? found =  s_dal.Task.Read(id);
         Console.WriteLine(found);
 
         if (found == null)//checks if the parse succseeded if it didnt reassign the old value
@@ -259,7 +256,7 @@ internal class Program
                         scheduledDate, start, required, deadline, null, deliverables,
                         remarks, engineerId);
 
-        s_dalTask!.Update(item);
+        s_dal!.Task.Update(item);
     }
 
     /// <summary>
@@ -286,7 +283,7 @@ internal class Program
             case 2:
                 {// checks if engineer with this id exists if it is print it else print error message
                     Console.WriteLine("Enter your ID:");
-                    Engineer? check = s_dalEngineer!.Read(int.Parse(Console.ReadLine()!));
+                    Engineer? check = s_dal!.Engineer.Read(int.Parse(Console.ReadLine()!));
 
                     if (check != null)
                     {
@@ -301,7 +298,7 @@ internal class Program
             case 3:
                 {// print all the engineers
                     List<DO.Engineer> newEngineers = new();
-                    newEngineers = s_dalEngineer!.ReadAll();
+                    newEngineers = s_dal!.Engineer.ReadAll();
 
                     foreach(Engineer item in newEngineers)
                     {
@@ -318,7 +315,7 @@ internal class Program
                 {// delete the engineer with this id if exsits
                     Console.WriteLine("Enter Engineer's ID to delete:");
                     int del=int.Parse(Console.ReadLine()!);
-                    s_dalEngineer!.Delete(del);
+                    s_dal!.Engineer.Delete(del);
                     break;
                 }
 
@@ -340,7 +337,7 @@ internal class Program
         Console.WriteLine("Enter your ID:");
         int id = int.Parse(Console.ReadLine()!);
 
-        Engineer? a = s_dalEngineer.Read(id);
+        Engineer? a = s_dal.Engineer.Read(id);
 
         if (a != null) 
         {//checks if the object exists if it is prints it
@@ -355,14 +352,14 @@ internal class Program
         string username = Console.ReadLine()!;
         if (username == "")
         {// checks if the input is valid else assign previous value
-            username = s_dalEngineer!.Read(id).Name;
+            username = s_dal!.Engineer.Read(id).Name;
         }
 
         Console.WriteLine("Enter your email:");
         string useremail = Console.ReadLine()!;
         if (useremail == "")
         {// checks if the input is valid else assign previous value
-            useremail = s_dalEngineer!.Read(id).Email;
+            useremail = s_dal!.Engineer.Read(id).Email;
         }
 
         Console.WriteLine("Enter your experience:");
@@ -376,7 +373,7 @@ internal class Program
         }
 
         Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
-        s_dalEngineer!.Update(engineer);
+        s_dal!.Engineer.Update(engineer);
     }
 
     /// <summary>
@@ -400,7 +397,7 @@ internal class Program
         int cost = int.Parse(Console.ReadLine()!);
         
         Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
-        s_dalEngineer!.Create(engineer);
+        s_dal!.Engineer.Create(engineer);
     }
 
     /// <summary>
@@ -422,13 +419,13 @@ internal class Program
             case 1:
                 {//create
                     Dependency dependency = getInputDependency();
-                    s_dalDependencys.Create(dependency);
+                    s_dal.Dependency.Create(dependency);
                     break;
                 }
             case 2:
                 {// checks if dependency with this id exists if it is output it else write a message
                     Console.WriteLine("Enter Dependency ID");
-                    Dependency? check = s_dalDependencys!.Read(int.Parse(Console.ReadLine()!));
+                    Dependency? check = s_dal!.Dependency.Read(int.Parse(Console.ReadLine()!));
 
                     if (check != null)
                     {//checks if the object exists if it is prnts it 
@@ -444,7 +441,7 @@ internal class Program
             case 3:
                 {// print all the dependencies
                     List<DO.Dependency> newDependencies = new();
-                    newDependencies = s_dalDependencys!.ReadAll();
+                    newDependencies = s_dal!.Dependency.ReadAll();
 
                     foreach (Dependency dependency in newDependencies)
                     {
@@ -459,7 +456,7 @@ internal class Program
                     Console.WriteLine("Enter ID of task to update");
                     int id = int.Parse(Console.ReadLine()!);
 
-                    Dependency x = s_dalDependencys!.Read(id);
+                    Dependency x = s_dal!.Dependency.Read(id);
 
                     Console.WriteLine(x);
                     Console.WriteLine("Enter task that depends ID");
@@ -479,7 +476,7 @@ internal class Program
                     }
 
                     Dependency dependency = new(x.Id, id3, id4);
-                    s_dalDependencys.Update(dependency);
+                    s_dal.Dependency.Update(dependency);
 
                     break;
                 }
@@ -487,7 +484,7 @@ internal class Program
                 {// delete the dependency with this id if exsits
                     Console.WriteLine("Enter Dependency's ID to delete:");
                     int del = int.Parse(Console.ReadLine()!);
-                    s_dalDependencys!.Delete(del);
+                    s_dal!.Dependency.Delete(del);
                     break;
                 }
             case 0:

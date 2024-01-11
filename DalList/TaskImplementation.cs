@@ -2,7 +2,7 @@
 using DalApi;
 using DO;
 
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     /// <summary>
     /// check if item already exists if it doesnt it add this item to the list
@@ -54,7 +54,7 @@ public class TaskImplementation : ITask
     public void Update(DO.Task item)
     {
         Task? found = DataSource.Tasks.Find(task => (item.Id == task.Id && task.IsActive == true));
-        DataSource.Tasks.Remove(found);
+        DataSource.Tasks.RemoveAll(x=>x.Id == item.Id);
         item = item with { CreatedAtDate = item.CreatedAtDate };
         DataSource.Tasks.Add(item);
     }

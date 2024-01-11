@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System.Security.Cryptography.X509Certificates;
 
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
 /// <summary>
 ///  check if item already exists if it doesnt it add this item to the list and create it his id
