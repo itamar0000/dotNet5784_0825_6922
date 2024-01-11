@@ -39,7 +39,7 @@ internal class DependencyImplementation : IDependency
     /// <summary>
     /// copy the list into a new list
     /// </summary>
-    IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
+    public IEnumerable<DO.Dependency?> ReadAll(Func<Dependency?, bool>? filter = null)
     {
         if (filter == null)
             return DataSource.Dependencys.Select(item => item);
