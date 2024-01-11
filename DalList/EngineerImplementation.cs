@@ -41,9 +41,16 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// copy the list into another list
     /// </summary>
-    public List<Engineer> ReadAll()
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer?,bool>?filter=null)
     {
-        return new List<Engineer>(DataSource.Engineers);
+       if(filter==null)
+        {
+            return DataSource.Engineers.Select(a => a);
+        }
+       else
+        {
+            return DataSource.Engineers.Where(filter);
+        }    
     }
 
     /// <summary>
@@ -58,5 +65,9 @@ internal class EngineerImplementation : IEngineer
         }
         Delete(a.Id);
         Create(item);
+    }
+    public Engineer? Read(Func<Engineer, bool> filter)
+    {
+        return DataSource.Engineers.FirstOrDefault(filter);
     }
 }

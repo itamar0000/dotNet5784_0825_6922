@@ -24,7 +24,7 @@ internal class DependencyImplementation : IDependency
     {
         Dependency? a = Read(id);
         if (a==null) { throw new Exception($"Dependency with ID={id} does not exist"); }
-        DataSource.Dependencys.Remove(a);
+        DataSource.Dependencys.RemoveAll(x=>x.Id==id);
     }
     
     /// <summary>
@@ -32,21 +32,25 @@ internal class DependencyImplementation : IDependency
     /// </summary>
     public Dependency? Read(int id)
     {
-        return DataSource.Dependencys.Find(x => x.Id == id);
+        return DataSource.Dependencys.FirstOrDefault(item => item.Id == id); ;
 
     }
 
     /// <summary>
     /// copy the list into a new list
     /// </summary>
-    public List<Dependency> ReadAll()
+    IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        return new List<Dependency>(DataSource.Dependencys);
+        if (filter == null)
+            return DataSource.Dependencys.Select(item => item);
+        else
+            return DataSource.Dependencys.Where(filter);
+
     }
 
-/// <summary>
-/// checks if item with the same id exists if it is deletes it and recreate it with updated values
-/// </summary>
+    /// <summary>
+    /// checks if item with the same id exists if it is deletes it and recreate it with updated values
+    /// </summary>
     public void Update(Dependency item)
     {
         Dependency? a = Read(item.Id);
@@ -56,5 +60,9 @@ internal class DependencyImplementation : IDependency
         }
         DataSource.Dependencys.Remove(a);
         DataSource.Dependencys.Add(item);
+    }
+    public Dependency? Read(Func<Dependency, bool> filter)
+    {
+        return DataSource.Dependencys.FirstOrDefault(filter);
     }
 }

@@ -43,9 +43,16 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// copy the list into a new list
     /// </summary>
-    public List<DO.Task> ReadAll()
+    public IEnumerable<DO.Task> ReadAll(Func<Task?,bool>?filter=null)
     {
-        return new List<Task>(DataSource.Tasks);
+        if(filter==null)
+        {
+            return DataSource.Tasks.Select(task => task);
+        }
+        else
+        {
+            return DataSource.Tasks.Where(filter);
+        }
     }
 
     /// <summary>
@@ -57,5 +64,9 @@ internal class TaskImplementation : ITask
         DataSource.Tasks.RemoveAll(x=>x.Id == item.Id);
         item = item with { CreatedAtDate = item.CreatedAtDate };
         DataSource.Tasks.Add(item);
+    }
+    public DO.Task? Read(Func<DO.Task, bool> filter)
+    {
+        return DataSource.Tasks.FirstOrDefault(filter);
     }
 }
