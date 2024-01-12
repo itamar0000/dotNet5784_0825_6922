@@ -47,10 +47,8 @@ internal class EngineerImplementation : IEngineer
         {
             return DataSource.Engineers.Select(a => a);
         }
-       else
-        {
-            return DataSource.Engineers.Where(filter);
-        }    
+        return DataSource.Engineers.Where(filter);
+      
     }
 
     /// <summary>

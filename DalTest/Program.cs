@@ -104,10 +104,8 @@ internal class Program
                 }
             case 4:
                 {// read all and print all the tasks
-                    List<Task> newTasks = new();
-                    newTasks = s_dal!.Task.ReadAll();
-
-                    foreach(Task item in newTasks)
+                    var newTasks = s_dal!.Task.ReadAll();
+                    foreach (Task? item in newTasks)
                     {
                         Console.WriteLine(item);
                     }
@@ -148,16 +146,16 @@ internal class Program
         DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
 
         Console.WriteLine("Enter Task's scheduled date:\n");
-        bool flag = DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate);
+        if(DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate))
 
         Console.WriteLine("Enter Task's start date:\n");
-        flag = DateTime.TryParse(Console.ReadLine(), out DateTime start);
+        if(DateTime.TryParse(Console.ReadLine(), out DateTime start))
 
         Console.WriteLine("Enter Task's required effort time:\n");
-        flag = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required);
+        if(TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required))
 
         Console.WriteLine("Enter Task's deadline date:\n");
-        flag = DateTime.TryParse(Console.ReadLine(), out DateTime deadline);
+        if(DateTime.TryParse(Console.ReadLine(), out DateTime deadline))
 
         Console.WriteLine("Enter Task's deliverables:\n");
         string? deliverables = Console.ReadLine();
@@ -167,12 +165,10 @@ internal class Program
 
         Console.WriteLine("Enter Task's engineer Id:\n");
         int? engineerId = null; //put null as deafault
-        flag = int.TryParse(Console.ReadLine(), out int engineerId1);
-        if(flag)    //if we success to takes engineerId1 - put it in the new task
+        if(int.TryParse(Console.ReadLine(), out int engineerId1))   //if we success to takes engineerId1 - put it in the new task
         {
             engineerId= engineerId1;
-        };
-
+        }
         Task item = new(0, alias, description, DateTime.Now, false, Complexity,
                         scheduledDate, start, required, deadline, null, deliverables,
                         remarks, engineerId);
@@ -297,10 +293,8 @@ internal class Program
                 }
             case 3:
                 {// print all the engineers
-                    List<DO.Engineer> newEngineers = new();
-                    newEngineers = s_dal!.Engineer.ReadAll();
-
-                    foreach(Engineer item in newEngineers)
+                    var newEngineers = s_dal!.Engineer.ReadAll();
+                    foreach(Engineer? item in newEngineers)
                     {
                         Console.WriteLine(item);
                     }
@@ -308,7 +302,7 @@ internal class Program
                 }
             case 4:
                 {// checks if engineer with this id exists if it is update its values
-                    updateEngineer();
+                    UpdateEngineer();
                     break;
                 }
             case 5:
@@ -332,7 +326,7 @@ internal class Program
     /// <summary>
     /// gets the values for the engineer and check if he exists and update it
     /// </summary>
-    private static void updateEngineer()
+    private static void UpdateEngineer()
     {
         Console.WriteLine("Enter your ID:");
         int id = int.Parse(Console.ReadLine()!);
@@ -363,7 +357,7 @@ internal class Program
         }
 
         Console.WriteLine("Enter your experience:");
-        int exp= (int.Parse(Console.ReadLine()));
+        int exp= (int.Parse(Console.ReadLine()!));
 
         Console.WriteLine("Enter your salary:");
         bool flag=double.TryParse(Console.ReadLine()!,out double cost);
@@ -418,7 +412,7 @@ internal class Program
         {
             case 1:
                 {//create
-                    Dependency dependency = getInputDependency();
+                    Dependency dependency = GetInputDependency();
                     s_dal.Dependency.Create(dependency);
                     break;
                 }
@@ -440,10 +434,8 @@ internal class Program
                 }
             case 3:
                 {// print all the dependencies
-                    List<DO.Dependency> newDependencies = new();
-                    newDependencies = s_dal!.Dependency.ReadAll();
-
-                    foreach (Dependency dependency in newDependencies)
+                    var newDependencies = s_dal!.Dependency.ReadAll();
+                    foreach (Dependency? dependency in newDependencies)
                     {
                         Console.WriteLine(dependency);
                     }
@@ -504,7 +496,7 @@ internal class Program
     /// <summary>
     /// get the values for the dependency
     /// </summary>
-    private static Dependency getInputDependency()
+    private static Dependency GetInputDependency()
     {
         Console.WriteLine("Enter task that depends ID");
         int id = int.Parse(Console.ReadLine()!);

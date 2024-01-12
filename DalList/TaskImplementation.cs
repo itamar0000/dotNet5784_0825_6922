@@ -43,7 +43,7 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// copy the list into a new list
     /// </summary>
-    public IEnumerable<DO.Task> ReadAll(Func<Task?,bool>?filter=null)
+    public IEnumerable<DO.Task?> ReadAll(Func<Task?,bool>?filter=null)
     {
         if(filter==null)
         {
