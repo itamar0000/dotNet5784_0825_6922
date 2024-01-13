@@ -23,7 +23,7 @@ internal class DependencyImplementation : IDependency
     public void Delete(int id)
     {
         Dependency? a = Read(id);
-        if (a==null) { throw new Exception($"Dependency with ID={id} does not exist"); }
+        if (a==null) { throw new DalDoesNotExistException($"Dependency with ID = {id} does not exist"); }
         DataSource.Dependencys.RemoveAll(x=>x.Id==id);
     }
     
@@ -56,7 +56,7 @@ internal class DependencyImplementation : IDependency
         Dependency? a = Read(item.Id);
         if (a == null)
         {
-            throw new Exception($"Dependency with ID={item.Id} does not exist");
+            throw new DalDoesNotExistException($"Dependency with ID = {item.Id} does not exist");
         }
         DataSource.Dependencys.Remove(a);
         DataSource.Dependencys.Add(item);

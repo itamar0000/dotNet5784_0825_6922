@@ -12,7 +12,7 @@ internal class EngineerImplementation : IEngineer
     public int Create(Engineer item)
     {
        
-        if (!(Read(item.Id)==null)) { throw new NullReferenceException("\"Object from type Engineer with this ID already exsists\""); }
+        if (!(Read(item.Id)==null)) { throw new DalAlreadyExistsException("\"Object from type Engineer with this ID already exsists\""); }
         DataSource.Engineers.Add(item); 
         return item.Id;
     }       
@@ -27,7 +27,7 @@ internal class EngineerImplementation : IEngineer
         {
             DataSource.Engineers.Remove(a);
         }
-        else { throw new Exception($"Engineer with ID={id} already exist"); }
+        else { throw new DalDoesNotExistException($"Engineer with ID = {id} does not exist"); }
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ internal class EngineerImplementation : IEngineer
         Engineer? a = Read(item.Id);
         if ( a== null)
         {
-            throw new Exception($"Dependency with ID={item.Id} does not exist");
+            throw new DalDoesNotExistException($"Dependency with ID = {item.Id} does not exist");
         }
         Delete(a.Id);
         Create(item);

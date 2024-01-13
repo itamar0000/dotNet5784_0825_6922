@@ -21,7 +21,7 @@ internal class TaskImplementation : ITask
     public void Delete(int id)
     {
         Task? found = DataSource.Tasks.Find(task => (id == task.Id) && task.IsActive);
-        if (found == null) throw new Exception($"Task with ID = {id} does not exist");
+        if (found == null) throw new DalDoesNotExistException($"Task with ID = {id} does not exist");
         else
         {
             Task item = found with { IsActive = false };
