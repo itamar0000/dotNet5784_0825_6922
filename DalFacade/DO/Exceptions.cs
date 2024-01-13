@@ -1,6 +1,4 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 
 /// <summary>
 /// Exception for variable that does not exist

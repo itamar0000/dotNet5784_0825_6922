@@ -35,9 +35,8 @@ internal class TaskImplementation : ITask
     /// </summary>
     public DO.Task? Read(int id)
     {
-        Task? found = DataSource.Tasks.Find(task => id == task.Id);
-        if ((found != null) && (found.IsActive == true)) return found;
-        return null;
+      
+        return DataSource.Tasks.FirstOrDefault(item=>item.Id==id);
     }
 
     /// <summary>

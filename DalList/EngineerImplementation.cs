@@ -35,7 +35,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public Engineer? Read(int  id)
     {
-       return DataSource.Engineers.Find(a =>(a.Id==id));
+       return DataSource.Engineers.FirstOrDefault(item => item.Id == id);
     }
 
     /// <summary>
