@@ -32,8 +32,7 @@ internal class DependencyImplementation : IDependency
     /// </summary>
     public Dependency? Read(int id)
     {
-        return DataSource.Dependencys.FirstOrDefault(item => item.Id == id); ;
-
+        return DataSource.Dependencys.FirstOrDefault(item => item.Id == id);
     }
 
     /// <summary>
@@ -61,6 +60,10 @@ internal class DependencyImplementation : IDependency
         DataSource.Dependencys.Remove(a);
         DataSource.Dependencys.Add(item);
     }
+
+    /// <summary>
+    /// the function gets a function and retrun the first value that suits the criterion else return deafualt
+    /// </summary>
     public Dependency? Read(Func<Dependency, bool> filter)
     {
         return DataSource.Dependencys.FirstOrDefault(filter);

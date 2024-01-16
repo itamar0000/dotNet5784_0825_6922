@@ -35,7 +35,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     public DO.Task? Read(int id)
     {
-        Task? found = DataSource.Tasks.Find(task => id == task.Id);
+        Task? found = DataSource.Tasks.FirstOrDefault(task => id == task.Id);
         if ((found != null) && (found.IsActive == true)) return found;
         return null;
     }
@@ -65,6 +65,10 @@ internal class TaskImplementation : ITask
         item = item with { CreatedAtDate = item.CreatedAtDate };
         DataSource.Tasks.Add(item);
     }
+
+    /// <summary>
+    /// the function gets a function and retrun the first value that suits the criterion else return deafualt
+    /// </summary>
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
         return DataSource.Tasks.FirstOrDefault(filter);

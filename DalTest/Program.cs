@@ -313,7 +313,7 @@ internal class Program
                     break;
                 }
 
-            case 0:
+            case 6:
                 break;
             default:
                 {
@@ -340,6 +340,7 @@ internal class Program
         else
         {// if it deosnt output a message
             Console.WriteLine("Engineer with this ID does not exist");
+            return;
         }
 
         Console.WriteLine("Enter your name:");
@@ -399,8 +400,8 @@ internal class Program
     /// </summary>
     private static void MenuDependency()
     {
-        Console.WriteLine("0.Exit\n" +
-            "choose:\n" +
+        Console.WriteLine("choose:\n" +
+            "0.Exit\n" +
             "1.Create Dependency\n" +
             "2.Read Dependency\n" +
             "3.ReadAll Dependency\n" +
@@ -449,6 +450,12 @@ internal class Program
                     int id = int.Parse(Console.ReadLine()!);
 
                     Dependency x = s_dal!.Dependency.Read(id);
+
+                    if(x == null)
+                    {
+                        Console.WriteLine($"\nDependency with this ID = {id} doesn't exists\n");
+                        return;
+                    }
 
                     Console.WriteLine(x);
                     Console.WriteLine("Enter task that depends ID");

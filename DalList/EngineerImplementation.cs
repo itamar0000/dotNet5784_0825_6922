@@ -35,7 +35,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public Engineer? Read(int  id)
     {
-       return DataSource.Engineers.Find(a =>(a.Id==id));
+       return DataSource.Engineers.FirstOrDefault(a =>(a.Id==id));
     }
 
     /// <summary>
@@ -64,6 +64,10 @@ internal class EngineerImplementation : IEngineer
         Delete(a.Id);
         Create(item);
     }
+
+    /// <summary>
+    /// the function gets a function and retrun the first value that suits the criterion else return deafualt
+    /// </summary>
     public Engineer? Read(Func<Engineer, bool> filter)
     {
         return DataSource.Engineers.FirstOrDefault(filter);

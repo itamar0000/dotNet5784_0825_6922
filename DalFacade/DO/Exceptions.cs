@@ -20,8 +20,11 @@ public class DalAlreadyExistsException : Exception
     public DalAlreadyExistsException(string? message) : base(message) { }
 }
 
-/*[Serializable]
+/// <summary>
+/// Exception for variable that must not be deleted
+/// </summary>
+[Serializable]
 public class DalDeletionImpossible : Exception
-{
+{   //this exception is not needed in this level !!!!
     public DalDeletionImpossible(string? message) : base(message) { }
-}*/
+}
