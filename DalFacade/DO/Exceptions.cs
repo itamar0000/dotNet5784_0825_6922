@@ -26,3 +26,11 @@ public class DalDeletionImpossible : Exception
 {   //this exception is not needed in this level !!!!
     public DalDeletionImpossible(string? message) : base(message) { }
 }
+
+/// <summary>
+/// 
+/// </summary>
+public class DalXMLFileLoadCreateException : Exception
+{
+    public DalXMLFileLoadCreateException(string? message) : base(message) { }
+}

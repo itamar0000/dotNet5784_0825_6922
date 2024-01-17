@@ -12,11 +12,11 @@ internal class Program
     /// </summary>
     static void Main(string[] args)
     {
-           Initialization.Do(s_dal);
+        Initialization.Do(s_dal);
 
-            int a = 0;
-            do
-            {
+        int a = 0;
+        do
+        {
             try
             {
                 Console.WriteLine("choose:\n" +
@@ -58,13 +58,13 @@ internal class Program
             {//catch the exceptions that was thrown threw the try and print the message
                 Console.WriteLine(e.Message);
             }
-            }
-            while (a != 0);
+        }
+        while (a != 0);
     }
 
-   /// <summary>
-   /// offers the user to choose what he wants to do with the task
-   /// </summary>
+    /// <summary>
+    /// offers the user to choose what he wants to do with the task
+    /// </summary>
     private static void MenuTask()
     {
         Console.WriteLine("choose:\n" +
@@ -97,7 +97,7 @@ internal class Program
                     if (item != null)
                         Console.WriteLine(item);
 
-                    else 
+                    else
                         Console.WriteLine("Task with this ID does not exist");
 
                     break;
@@ -143,21 +143,21 @@ internal class Program
         string? description = Console.ReadLine();
 
         Console.WriteLine("Enter Task's complexity:\n");
-        DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
+        DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()!));
 
         Console.WriteLine("Enter Task's scheduled date:\n");
-        if(DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate))
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate))
 
-        Console.WriteLine("Enter Task's start date:\n");
-        if(DateTime.TryParse(Console.ReadLine(), out DateTime start))
+            Console.WriteLine("Enter Task's start date:\n");
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime start))
 
-        Console.WriteLine("Enter Task's required effort time:\n");
-        if(TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required))
+            Console.WriteLine("Enter Task's required effort time:\n");
+        if (TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required))
 
-        Console.WriteLine("Enter Task's deadline date:\n");
-        if(DateTime.TryParse(Console.ReadLine(), out DateTime deadline))
+            Console.WriteLine("Enter Task's deadline date:\n");
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime deadline))
+            Console.WriteLine("Enter Task's deliverables:\n");
 
-        Console.WriteLine("Enter Task's deliverables:\n");
         string? deliverables = Console.ReadLine();
 
         Console.WriteLine("Enter Task's remarks:\n");
@@ -165,13 +165,27 @@ internal class Program
 
         Console.WriteLine("Enter Task's engineer Id:\n");
         int? engineerId = null; //put null as deafault
-        if(int.TryParse(Console.ReadLine(), out int engineerId1))   //if we success to takes engineerId1 - put it in the new task
+
+        if (int.TryParse(Console.ReadLine(), out int engineerId1))   // if we success to takes engineerId1 - put it in the new task
         {
-            engineerId= engineerId1;
+            engineerId = engineerId1;
         }
-        Task item = new(0, alias, description, DateTime.Now, false, Complexity,
-                        scheduledDate, start, required, deadline, null, deliverables,
-                        remarks, engineerId);
+
+        Task item = new
+        (
+            Id: 0,
+            Description: description,
+            Alias: alias,
+            CreatedAtDate: DateTime.Now,
+            Complexity: Complexity,
+            ScheduledDate: scheduledDate,
+            StartDate: start,
+            RequiredEffortTime: required,
+            DeadlineDate: deadline,
+            Deliverables: deliverables,
+            Remarks: remarks,
+            EngineerId: engineerId
+        );
 
         s_dal!.Task.Create(item);
     }
@@ -184,7 +198,7 @@ internal class Program
         Console.WriteLine("Enter ID of task to update: ");
         int id = int.Parse(Console.ReadLine()!);
 
-        Task? found =  s_dal.Task.Read(id);
+        Task? found = s_dal.Task.Read(id);
         Console.WriteLine(found);
 
         if (found == null)//checks if the parse succseeded if it didnt reassign the old value
@@ -294,7 +308,7 @@ internal class Program
             case 3:
                 {// print all the engineers
                     var newEngineers = s_dal!.Engineer.ReadAll();
-                    foreach(Engineer? item in newEngineers)
+                    foreach (Engineer? item in newEngineers)
                     {
                         Console.WriteLine(item);
                     }
@@ -308,7 +322,7 @@ internal class Program
             case 5:
                 {// delete the engineer with this id if exsits
                     Console.WriteLine("Enter Engineer's ID to delete:");
-                    int del=int.Parse(Console.ReadLine()!);
+                    int del = int.Parse(Console.ReadLine()!);
                     s_dal!.Engineer.Delete(del);
                     break;
                 }
@@ -333,7 +347,7 @@ internal class Program
 
         Engineer? a = s_dal.Engineer.Read(id);
 
-        if (a != null) 
+        if (a != null)
         {//checks if the object exists if it is prints it
             Console.WriteLine(a);
         }
@@ -358,10 +372,10 @@ internal class Program
         }
 
         Console.WriteLine("Enter your experience:");
-        int exp= (int.Parse(Console.ReadLine()!));
+        int exp = (int.Parse(Console.ReadLine()!));
 
         Console.WriteLine("Enter your salary:");
-        bool flag=double.TryParse(Console.ReadLine()!,out double cost);
+        bool flag = double.TryParse(Console.ReadLine()!, out double cost);
         if (!flag)
         {// checks if the parse succseeded if it didnt reassign the old value
             cost = a.Cost;
@@ -381,16 +395,16 @@ internal class Program
 
         Console.WriteLine("Enter your name:");
         string username = Console.ReadLine()!;
-        
+
         Console.WriteLine("Enter your email:");
         string useremail = Console.ReadLine()!;
-        
+
         Console.WriteLine("Enter your experience:");
         int exp = int.Parse(Console.ReadLine()!);
-        
+
         Console.WriteLine("Enter your salary:");
         int cost = int.Parse(Console.ReadLine()!);
-        
+
         Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
         s_dal!.Engineer.Create(engineer);
     }
@@ -451,7 +465,7 @@ internal class Program
 
                     Dependency x = s_dal!.Dependency.Read(id);
 
-                    if(x == null)
+                    if (x == null)
                     {
                         Console.WriteLine($"\nDependency with this ID = {id} doesn't exists\n");
                         return;
@@ -459,7 +473,7 @@ internal class Program
 
                     Console.WriteLine(x);
                     Console.WriteLine("Enter task that depends ID");
-                    int? id3= x.DependentTask,id4=x.DependensOnTask;
+                    int? id3 = x.DependentTask, id4 = x.DependensOnTask;
 
                     bool flag = int.TryParse(Console.ReadLine()!, out int id1);
                     if (flag)
@@ -468,7 +482,7 @@ internal class Program
                     }
 
                     Console.WriteLine("Enter the task it depends on ID");
-                    flag= int.TryParse(Console.ReadLine()!,out int id2);
+                    flag = int.TryParse(Console.ReadLine()!, out int id2);
                     if (flag)
                     {// checks if the input is valid
                         id4 = id2;
