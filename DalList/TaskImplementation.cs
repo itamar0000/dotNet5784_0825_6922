@@ -20,11 +20,11 @@ internal class TaskImplementation : ITask
     /// </summary>
     public void Delete(int id)
     {
-        Task? found = DataSource.Tasks.Find(task => (id == task.Id) && task.IsActive);
+        Task? found = DataSource.Tasks.Find(task => (id == task.Id) && task.isActive);
         if (found == null) throw new DalDoesNotExistException($"Task with ID = {id} does not exist");
         else
         {
-            Task item = found with { IsActive = false };
+            Task item = found with { isActive = false };
             DataSource.Tasks.RemoveAll(temp=> temp.Id == id);
             DataSource.Tasks.Add(item);
         }
@@ -36,7 +36,7 @@ internal class TaskImplementation : ITask
     public DO.Task? Read(int id)
     {
         Task? found = DataSource.Tasks.FirstOrDefault(task => id == task.Id);
-        if ((found != null) && (found.IsActive == true)) return found;
+        if ((found != null) && (found.isActive == true)) return found;
         return null;
     }
 
@@ -60,7 +60,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     public void Update(DO.Task item)
     {
-        Task? found = DataSource.Tasks.Find(task => (item.Id == task.Id && task.IsActive == true));
+        Task? found = DataSource.Tasks.Find(task => (item.Id == task.Id && task.isActive == true));
         DataSource.Tasks.RemoveAll(x=>x.Id == item.Id);
         item = item with { CreatedAtDate = item.CreatedAtDate };
         DataSource.Tasks.Add(item);

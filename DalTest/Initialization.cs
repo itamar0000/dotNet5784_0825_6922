@@ -165,38 +165,7 @@ public static class Initialization
   "Assess and choose the appropriate technologies, frameworks, and tools for system development.",
   "Adjust the technology stack based on evaluation and project requirements."};
 
-        int[] complexity = {0,  // Requirement Analysis
-    1,  // Feasibility Study
-    2,  // System Architecture Design
-    2,  // Component Specification
-    0,  // Hardware Procurement
-    2,  // Software Development
-    1,  // Prototyping
-    2,  // Integration Testing
-    2,  // Quality Assurance Testing
-    2,  // User Training
-    2,  // System Deployment
-    3,  // Performance Testing
-    2,  // Bug Fixing
-    2,  // User Acceptance Testing
-    2,  // Final Documentation
-    2,  // Project Sign-off
-    3,  // Post-Implementation Review
-    2,  // Project Closure
-    3,  // Security Audit
-    2,  // Capacity Planning
-    3,  //Usability Testing
-    4,  //Regulatory Compliance Assessment
-    4,  //Data Migration
-    0,  //Continuous Integration/Continuous Deployment (CI/CD) Implementation
-    2,  //Change Management
-    1,  //Stakeholder Communication
-    3,  //User Feedback Collection
-    4,  //Disaster Recovery Planning
-    3,  //Performance Monitoring and Optimization
-    1,  //Technology Stack Evaluation
-    4,  //Technology Stack Adjustment
-        };
+  
         for (int i = 0; i < tasks.Length; i++)
         {
             int level = s_rand.Next(5);
@@ -204,8 +173,8 @@ public static class Initialization
                 tasks[i],
                 descriptions[i],
                 DateTime.Now.AddDays(-s_rand.Next(60)),
-                false,
-                (DO.EngineerExperience)complexity[i]);
+                false
+                );
 
            s_dal!.Task.Create(newTask);
         }

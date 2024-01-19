@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfEngineer>
+<ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Engineer>
+    <Id>3231312</Id>
+    <Name>fmo</Name>
+    <Email>dme</Email>
+    <Cost>21</Cost>
+    <Level>Intermediate</Level>
+  </Engineer>
 </ArrayOfEngineer>

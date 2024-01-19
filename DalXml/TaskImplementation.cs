@@ -37,10 +37,10 @@ internal class TaskImplementation:ITask
         if (item == null) 
             throw new DalDoesNotExistException($"Task with ID = {id} does not exist");
 
-        if (!item.IsActive)
+        if (!item.isActive)
             throw new DalDeletionImpossible($"Task with ID = {id} is allready deleted (deactivated)");
 
-        Task updatedItem = item with { IsActive = false };
+        Task updatedItem = item with { isActive = false };
 
         taskslist.Remove(item);
         taskslist.Add(updatedItem);
@@ -57,7 +57,7 @@ internal class TaskImplementation:ITask
         if (item == null)
             throw new DalDoesNotExistException($"Task with ID = {id} does not exist");
 
-        if (!item.IsActive)
+        if (!item.isActive)
             throw new DalDeletionImpossible($"Task with ID = {id} is allready deleted (deactivated)");
 
         return item;
@@ -87,7 +87,7 @@ internal class TaskImplementation:ITask
     {
         List<Task> taskslist = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
 
-        Task? found = taskslist.Find(task => (item.Id == task.Id && task.IsActive == true));
+        Task? found = taskslist.Find(task => (item.Id == task.Id && task.isActive == true));
 
         if (found == null)
             throw new DalDoesNotExistException($"Task with ID = {item.Id} does not exist");

@@ -6,13 +6,14 @@ using System.Transactions;
 
 internal class Program
 {
-    static readonly IDal s_dal = new DalList();
+    // static readonly IDal s_dal = new DalList();
+    static readonly IDal s_dal = new DalXml();
     /// <summary>
     /// Initialize and manage the menu and catch exceptions
     /// </summary>
     static void Main(string[] args)
     {
-        Initialization.Do(s_dal);
+      
 
         int a = 0;
         do
@@ -23,7 +24,8 @@ internal class Program
                     "0.Exit\n" +
                     "1.Open Engineer menu\n" +
                     "2.Open Task menu\n" +
-                    "3.Open Dependency menu\n");
+                    "3.Open Dependency menu\n"+
+                    "4.initialization");
 
                 a = int.Parse(Console.ReadLine()!);
                 switch (a)
@@ -45,6 +47,14 @@ internal class Program
                     case 3:
                         {//dependency menu
                             MenuDependency();
+                            break;
+                        }
+                    case 4:
+                        {
+                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                            if (ans == "Y") //stage 3
+                                Initialization.Do(s_dal);
                             break;
                         }
                     default:
@@ -262,9 +272,20 @@ internal class Program
         if (flag)//checks if the parse succseeded if it didnt reassign the old value
             engineerId = tempInt;
 
-        Task item = new(id, alias, description, DateTime.Now, false, Complexity,
-                        scheduledDate, start, required, deadline, null, deliverables,
-                        remarks, engineerId);
+        Task item = new(Id:id,
+            alias,
+            description,
+            DateTime.Now,
+            IsMileStone:false,
+            isActive:true,
+             scheduledDate,
+             start,
+             RequiredEffortTime: required,
+             deadline,
+             CompleteDate: null,
+             deliverables,
+             remarks,
+             engineerId);
 
         s_dal!.Task.Update(item);
     }

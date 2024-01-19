@@ -19,7 +19,7 @@ internal class DependencyImplementation : IDependency
         if (item.DependentTask != null)
             newItem.Add(new XElement("DependentTask", item.DependentTask));
 
-        if (item.DependensOnTask != null)
+        if (item.DependensOnTask != null)   
             newItem.Add(new XElement("DependensOnTask", item.DependensOnTask));
 
         dependencysList.Add(newItem);
@@ -64,11 +64,7 @@ internal class DependencyImplementation : IDependency
                  DependentTask: int.Parse(dependency.Element("DependentTask")?.Value!),
                  DependensOnTask: int.Parse(dependency.Element("DependensOnTask")?.Value!)
                   ))).FirstOrDefault();
-        Dependency found = new Dependency(
-            Id: int.Parse(dependencyElement.Element("Id")!.Value),
-            DependentTask: int.Parse(dependencyElement.Element("DependentTask")?.Value!),
-            DependensOnTask: int.Parse(dependencyElement.Element("DependensOnTask")?.Value!)
-            );
+        Dependency found = GetDependency(dependencyElement);
         return found;
     }
     public IEnumerable<Dependency?> ReadAll(Func<Dependency?, bool>? filter = null)
