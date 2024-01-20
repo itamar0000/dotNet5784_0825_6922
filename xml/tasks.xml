@@ -1,3 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask>
+<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Task>
+    <Id>128</Id>
+    <Alias>Requirement Analysis</Alias>
+    <Description>Understand what needs to be done in the project.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5295763+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>129</Id>
+    <Alias>Feasibility Study</Alias>
+    <Description>Check if it's possible and makes sense to do the project.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5354457+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>130</Id>
+    <Alias>System Architecture Design</Alias>
+    <Description>Plan how the system will be built.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5365991+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>131</Id>
+    <Alias>Component Specification</Alias>
+    <Description>Describe in detail what each part of the system should be like.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5376228+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>132</Id>
+    <Alias>Hardware Procurement</Alias>
+    <Description>Buy the necessary hardware for the system.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5386711+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>133</Id>
+    <Alias>Software Development</Alias>
+    <Description>Write the actual code for the software components.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5396046+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>134</Id>
+    <Alias>Prototyping</Alias>
+    <Description>Make a simple version of the system to test its basic features.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5406454+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>135</Id>
+    <Alias>Integration Testing</Alias>
+    <Description>Put all the pieces together and make sure they work well.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.541649+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>136</Id>
+    <Alias>Quality Assurance Testing</Alias>
+    <Description>Test the system thoroughly to find and fix any problems.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5431206+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>137</Id>
+    <Alias>User Training</Alias>
+    <Description>Create all the necessary documents about the system.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5449617+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>138</Id>
+    <Alias>System Deployment</Alias>
+    <Description>Teach the users how to use the system.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5461469+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>139</Id>
+    <Alias>Performance Testing</Alias>
+    <Description>Put the system into use for everyone.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5471691+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>140</Id>
+    <Alias>Bug Fixing</Alias>
+    <Description>Test how well the system performs in different situations.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5481526+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>141</Id>
+    <Alias>User Acceptance Testing</Alias>
+    <Description>Fix any issues or problems in the system.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5491906+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>142</Id>
+    <Alias>Final Documentation</Alias>
+    <Description>Let users try out the system to make sure they like it.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5502376+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>143</Id>
+    <Alias>Project Sign-off</Alias>
+    <Description>Finish all the documentation for the system.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5513386+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>144</Id>
+    <Alias>Post-Implementation Review</Alias>
+    <Description>Get formal approval to finish the project.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5524418+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>145</Id>
+    <Alias>Project Closure</Alias>
+    <Description>Look back at the project and see what went well and what can be improved.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5534902+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>146</Id>
+    <Alias>Security Audit</Alias>
+    <Description>Officially finish the project, making sure everything is done.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5545095+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>147</Id>
+    <Alias>Capacity Planning</Alias>
+    <Description>Check the security of the software.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5555039+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>148</Id>
+    <Alias>Usability Testing</Alias>
+    <Description>Plan for the system's capacity and resources.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5565475+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>149</Id>
+    <Alias>Regulatory Compliance Assessment</Alias>
+    <Description>Evaluate the system's user interface and overall user experience.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5576899+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>150</Id>
+    <Alias>Data Migration</Alias>
+    <Description>Verify that the system complies with relevant regulations, standards, and legal requirements.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5595284+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>151</Id>
+    <Alias>Continuous Integration/Continuous Deployment (CI/CD) Implementation</Alias>
+    <Description>Plan and execute the transfer of data from existing systems to the newly developed system.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5607111+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>152</Id>
+    <Alias>Change Management</Alias>
+    <Description>Establish automated processes for code integration, testing, and deployment.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.56181+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>153</Id>
+    <Alias>Stakeholder Communication</Alias>
+    <Description>Develop strategies and processes to manage and communicate changes effectively.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5629317+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>154</Id>
+    <Alias>User Feedback Collection</Alias>
+    <Description>Maintain regular and transparent communication with project stakeholders.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5643642+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>155</Id>
+    <Alias>Disaster Recovery Planning</Alias>
+    <Description>Set up mechanisms to collect feedback from end-users during and after system deployment.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.565714+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>156</Id>
+    <Alias>Performance Monitoring and Optimization</Alias>
+    <Description>Develop a comprehensive plan for recovering the system in the event of unexpected disruptions.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5669035+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>157</Id>
+    <Alias>Technology Stack Evaluation</Alias>
+    <Description>Implement tools and processes to monitor the system's performance in real-time.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5681369+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
+  <Task>
+    <Id>158</Id>
+    <Alias>Technology Stack Adjustment</Alias>
+    <Description>Assess and choose the appropriate technologies, frameworks, and tools for system development.</Description>
+    <CreatedAtDate>2024-01-21T00:56:05.5693478+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+  </Task>
 </ArrayOfTask>

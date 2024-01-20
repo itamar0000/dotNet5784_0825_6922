@@ -6,7 +6,10 @@ using System.Transactions;
 
 internal class Program
 {
-    // static readonly IDal s_dal = new DalList();
+    //  static readonly IDal s_dal = new DalList();
+    static readonly string s_tasks_xml = "tasks";
+    static readonly string s_engineers_xml = "engineers";
+    static readonly string s_dependencys_xml = "dependencys";
     static readonly IDal s_dal = new DalXml();
     /// <summary>
     /// Initialize and manage the menu and catch exceptions
@@ -54,7 +57,15 @@ internal class Program
                             Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
                             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                             if (ans == "Y") //stage 3
+                            {//clears all the data from the file and reinitializes it
+                                List<Task> Tasklist = new List<Task>();
+                                List<Dependency> Dependencylist = new List<Dependency>();
+                                List<Engineer> Engineerlist = new List<Engineer>();
+                                XMLTools.SaveListToXMLSerializer<Task>(Tasklist, s_tasks_xml);
+                                XMLTools.SaveListToXMLSerializer<Engineer>(Engineerlist, s_engineers_xml);
+                                XMLTools.SaveListToXMLSerializer<Dependency>(Dependencylist, s_dependencys_xml);
                                 Initialization.Do(s_dal);
+                            }
                             break;
                         }
                     default:

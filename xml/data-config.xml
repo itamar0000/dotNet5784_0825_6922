@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-	<NextCourseId>1000</NextCourseId>
-	<NextLinkId>0</NextLinkId>
+  <NextDependencyId>1621</NextDependencyId>
+  <NextTaskId>159</NextTaskId>
 </config>

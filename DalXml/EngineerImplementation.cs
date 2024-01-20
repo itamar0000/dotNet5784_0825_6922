@@ -43,9 +43,6 @@ internal class EngineerImplementation:IEngineer
 
         Engineer? item = engineerslist.FirstOrDefault(Engineer => Engineer.Id == id);
 
-        if (item == null)
-            throw new DalDoesNotExistException($"Engineer with ID = {id} does not exist");
-
         return item;
     }
 
