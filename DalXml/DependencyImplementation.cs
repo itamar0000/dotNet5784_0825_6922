@@ -42,7 +42,7 @@ internal class DependencyImplementation : IDependency
     {
         XElement dependencysList = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         XElement? dependencyElement = dependencysList.Elements("dependency").Where(dependency
-                   => int.Parse(dependency.Element("Id").Value) == id).FirstOrDefault();
+                   => int.Parse(dependency.Element("Id")!.Value) == id).FirstOrDefault();
 
         if (dependencyElement == null)
             throw new DalDoesNotExistException($"Dependency with ID = {id} does not exist");
@@ -64,7 +64,7 @@ internal class DependencyImplementation : IDependency
                  DependentTask: int.Parse(dependency.Element("DependentTask")?.Value!),
                  DependensOnTask: int.Parse(dependency.Element("DependensOnTask")?.Value!)
                   ))).FirstOrDefault();
-        Dependency found = GetDependency(dependencyElement);
+        Dependency found = GetDependency(dependencyElement!);
         return found;
     }
     public IEnumerable<Dependency?> ReadAll(Func<Dependency?, bool>? filter = null)
@@ -91,7 +91,7 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"Dependency with ID = {item.Id} does not exist");
 
         dependencysList.Elements("dependency").Where(dependency
-        => int.Parse(dependency.Element("Id").Value) == item.Id).FirstOrDefault()?.Remove();
+        => int.Parse(dependency.Element("Id")!.Value) == item.Id).FirstOrDefault()?.Remove();
 
         dependencyElement.Element("DependentTask")!.Value = item.DependentTask.ToString()!;
         dependencyElement.Element("DependensOnTask")!.Value = item.DependensOnTask.ToString()!;

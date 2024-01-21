@@ -167,16 +167,16 @@ internal class Program
         DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()!));
 
         Console.WriteLine("Enter Task's scheduled date:\n");
-        if (DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate))
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate)) { }
 
             Console.WriteLine("Enter Task's start date:\n");
-        if (DateTime.TryParse(Console.ReadLine(), out DateTime start))
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime start)) { }
 
             Console.WriteLine("Enter Task's required effort time:\n");
-        if (TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required))
+        if (TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required)) { }
 
             Console.WriteLine("Enter Task's deadline date:\n");
-        if (DateTime.TryParse(Console.ReadLine(), out DateTime deadline))
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime deadline)) { }
             Console.WriteLine("Enter Task's deliverables:\n");
 
         string? deliverables = Console.ReadLine();
