@@ -25,7 +25,7 @@ internal class DependencyImplementation : IDependency
         dependencysList.Add(newItem);
         XMLTools.SaveListToXMLElement(dependencysList, s_dependencys_xml);
 
-        return int.Parse(newItem.Element("Id").Value);
+        return int.Parse(newItem.Element("Id")!.Value);
     }
 
     public void Delete(int id)
@@ -33,7 +33,7 @@ internal class DependencyImplementation : IDependency
         XElement dependencysList = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
 
         dependencysList.Elements("dependency").Where(dependency
-        => int.Parse(dependency.Element("Id").Value) == id).FirstOrDefault()?.Remove();
+        => int.Parse(dependency.Element("Id")!.Value) == id).FirstOrDefault()?.Remove();
 
         XMLTools.SaveListToXMLElement(dependencysList, s_dependencys_xml);
     }
@@ -85,7 +85,7 @@ internal class DependencyImplementation : IDependency
     {
         XElement dependencysList = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         XElement? dependencyElement = dependencysList.Elements("dependency").Where(dependency
-                              => int.Parse(dependency.Element("Id").Value) == item.Id).FirstOrDefault();
+                              => int.Parse(dependency.Element("Id")!.Value) == item.Id).FirstOrDefault();
 
         if (dependencyElement == null)
             throw new DalDoesNotExistException($"Dependency with ID = {item.Id} does not exist");
@@ -93,8 +93,8 @@ internal class DependencyImplementation : IDependency
         dependencysList.Elements("dependency").Where(dependency
         => int.Parse(dependency.Element("Id").Value) == item.Id).FirstOrDefault()?.Remove();
 
-        dependencyElement.Element("DependentTask")!.Value = item.DependentTask.ToString();
-        dependencyElement.Element("DependensOnTask")!.Value = item.DependensOnTask.ToString();
+        dependencyElement.Element("DependentTask")!.Value = item.DependentTask.ToString()!;
+        dependencyElement.Element("DependensOnTask")!.Value = item.DependensOnTask.ToString()!;
 
         dependencysList.Add(dependencyElement);
 
