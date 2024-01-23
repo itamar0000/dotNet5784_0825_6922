@@ -126,7 +126,10 @@ internal class Program
                     var newTasks = s_dal!.Task.ReadAll();
                     foreach (Task? item in newTasks)
                     {
-                        Console.WriteLine(item);
+                        if (item.isActive)
+                        {
+                            Console.WriteLine(item);
+                        }
                     }
                     break;
                 }
@@ -552,7 +555,7 @@ internal class Program
         Console.WriteLine("Enter task that depends ID");
         int id = int.Parse(Console.ReadLine()!);
 
-        Console.WriteLine("Enter the tas it depends on ID");
+        Console.WriteLine("Enter the task it depends on ID");
         int id2 = int.Parse(Console.ReadLine()!);
 
         Dependency dependency = new(0, id, id2);

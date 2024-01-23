@@ -241,11 +241,23 @@
     <isActive>true</isActive>
   </Task>
   <Task>
+    <Id>31</Id>
+    <Alias>dasdsa</Alias>
+    <Description>asdasdsa</Description>
+    <CreatedAtDate>2024-01-23T18:53:24.1652259+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>false</isActive>
+    <ScheduledDate>0001-01-01T00:00:00</ScheduledDate>
+    <StartDate>0001-01-01T00:00:00</StartDate>
+    <RequiredEffortTime>PT0S</RequiredEffortTime>
+    <DeadlineDate>0001-01-01T00:00:00</DeadlineDate>
+  </Task>
+  <Task>
     <Id>30</Id>
     <Alias>Technology Stack Adjustment</Alias>
     <Description>Assess and choose the appropriate technologies, frameworks, and tools for system development.</Description>
     <CreatedAtDate>2024-01-23T18:06:50.0496645+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
+    <isActive>false</isActive>
   </Task>
 </ArrayOfTask>

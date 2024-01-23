@@ -133,11 +133,4 @@
     <Cost>430</Cost>
     <Level>Expert</Level>
   </Engineer>
-  <Engineer>
-    <Id>384164851</Id>
-    <Name>Ella Jones</Name>
-    <Email>ella.jones@example.com</Email>
-    <Cost>230</Cost>
-    <Level>Intermediate</Level>
-  </Engineer>
 </ArrayOfEngineer>
