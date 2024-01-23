@@ -69,4 +69,12 @@ internal class DependencyImplementation : IDependency
     {
         return DataSource.Dependencys.FirstOrDefault(filter);
     }
+
+    /// <summary>
+    /// delete all the database
+    /// </summary>
+    public void DeleteAll()
+    {
+        DataSource.Dependencys.Clear();
+    }
 }

@@ -72,4 +72,12 @@ internal class EngineerImplementation : IEngineer
     {
         return DataSource.Engineers.FirstOrDefault(filter);
     }
+
+    /// <summary>
+    /// delete all the database
+    /// </summary>
+    public void DeleteAll()
+    {
+        DataSource.Engineers.Clear();
+    }
 }

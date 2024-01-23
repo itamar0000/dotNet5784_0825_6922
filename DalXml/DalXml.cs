@@ -1,8 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
 
-
-
 sealed public class DalXml : IDal
 {
     public IEngineer Engineer =>  new EngineerImplementation();

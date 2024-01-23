@@ -73,4 +73,12 @@ internal class TaskImplementation : ITask
     {
         return DataSource.Tasks.FirstOrDefault(filter);
     }
+
+    /// <summary>
+    /// delete all the database
+    /// </summary>
+    public void DeleteAll()
+    {
+        DataSource.Engineers.Clear();
+    }
 }

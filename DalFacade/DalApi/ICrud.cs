@@ -41,6 +41,11 @@ namespace DalApi
         /// <summary>
         /// Deletes an object by its Id
         /// </summary>
-        void Delete(int id); 
+        void Delete(int id);
+
+        /// <summary>
+        /// delete all the database
+        /// </summary>
+        void DeleteAll();
     }
 }
