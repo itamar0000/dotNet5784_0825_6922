@@ -113,6 +113,6 @@ internal class EngineerImplementation : IEngineer
         engineersList.Remove(itemToUpdate);
         engineersList.Add(item);
 
-        XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
+        XMLTools.SaveListToXMLSerializer<Engineer>(engineersList, s_engineers_xml);
     }
 }
