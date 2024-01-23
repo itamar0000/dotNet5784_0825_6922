@@ -10,6 +10,7 @@ internal class Program
     static readonly string s_tasks_xml = "tasks";
     static readonly string s_engineers_xml = "engineers";
     static readonly string s_dependencys_xml = "dependencys";
+    static readonly string s_config_xml = "data-config";
     static readonly IDal s_dal = new DalXml();
     /// <summary>
     /// Initialize and manage the menu and catch exceptions
@@ -54,17 +55,13 @@ internal class Program
                         }
                     case 4:
                         {
-                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-                            if (ans == "Y") //stage 3
+                            Console.Write("Would you like to create Initial data? (Y/N)");
+                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+                            if (ans == "Y")
                             {//clears all the data from the file and reinitializes it
-                                List<Task> Tasklist = new List<Task>();
-                                List<Dependency> Dependencylist = new List<Dependency>();
-                                List<Engineer> Engineerlist = new List<Engineer>();
-                                XMLTools.SaveListToXMLSerializer<Task>(Tasklist, s_tasks_xml);
-                                XMLTools.SaveListToXMLSerializer<Engineer>(Engineerlist, s_engineers_xml);
-                                XMLTools.SaveListToXMLSerializer<Dependency>(Dependencylist, s_dependencys_xml);
-                                //plz reset the id's to 0 for task and 1000 for dependency
+                                s_dal.Dependency.DeleteAll();
+                                s_dal.Task.DeleteAll();
+                                s_dal.Engineer.DeleteAll();
                                 Initialization.Do(s_dal);
                             }
                             break;
@@ -209,7 +206,7 @@ internal class Program
             EngineerId: engineerId
         );
 
-        s_dal!.Task.Create(item);
+        Console.WriteLine(s_dal!.Task.Create(item));
     }
 
     /// <summary>
@@ -439,7 +436,7 @@ internal class Program
         int cost = int.Parse(Console.ReadLine()!);
 
         Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
-        s_dal!.Engineer.Create(engineer);
+        Console.WriteLine(s_dal!.Engineer.Create(engineer));
     }
 
     /// <summary>
@@ -461,7 +458,7 @@ internal class Program
             case 1:
                 {//create
                     Dependency dependency = GetInputDependency();
-                    s_dal.Dependency.Create(dependency);
+                    Console.WriteLine(s_dal.Dependency.Create(dependency));
                     break;
                 }
             case 2:
