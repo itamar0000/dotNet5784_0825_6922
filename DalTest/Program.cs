@@ -6,12 +6,15 @@ using System.Transactions;
 
 internal class Program
 {
-    //  static readonly IDal s_dal = new DalList();
+    //static readonly IDal s_dal = new DalList();
     static readonly string s_tasks_xml = "tasks";
     static readonly string s_engineers_xml = "engineers";
     static readonly string s_dependencys_xml = "dependencys";
     static readonly string s_config_xml = "data-config";
-    static readonly IDal s_dal = new DalXml();
+    //  static readonly IDal s_dal = new DalXml();
+    static readonly IDal s_dal = Factory.Get; //stage 4
+
+
     /// <summary>
     /// Initialize and manage the menu and catch exceptions
     /// </summary>
@@ -59,10 +62,9 @@ internal class Program
                             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
                             if (ans == "Y")
                             {//clears all the data from the file and reinitializes it
-                                s_dal.Dependency.DeleteAll();
-                                s_dal.Task.DeleteAll();
-                                s_dal.Engineer.DeleteAll();
-                                Initialization.Do(s_dal);
+                                s_dal.DeleteAll();
+                               
+                                Initialization.Do(); //stage 4  
                             }
                             break;
                         }

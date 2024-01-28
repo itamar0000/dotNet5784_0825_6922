@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace Dal;
 using DalApi;
-sealed public class DalList : IDal
+sealed internal class DalList : IDal
 {
+    public static IDal Instance { get; } = new DalList();
+    private DalList() { }
     public IEngineer Engineer => new EngineerImplementation();
     public IDependency Dependency => new DependencyImplementation();
     public ITask Task => new TaskImplementation();
+
+    public void DeleteAll()
+    {
+        Engineer.DeleteAll();
+        Dependency.DeleteAll();
+        Task.DeleteAll();
+    }
 }
