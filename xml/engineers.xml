@@ -25,8 +25,8 @@
     <Id>268747567</Id>
     <Name>Mia Patel</Name>
     <Email>mia.patel@example.com</Email>
-    <Cost>330</Cost>
-    <Level>Advanced</Level>
+    <Cost>230</Cost>
+    <Level>Intermediate</Level>
   </Engineer>
   <Engineer>
     <Id>216022664</Id>
@@ -60,8 +60,8 @@
     <Id>287078717</Id>
     <Name>Nathan Carter</Name>
     <Email>nathan.carter@example.com</Email>
-    <Cost>230</Cost>
-    <Level>Intermediate</Level>
+    <Cost>330</Cost>
+    <Level>Advanced</Level>
   </Engineer>
   <Engineer>
     <Id>380023168</Id>

@@ -183,12 +183,15 @@ public static class Initialization
     /// <summary>
     /// Initialize the entities of DAL
     /// </summary>
-    public static void Do(IDal dal)
+    // public static void Do(IDal dal)
+    public static void Do() //stage 4
     {
         //s_dalStudent = dalStudent ?? throw new NullReferenceException("DAL object can not be null!"); //stage 1
         //s_dalCourse = dalCourse ?? throw new NullReferenceException("DAL object can not be null!"); //stage 1
         //s_dalLink = dalStudentInCourse ?? throw new NullReferenceException("DAL object can not be null!"); //stage 1
-        s_dal = dal?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        //s_dal = dal?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+    
+        s_dal = DalApi.Factory.Get; //stage 4
         createDependency();
         createEngineer();
         createTask();

@@ -2,8 +2,4 @@
 
 namespace DalApi;
 
-public interface IDependency:ICrud<Dependency>
-{
-   
-
-}
+public interface IDependency:ICrud<Dependency> { }
