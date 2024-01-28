@@ -8,7 +8,7 @@ public class Task
     public int Id { get; init; }
     public string Description { get; init; }
     public string Alias { get; init; }
-    public DateTime? CreatedAtDate { get; init; }
+    public DateTime CreatedAtDate { get; init; }
     public Status? Status { get; set; }
     public List<BO.TaskInList>? Dependencies { get; init; }
     public BO.MilestoneInTask? Milestone { get; set; }

@@ -13,7 +13,7 @@ public class Milestone
     public DateTime? ForecastDate { get; set; } // A revised scheduled completion date
     public DateTime? DeadlineDate { get; init; } // The latest complete date
     public DateTime? CompleteDate { get; set; } // Real completion date
-    public double CompletionPercentage { get; set; } // Percentage of completed tasks - Calculated
-    public string Remarks { get; init; } // Free remarks from project meetings
-    public List<TaskInList> Dependencies { get; init; } // List of tasks that this milestone depends on
+    public double? CompletionPercentage { get; set; } // Percentage of completed tasks - Calculated
+    public string? Remarks { get; init; } // Free remarks from project meetings
+    public List<TaskInList>? Dependencies { get; init; } // List of tasks that this milestone depends on
 }
