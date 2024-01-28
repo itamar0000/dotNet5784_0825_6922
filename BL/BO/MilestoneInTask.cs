@@ -2,13 +2,13 @@
 
 namespace BO;
 
-internal class MilestoneInTask
+public class MilestoneInTask
 {
-    public int Id { get; set; }
-    public string Description { get; set; }
-    public string Alias { get; set; }
-    public DateTime CreatedAtDate { get; set; }
-    public Status Status { get; set; }
+    public int Id { get; init; }
+    public string Description { get; init; }
+    public string Alias { get; init; }
+    public DateTime CreatedAtDate { get; init; }
+    public Status Status { get; init; }
     public DateTime ForecastDate { get; set; }
     public DateTime DeadlineDate { get; set; }
     public DateTime CompleteDate { get; set; }

@@ -1,8 +1,8 @@
 ﻿
 namespace BO;
 
-internal class EngineerInTask
+public  class EngineerInTask
 {
-    public int Id;
-    public string Name;
+    public int Id { get; init; }
+    public string Name { get; init; }
 }
