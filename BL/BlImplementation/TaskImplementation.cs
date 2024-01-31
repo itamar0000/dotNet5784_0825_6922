@@ -36,7 +36,7 @@ internal class TaskImplementation : BlApi.ITask
              DeadlineDate: item.DeadlineDate,
              Deliverables: item.Deliverables,
              Remarks: item.Remarks,
-             EngineerId: item.Engineer.Id,
+             EngineerId: item.Engineer?.Id,
              Complexity: (DO.EngineerExperience?)item.Complexity
              );
         int id;
@@ -57,11 +57,16 @@ internal class TaskImplementation : BlApi.ITask
         DO.Task? task = _dal.Task.Read(id);
         if(task == null||task.isActive==false)
             throw new  BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-        var tasks=_dal.Dependency.ReadAll().Where(t =>t.DependensOnTask==id).Any();
+        bool tasks=_dal.Dependency.ReadAll().Where(t =>t.DependensOnTask==id).Any();
+        if (tasks == false)
+            Delete(id);
+        else
+            throw new BlDeletionImpossible($"Task with ID={id}cannot be deleted");
         return 0;
     }
 
     public BO.Task Read(int id)
+
     {
         DO.Task? item = _dal.Task.Read(id);
         if (item == null)
@@ -116,7 +121,6 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlInvalidInputException("Id cannot be negative");
 
         }
-        _dal.Task.Delete(item.Id);
         DO.Task task = new DO.Task
             (Id: item.Id,
              Alias: item.Alias,
@@ -181,9 +185,15 @@ internal class TaskImplementation : BlApi.ITask
                              where dependency.Status != Status.Scheduled
                              select dependency).Any();
         if (notScheduled)
-            throw new BlInvalidInputException($"jjhjhji {date} not valid");
+            throw new BlInvalidInputException($"Task date = {date}  not valid");
 
-        _dal.Task.Update(task with { CompleteDate = date});
+        var tasks = (from dependency in getDependencies(task)
+                     where Read(dependency.Id).DeadlineDate < date
+                     select dependency).Any();
+        if (tasks)
+            throw new BlInvalidInputException($"Task date = {date}  not valid");
+                                        
+        _dal.Task.Update(task with { ScheduledDate= date});
 
     }
 }
