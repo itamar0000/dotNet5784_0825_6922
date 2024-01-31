@@ -65,9 +65,7 @@ internal class DependencyImplementation : IDependency
         // Remove all the dependencies
         dependencys.Remove();
         // Save the updated XML back to the file
-        XMLTools.SaveListToXMLElement(root, s_dependencys_xml);
-        configlist.Element("NextDependencyId").Value = "1000";
-        XMLTools.SaveListToXMLElement(configlist, s_config_xml);
+        Config.ResetDependencyId();
     }
 
     /// <summary>

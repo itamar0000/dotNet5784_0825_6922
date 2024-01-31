@@ -37,6 +37,13 @@ public class BlDeletionImpossible : Exception
     public BlDeletionImpossible(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
+public class BlInvalidInputException : Exception
+{
+    public BlInvalidInputException(string? message) : base(message) { }
+    public BlInvalidInputException(string message, Exception innerException)
+                : base(message, innerException) { }
+}
 
 /// <summary>
 /// 

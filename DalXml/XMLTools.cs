@@ -34,6 +34,12 @@ static internal class XMLTools
         XMLTools.SaveListToXMLElement(root, data_config_xml);
         return nextId;
     }
+    internal static void ResetNextId(string data_config_xml, string nextId, string initID)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        root.Element(nextId)?.SetValue(root.Element(initID)?.Value!);
+        XMLTools.SaveListToXMLElement(root, data_config_xml);
+    }
     #endregion
 
     #region SaveLoadWithXElement
@@ -96,5 +102,7 @@ static internal class XMLTools
             throw new DalXMLFileLoadCreateException($"fail to load xml file: {filePath}, {ex.Message}");
         }
     }
+
+    
     #endregion
 }

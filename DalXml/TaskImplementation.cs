@@ -63,9 +63,7 @@ internal class TaskImplementation : ITask
     {
         List<Task> tasksList = new List<Task>();
         XMLTools.SaveListToXMLSerializer<Task>(tasksList, s_tasks_xml);
-        XElement configList = XMLTools.LoadListFromXMLElement(s_config_xml);
-        configList.Element("NextTaskId").Value = "0";
-        XMLTools.SaveListToXMLElement(configList, s_config_xml);
+        Config.ResetTaskId();
     }
 
     /// <summary>
@@ -125,7 +123,8 @@ internal class TaskImplementation : ITask
     {
         List<Task> tasksList = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
 
-        Task? found = tasksList.Find(task => (item.Id == task.Id && task.isActive == true));
+        Task? found = tasksList.Find(task => (item.Id == task.Id && task.isActive
+        == true));
 
         if (found == null)
             throw new DalDoesNotExistException($"Task with ID = {item.Id} does not exist");
