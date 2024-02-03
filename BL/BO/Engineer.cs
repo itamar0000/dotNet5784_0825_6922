@@ -9,4 +9,12 @@ public class Engineer
     public double Cost { get; set; }
     public EngineerExperience Level { get; init; }
     public TaskInEngineer? Task { get; set; }
+
+    public Engineer(int Id, string Name, string Email, double Cost, DO.EngineerExperience Level)
+    {
+        this.Id = Id;
+        this.Name = Name;
+        this.Email = Email;
+        this.Cost = Cost;
+    }
 }
