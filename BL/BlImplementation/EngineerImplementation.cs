@@ -35,9 +35,20 @@ internal class EngineerImplementation : IEngineer
 
         bool tasks = _dal.Task.ReadAll().Where(item => item.EngineerId == id).Any();
         if (tasks == true)
-            throw new BO.BlDeletionImpossible($"Task with ID = {id} cannot be deleted");
+            throw new BO.BlDeletionImpossible($"Engineer with ID = {id} cannot be deleted");
         else
+        {
             _dal.Engineer.Delete(id);
+
+            /*try
+            {
+                _dal.Engineer.Delete(id);
+            }
+            catch (DO.DalAlreadyExistsException ex)
+            {
+                throw new BO.BlDoesNotExistException
+            }*/
+        }
     }
 
     public BO.Engineer Read(int id)
@@ -48,9 +59,23 @@ internal class EngineerImplementation : IEngineer
         return ConvertDoToBo(doEngineer);
     }
 
-    public IEnumerable<BO.Engineer> ReadAll()
+    public BO.Engineer? Read(Func<BO.Engineer?, bool>? filter)
     {
-        return _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item));
+        BO.Engineer? boEngineer = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item)).FirstOrDefault(filter);
+
+        return boEngineer;
+    }
+
+    public IEnumerable<BO.Engineer>? ReadAll(Func<BO.Engineer?, bool>? filter = null)
+    {
+        var boEngineers = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item));
+
+        if(filter != null)
+        {
+            boEngineers.Where(item => filter(item));
+        }
+
+        return boEngineers;
     }
 
     public void Update(BO.Engineer boEngineer)
