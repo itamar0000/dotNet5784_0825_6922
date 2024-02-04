@@ -59,7 +59,8 @@ internal class TaskImplementation : BlApi.ITask
             throw new  BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
         bool tasks=_dal.Dependency.ReadAll().Where(t =>t.DependensOnTask==id).Any();
         if (tasks == false)
-            Delete(id);
+            try {
+                Delete(id); } catch (Exception ex){ throw new BlDeletionImpossible($"Task with ID={id} cannot be deleted", ex); }
         else
             throw new BlDeletionImpossible($"Task with ID={id}cannot be deleted");
         return 0;
@@ -89,8 +90,30 @@ internal class TaskImplementation : BlApi.ITask
         };
     }
 
-    public IEnumerable<BO.Task> ReadAll()
+    public IEnumerable<BO.Task> ReadAll(Func<BO.Task?, bool>? filter = null)
     {
+        if(filter!=null)
+        {
+            var tasks= _dal.Task.ReadAll().Select(item => new BO.Task()
+            {
+                Id = item.Id,
+                Alias = item.Alias,
+                Description = item.Description,
+                CreatedAtDate = item.CreatedAtDate,
+                ScheduledDate = item.ScheduledDate,
+                StartDate = item.StartDate,
+                CompleteDate = item.CompleteDate,
+                DeadlineDate = item.DeadlineDate,
+                Deliverables = item.Deliverables,
+                RequiredEffortTime = item.RequiredEffortTime,
+                Remarks = item.Remarks,
+                Status = getStatus(item),
+                Dependencies = getDependencies(item),
+                Complexity = (BO.EngineerExperience?)item.Complexity
+            });
+           return tasks.Where(item => filter(item));
+   
+        }
         return _dal.Task.ReadAll().Select(item => new BO.Task()
         {
             Id = item.Id,
@@ -195,5 +218,26 @@ internal class TaskImplementation : BlApi.ITask
                                         
         _dal.Task.Update(task with { ScheduledDate= date});
 
+    }
+
+    public BO.Task? Read(Func<BO.Task?, bool>? filter )
+    {
+        return _dal.Task.ReadAll().Select(item => new BO.Task()
+        {
+            Id = item.Id,
+            Alias = item.Alias,
+            Description = item.Description,
+            CreatedAtDate = item.CreatedAtDate,
+            ScheduledDate = item.ScheduledDate,
+            StartDate = item.StartDate,
+            CompleteDate = item.CompleteDate,
+            DeadlineDate = item.DeadlineDate,
+            Deliverables = item.Deliverables,
+            RequiredEffortTime = item.RequiredEffortTime,
+            Remarks = item.Remarks,
+            Status = getStatus(item),
+            Dependencies = getDependencies(item),
+            Complexity = (BO.EngineerExperience?)item.Complexity
+        }).FirstOrDefault(item => filter(item));
     }
 }
