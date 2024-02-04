@@ -12,5 +12,6 @@ public interface IDal
     IDependency Dependency { get; }
     ITask Task { get; }
 
+    IClock Clock { get; }
     void DeleteAll();
 }

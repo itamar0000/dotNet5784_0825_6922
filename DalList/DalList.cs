@@ -14,6 +14,8 @@ sealed internal class DalList : IDal
     public IDependency Dependency => new DependencyImplementation();
     public ITask Task => new TaskImplementation();
 
+    public IClock Clock => new ClockImplementation();
+
     public void DeleteAll()
     {
         Engineer.DeleteAll();
