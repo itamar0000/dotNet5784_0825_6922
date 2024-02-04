@@ -3,6 +3,9 @@ namespace BlImplementation;
 using BlApi;
 using BO;
 using System.Collections.Generic;
+using System.Data;
+using System.Net.Mail;
+using System.ComponentModel.DataAnnotations;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -18,11 +21,15 @@ internal class EngineerImplementation : IEngineer
         if (boEngineer.Cost <= 0)
             throw new BO.BlInvalidInputException("Engineer can't be with unpositive Cost");
 
-        if (!boEngineer.Email.Contains('@'))
+        /*if (!boEngineer.Email.Contains('@'))
             throw new BO.BlInvalidInputException("Engineer's Mail must containe '@'");
 
         if (boEngineer.Email.Contains(" "))
-            throw new BO.BlInvalidInputException("Engineer's Mail must not containe ' '");
+            throw new BO.BlInvalidInputException("Engineer's Mail must not containe ' '"); */
+
+        if (!new EmailAddressAttribute().IsValid(boEngineer.Email))
+            throw new BO.BlInvalidInputException("Engineer's Mail is invalid");
+
 
         DO.Engineer doEngineer = ConvertBoToDo(boEngineer);
 
@@ -33,33 +40,65 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Engineer with ID={boEngineer.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException($"Engineer with ID = {boEngineer.Id} already exists", ex);
         }
-
     }
 
 
-    public int Delete(int id)
+    public void Delete(int id)
     {
-        BO.Engineer boEngineer = Read(id);
-        if (boEngineer.Task)
-        throw new NotImplementedException();
+        DO.Engineer doEngineer = _dal.Engineer.Read(id)
+            ?? throw new BO.BlDoesNotExistException($"Engineer with ID = {id} doe's not exists");
+
+        bool tasks = _dal.Task.ReadAll().Where(item => item.EngineerId == id).Any();
+        if (tasks == true)
+            throw new BO.BlDeletionImpossible($"Task with ID = {id} cannot be deleted");
+        else
+            _dal.Engineer.Delete(id);
     }
 
-    public Engineer Read(int id)
+    public BO.Engineer Read(int id)
     {
-        throw new NotImplementedException();
+        DO.Engineer doEngineer = _dal.Engineer.Read(id)
+            ?? throw new BO.BlDoesNotExistException($"Engineer with ID = {id} does not exists");
+
+        BO.Engineer doEngineer = 
     }
 
-    public IEnumerable<Engineer> ReadAll()
+    public IEnumerable<BO.Engineer> ReadAll()
     {
-        throw new NotImplementedException();
+        return _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item));
     }
 
-    public int Update(Engineer item)
+    public void Update(BO.Engineer boEngineer)
     {
-        throw new NotImplementedException();
+        if (boEngineer.Id <= 0)
+            throw new BO.BlInvalidInputException("Engineer can't be with unpositive Id");
+
+        if (boEngineer.Name == "")
+            throw new BO.BlInvalidInputException("Engineer can't be with an empty Name");
+
+        if (boEngineer.Cost <= 0)
+            throw new BO.BlInvalidInputException("Engineer can't be with unpositive Cost");   
+
+        if (!new EmailAddressAttribute().IsValid(boEngineer.Email))
+            throw new BO.BlInvalidInputException("Engineer's Mail is invalid");
+
+        /////////////////////// לעדכן משימההההההה ///////////////////////
+
+        DO.Engineer doEngineer = ConvertBoToDo(boEngineer);
+
+        try
+        {
+            _dal.Engineer.Update(doEngineer);
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID = {boEngineer.Id} does not exists", ex);
+        }
     }
+
+
 
     private static DO.Engineer ConvertBoToDo(BO.Engineer boEngineer)
     {
@@ -73,5 +112,16 @@ internal class EngineerImplementation : IEngineer
         return doEngineer;
     }
 
+    private static BO.Engineer ConvertDoToBo(DO.Engineer doEngineer)
+    {
+        BO.Engineer boEngineer = new BO.Engineer
+            (Id: doEngineer.Id,
+             Name: doEngineer.Name,
+             Email: doEngineer.Email,
+             Cost: doEngineer.Cost,
+             Level: (DO.EngineerExperience)doEngineer.Level);
+        boEngineer.Task();
 
+        return boEngineer;
+    }
 }
