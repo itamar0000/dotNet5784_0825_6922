@@ -16,4 +16,5 @@ public class Milestone
     public double? CompletionPercentage { get; set; } // Percentage of completed tasks - Calculated
     public string? Remarks { get; init; } // Free remarks from project meetings
     public List<TaskInList>? Dependencies { get; init; } // List of tasks that this milestone depends on
+    public override string ToString() => this.ToStringProperty();
 }
