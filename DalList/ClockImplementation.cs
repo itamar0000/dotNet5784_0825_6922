@@ -4,23 +4,23 @@ namespace Dal;
 
 internal class ClockImplementation : IClock
 {
-    public DateTime GetEndDate()
-    {
-        throw new NotImplementedException();
-    }
-
-    public DateTime GetStartDate()
-    {
-        throw new NotImplementedException();
-    }
-
     public void SetEndDate(DateTime time)
     {
-        throw new NotImplementedException();
+       DataSource.Config.startDate = time;
     }
 
     public void SetStartDate(DateTime time)
     {
-        throw new NotImplementedException();
+        DataSource.Config.endDate = time;
+    }
+
+    DateTime? IClock.GetEndDate()
+    {
+        return DataSource.Config.endDate;
+    }
+
+    DateTime? IClock.GetStartDate()
+    {
+        return DataSource.Config.startDate;
     }
 }
