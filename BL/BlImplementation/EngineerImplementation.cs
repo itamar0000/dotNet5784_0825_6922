@@ -33,8 +33,25 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer doEngineer = _dal.Engineer.Read(id)
             ?? throw new BO.BlDoesNotExistException($"Engineer with ID = {id} doe's not exists");
 
-        bool tasks = _dal.Task.ReadAll().Where(item => item.EngineerId == id).Any();
-        if (tasks == true)
+        bool flag = _dal.Task.ReadAll().Where(item => item.EngineerId == id).Select(item => new BO.Task()
+        {
+            Id = item.Id,
+            Alias = item.Alias,
+            Description = item.Description,
+            CreatedAtDate = item.CreatedAtDate,
+            ScheduledDate = item.ScheduledDate,
+            StartDate = item.StartDate,
+            CompleteDate = item.CompleteDate,
+            DeadlineDate = item.DeadlineDate,
+            Deliverables = item.Deliverables,
+            RequiredEffortTime = item.RequiredEffortTime,
+            Remarks = item.Remarks,
+            Status = getStatus(item),
+            Dependencies = getDependencies(item),
+            Complexity = (BO.EngineerExperience?)item.Complexity
+        }).Where(item=>item.Status==Status.OnTrack||item.Status==Status.Done).Any();
+
+        if (flag == true)
             throw new BO.BlDeletionImpossible($"Engineer with ID = {id} cannot be deleted");
         else
         {
@@ -162,5 +179,45 @@ internal class EngineerImplementation : IEngineer
         return boEngineer;
     }
 
-    
+    public void Assiagn( int engineerId,int taskId)
+    {
+        DO.Engineer? engineer = _dal.Engineer.Read(engineerId);
+        DO.Task? task = _dal.Task.Read(taskId);
+        if(engineer == null)
+            throw new BO.BlDoesNotExistException($"Engineer with ID = {engineerId} does not exists");
+       if(task==null)
+            throw new BO.BlDoesNotExistException($"Task with ID = {taskId} does not exists");
+       if (task.EngineerId != null)
+            throw new BO.BlInvalidInputException($"Task with ID = {taskId} already assigned to an engineer");
+        if (task.CompleteDate != null)
+            throw new BO.BlInvalidInputException($"Task with ID = {taskId} already completed");
+        task=task with { EngineerId = engineerId };
+        _dal.Task.Update(task);
+    }
+    public bool getIsMilestone(BO.Task item)
+    {
+        return item.Milestone?.Id == null;
+    }
+    public BO.Status? getStatus(DO.Task? item)
+    {
+        if (item.CompleteDate != null)
+            return BO.Status.Done;
+        if (item.StartDate != null)
+            return BO.Status.OnTrack;
+        if (item.ScheduledDate != null)
+            return BO.Status.Scheduled;
+        return BO.Status.Unscheduled;
+    }
+    public List<BO.TaskInList>? getDependencies(DO.Task item)
+    {
+        var dependencies = _dal.Dependency.ReadAll().Where(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
+        {
+            Id = d.Id,
+            Alias = _dal.Task.Read(d.Id).Alias,
+            Description = _dal.Task.Read(d.Id).Description,
+            Status = getStatus(_dal.Task.Read(d.Id)),
+        });
+        var dependenciesList = dependencies.ToList();
+        return dependenciesList;
+    }
 }
