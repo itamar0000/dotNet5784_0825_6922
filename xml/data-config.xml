@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-	<InitDependencyID>1000</InitDependencyID>
-	<InitTaskID>1</InitTaskID>
-	<!--*******************************************-->
-	<NextDependencyId>1052</NextDependencyId>
-	<NextTaskId>31</NextTaskId>
-	<StartDate></StartDate>
-	<endDate></endDate>
+  <InitDependencyID>1000</InitDependencyID>
+  <InitTaskID>1</InitTaskID>
+  <!--*******************************************-->
+  <NextDependencyId>1052</NextDependencyId>
+  <NextTaskId>31</NextTaskId>
+  <StartDate></StartDate>
+  <endDate></endDate>
 </config>

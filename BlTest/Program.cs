@@ -1,4 +1,5 @@
 ﻿using BO;
+using DalApi;
 using DalTest;
 
 namespace BlTest;
@@ -14,15 +15,54 @@ internal class Program
         {//clears all the data from the file and reinitializes it
             Initialization.Do(); //stage 4  
         }
-
-        if(s_bl.IClock.GetStartDate()>DateTime.Now)
+        int a = 0;
+        do
         {
-
+           
+        
+        switch(a)
+        {
+            case 1:
+                {
+                    MenuTask();
+                    break;
+                }
+            case 2:
+                {
+                    MenuEngineer();
+                    break;
+                }
+            case 3:
+                {
+                    MenuClock();
+                    break;
+                }
+            default:
+                {
+                    Console.WriteLine("Invalid input");
+                    break;
+                }
         }
+        //if(s_bl.IClock.GetStartDate()>DateTime.Now)
+        //{
 
-        else if(s_bl.IClock.GetStartDate()<=DateTime.Now)
+        //}
+
+        //else if(s_bl.IClock.GetStartDate()<=DateTime.Now)
+        //{
+
+        //}
+    }
+
+    private static void MenuClock()
+    {
+        Console.WriteLine("enter the start date of the project");
+        DateTime start = DateTime.Parse(Console.ReadLine()!);
+        s_bl.Clock.SetStartDate(start);
+
+        foreach (var item in s_bl.Task.ReadAll())
         {
-
+            s_bl.Task.SetScheduele(item);
         }
     }
 
@@ -63,7 +103,7 @@ internal class Program
         string description = Console.ReadLine()!;
 
         Console.WriteLine("Enter Task's complexity:\n");
-        DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()!));
+        BO.EngineerExperience? Complexity = (BO.EngineerExperience)(int.Parse(Console.ReadLine()!));
 
         Console.WriteLine("Enter Task's required effort time:\n");
         if (TimeSpan.TryParse(Console.ReadLine(), out TimeSpan required)) { }
@@ -80,7 +120,7 @@ internal class Program
             Description = description,
             Alias = alias,
             CreatedAtDate = DateTime.Now,
-            Complexity = (BO.EngineerExperience)Complexity, 
+            Complexity = Complexity, 
             RequiredEffortTime = required,
             Deliverables = deliverables,
             Remarks = remarks
@@ -279,7 +319,6 @@ internal class Program
                     s_bl!.Engineer.Delete(del);
                     break;
                 }
-
             case 6:
                 break;
             default:
@@ -312,17 +351,10 @@ internal class Program
 
         Console.WriteLine("Enter your name: ");
         string username = Console.ReadLine()!;
-        if (username == "")
-        {// checks if the input is valid else assign previous value
-            username = a.Name;
-        }
-
+        
         Console.WriteLine("Enter your email: ");
         string useremail = Console.ReadLine()!;
-        if (useremail == "")
-        {// checks if the input is valid else assign previous value
-            useremail = a.Email;
-        }
+       
 
         Console.WriteLine("Enter your experience: ");
         int exp = (int.Parse(Console.ReadLine()!));
@@ -334,7 +366,7 @@ internal class Program
             cost = a.Cost;
         }
 
-        TaskInEngineer? task;
+       /* TaskInEngineer? task;
         Console.WriteLine("Enter engineer's task: ");
         flag = int.TryParse(Console.ReadLine()!, out int taskId);
         if (!flag)
@@ -356,7 +388,7 @@ internal class Program
             };
 
             task = help;
-        }
+        }*/
 
         BO.Engineer engineer = new()
         {
@@ -365,7 +397,7 @@ internal class Program
             Email = useremail,
             Cost = cost,
             Level = (BO.EngineerExperience)exp,
-            Task = task
+            //Task = task
         };
 
         s_bl!.Engineer.Update(engineer);
@@ -401,132 +433,72 @@ internal class Program
         };
         Console.WriteLine(s_bl!.Engineer.Create(engineer));
     }
-
-    /// <summary>
-    /// offer the user action to do on the Dependency
-    /// </summary>
-    
-    
-    
-    
-    
-    private static void MenuDependency()
+    private static void MenuTask()
     {
         Console.WriteLine("choose:\n" +
-            "0.Exit\n" +
-            "1.Create Dependency\n" +
-            "2.Read Dependency\n" +
-            "3.ReadAll Dependency\n" +
-            "4.Update Dpenedency\n" +
-            "5.Delete Dependency");
+            "1.Exit\n" +
+            "2.Create Task\n" +
+            "3.Read Task\n" +
+            "4.ReadAll Task\n" +
+            "5.Update Task\n" +
+            "6.Delete Task");
 
         int b = int.Parse(Console.ReadLine()!);
         switch (b)
         {
             case 1:
-                {//create
-                    Dependency dependency = GetInputDependency();
-                    Console.WriteLine(s_bl.Dependency.Create(dependency));
+                {//exit
                     break;
                 }
             case 2:
-                {// checks if dependency with this id exists if it is output it else write a message
-                    Console.WriteLine("Enter Dependency ID");
-                    Dependency? check = s_bl!.Dependency.Read(int.Parse(Console.ReadLine()!));
-
-                    if (check != null)
-                    {//checks if the object exists if it is prnts it 
-                        Console.WriteLine(check);
-                    }
-                    else
-                    {//if it deosnt output a message
-                        Console.WriteLine("Dependency with this ID does not exist");
-                    }
-
+                {//create
+                    CreateTask();
                     break;
                 }
             case 3:
-                {// print all the dependencies
-                    var newDependencies = s_bl!.Dependency.ReadAll();
-                    foreach (Dependency? dependency in newDependencies)
-                    {
-                        Console.WriteLine(dependency);
-                    }
+                {// read checks if task with this id exists and print the task if it exists and print error message if it doesnt
+                    Console.WriteLine("Enter Task's id:\n");
+                    bool flag = int.TryParse(Console.ReadLine(), out int id);
+
+                    BO.Task? item = s_bl!.Task.Read(id);
+
+                    if (item != null)
+                        Console.WriteLine(item);
+
+                    else
+                        Console.WriteLine("Task with this ID does not exist");
 
                     break;
                 }
             case 4:
-                {
-                    // checks if dependency with this id exists if it is update its values
-                    Console.WriteLine("Enter ID of task to update");
-                    int id = int.Parse(Console.ReadLine()!);
-
-                    Dependency x = s_bl!.Dependency.Read(id);
-
-                    if (x == null)
+                {// read all and print all the tasks
+                    var newTasks = s_bl!.Task.ReadAll();
+                    foreach (BO.Task? item in newTasks)
                     {
-                        Console.WriteLine($"\nDependency with this ID = {id} doesn't exists\n");
-                        return;
+                            Console.WriteLine(item);
                     }
-
-                    Console.WriteLine(x);
-                    Console.WriteLine("Enter task that depends ID");
-                    int? id3 = x.DependentTask, id4 = x.DependensOnTask;
-
-                    bool flag = int.TryParse(Console.ReadLine()!, out int id1);
-                    if (flag)
-                    {// checks if the input is valid
-                        id3 = id1;
-                    }
-
-                    Console.WriteLine("Enter the task it depends on ID");
-                    flag = int.TryParse(Console.ReadLine()!, out int id2);
-                    if (flag)
-                    {// checks if the input is valid
-                        id4 = id2;
-                    }
-
-                    Dependency dependency = new(x.Id, id3, id4);
-                    s_bl.Dependency.Update(dependency);
-
                     break;
                 }
             case 5:
-                {// delete the dependency with this id if exsits
-                    Console.WriteLine("Enter Dependency's ID to delete:");
-                    int del = int.Parse(Console.ReadLine()!);
-                    s_bl!.Dependency.Delete(del);
+                {// update checks if task with this id exists and if it does it updates it with the new values
+                    UpdateTask();
                     break;
                 }
-            case 0:
-                {//exit
+            case 6:
+                {// delete checks if task with this id exists and if it does it deletes it
+                    Console.WriteLine("Enter ID of task to delete: ");
+                    bool flag = int.TryParse(Console.ReadLine(), out int id);
+                    s_bl!.Task.Delete(id);
                     break;
                 }
             default:
-                {//invalid input
+                {// invalid input
                     Console.WriteLine("Invalid input");
                     break;
                 }
-
         }
-
     }
 
-    /// <summary>
-    /// get the values for the dependency
-    /// </summary>
-    private static Dependency GetInputDependency()
-    {
-        Console.WriteLine("Enter task that depends ID");
-        int id = int.Parse(Console.ReadLine()!);
 
-        Console.WriteLine("Enter the task it depends on ID");
-        int id2 = int.Parse(Console.ReadLine()!);
 
-        Dependency dependency = new(0, id, id2);
-
-        return dependency;
-    }
-
-   
 }

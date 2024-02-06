@@ -37,7 +37,7 @@ static internal class XMLTools
     internal static void ResetNextId(string data_config_xml, string nextId, string initID)
     {
         XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
-        root.Element(nextId)?.SetValue(root.Element(initID)?.Value!);
+        root.Element(nextId)?.SetValue(root.Element("initID")?.Value!);
         XMLTools.SaveListToXMLElement(root, data_config_xml);
     }
     #endregion

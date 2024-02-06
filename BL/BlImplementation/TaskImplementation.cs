@@ -94,7 +94,7 @@ internal class TaskImplementation : BlApi.ITask
     {
         if(filter!=null)
         {
-            var tasks= _dal.Task.ReadAll().Select(item => new BO.Task()
+            var tasks= _dal.Task.ReadAll().Where(item=>item.isActive).Select(item => new BO.Task()
             {
                 Id = item.Id,
                 Alias = item.Alias,
@@ -160,10 +160,19 @@ internal class TaskImplementation : BlApi.ITask
              EngineerId: item.Engineer.Id,
              Complexity: (DO.EngineerExperience?)item.Complexity
              );
-     /*   if(item.Dependencies!=getDependencies(task))
+       if(item.Dependencies!=getDependencies(task))
         {
-           var dependencies= _dal.Dependency.ReadAll().Where(items => items.DependentTask == item.Id);
-        }*/
+           _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items.Id));
+            foreach (var dependency in item.Dependencies)
+            {
+                DO.Dependency dep = new DO.Dependency
+                {
+                    DependentTask = item.Id,
+                    DependensOnTask = dependency.Id
+                };
+                _dal.Dependency.Create(dep);
+            }
+        }
         int id;
         try
         {
