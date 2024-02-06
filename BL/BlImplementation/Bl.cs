@@ -9,4 +9,5 @@ internal class Bl : IBl
 
     public IMilestone Milestone => throw new NotImplementedException();
 
+    public IClock Clock => throw new NotImplementedException();
 }

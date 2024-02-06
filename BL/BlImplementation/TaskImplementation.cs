@@ -82,7 +82,7 @@ internal class TaskImplementation : BlApi.ITask
             ScheduledDate = item.ScheduledDate,
             StartDate = item.StartDate,
             CompleteDate = item.CompleteDate,
-            DeadlineDate = item.DeadlineDate,
+            ForecastDate = getForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
             Remarks = item.Remarks,
@@ -103,7 +103,7 @@ internal class TaskImplementation : BlApi.ITask
                 ScheduledDate = item.ScheduledDate,
                 StartDate = item.StartDate,
                 CompleteDate = item.CompleteDate,
-                DeadlineDate = item.DeadlineDate,
+                ForecastDate = getForecastDate(item),
                 Deliverables = item.Deliverables,
                 RequiredEffortTime = item.RequiredEffortTime,
                 Remarks = item.Remarks,
@@ -123,7 +123,7 @@ internal class TaskImplementation : BlApi.ITask
             ScheduledDate = item.ScheduledDate,
             StartDate = item.StartDate,
             CompleteDate = item.CompleteDate,
-            DeadlineDate = item.DeadlineDate,
+            ForecastDate = getForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
             Remarks = item.Remarks,
@@ -160,7 +160,10 @@ internal class TaskImplementation : BlApi.ITask
              EngineerId: item.Engineer.Id,
              Complexity: (DO.EngineerExperience?)item.Complexity
              );
-
+     /*   if(item.Dependencies!=getDependencies(task))
+        {
+           var dependencies= _dal.Dependency.ReadAll().Where(items => items.DependentTask == item.Id);
+        }*/
         int id;
         try
         {
@@ -197,7 +200,7 @@ internal class TaskImplementation : BlApi.ITask
         var dependenciesList = dependencies.ToList();
         return dependenciesList;
     }
-    public void Update(int id, DateTime date)
+    public void Update(int id, DateTime? date)
     {
         DO.Task? task = _dal.Task.Read(id);
 
@@ -211,7 +214,7 @@ internal class TaskImplementation : BlApi.ITask
             throw new BlInvalidInputException($"Task date = {date}  not valid");
 
         var tasks = (from dependency in getDependencies(task)
-                     where Read(dependency.Id).DeadlineDate < date
+                     where Read(dependency.Id).ForecastDate < date
                      select dependency).Any();
         if (tasks)
             throw new BlInvalidInputException($"Task date = {date}  not valid");
@@ -231,7 +234,7 @@ internal class TaskImplementation : BlApi.ITask
             ScheduledDate = item.ScheduledDate,
             StartDate = item.StartDate,
             CompleteDate = item.CompleteDate,
-            DeadlineDate = item.DeadlineDate,
+            ForecastDate = getForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
             Remarks = item.Remarks,
@@ -239,5 +242,30 @@ internal class TaskImplementation : BlApi.ITask
             Dependencies = getDependencies(item),
             Complexity = (BO.EngineerExperience?)item.Complexity
         }).FirstOrDefault(item => filter(item));
+    }
+
+    private DateTime? EarliestDate(BO.Task item)
+    {
+       IEnumerable<DO.Dependency>deps=_dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
+       if(deps.Any())
+        {
+            return DateTime.Now ;
+        }
+        var tasks = _dal.Task.ReadAll();
+        var dependenttasks= deps.Select(items => _dal.Task.Read((int)items.DependentTask));
+        if (dependenttasks.Where(items => items.ScheduledDate == null).Any())
+            throw new BlNullPropertyException($"not all the tasks before has start date");
+
+        return dependenttasks.Max(item => item.DeadlineDate);
+
+    }
+
+    public void SetScheduele(BO.Task item)
+    {
+        Update(item.Id, EarliestDate(item));
+    }
+    private DateTime? getForecastDate(DO.Task item)
+    {
+        return item.ScheduledDate + item.RequiredEffortTime;
     }
 }
