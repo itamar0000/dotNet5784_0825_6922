@@ -110,11 +110,14 @@ internal class EngineerImplementation : IEngineer
             if ((tasks.Any(task => task.isActive == true && task.CompleteDate is null && task.StartDate is not null)))
                 throw new BO.BlInvalidInputException($"Engineer's Task can not be changed because he in a middle of another task");
 
+            if((DO.EngineerExperience)boEngineer.Level < _dal.Task.Read(boEngineer.Task.Id).Complexity)
+                throw new BO.BlInvalidInputException($"Engineer's Task can not be changed because the complexity's task is to high");
+
         try
         {        
             _dal.Engineer.Update(doEngineer);
 
-            DO.Task task = _dal.Task.Read(task => task.Id == boEngineer.Task.Id) with { EngineerId = boEngineer.Id };
+            DO.Task? task = _dal.Task.Read(task => task.Id == boEngineer.Task?.Id) with { EngineerId = boEngineer.Id };
 
             _dal.Task.Update(task);            
         }
