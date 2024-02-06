@@ -10,13 +10,13 @@ public class Task
     public string Alias { get; init; }
     public DateTime CreatedAtDate { get; init; }
     public Status? Status { get; set; }
-    public List<BO.TaskInList>? Dependencies { get; init; }
+    public List<BO.TaskInList>? Dependencies { get; set; }
     public BO.MilestoneInTask? Milestone { get; set; }
     public TimeSpan? RequiredEffortTime { get; init; }
     public DateTime? StartDate { get; set; }
-    public DateTime? ScheduledDate { get; init; }
+    public DateTime? ScheduledDate { get; set; }
     public DateTime? ForecastDate { get; set; }
-    public DateTime? DeadlineDate { get; init; }
+    public DateTime? DeadlineDate { get; set; }
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; init; }
     public string? Remarks { get; init; }

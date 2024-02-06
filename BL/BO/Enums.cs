@@ -8,6 +8,7 @@ public enum Status
     InJeopardy,
     Done
 }
+
 public enum EngineerExperience
 {
     Beginner,
@@ -15,4 +16,11 @@ public enum EngineerExperience
     Intermediate,
     Advanced,
     Expert
+}
+
+public enum ProjectStatus
+{
+    BeforeStart,
+    Start,
+    end
 }
