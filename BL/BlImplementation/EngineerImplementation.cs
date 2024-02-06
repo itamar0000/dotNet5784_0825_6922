@@ -157,12 +157,15 @@ internal class EngineerImplementation : IEngineer
 
     private BO.Engineer ConvertDoToBo(DO.Engineer doEngineer)
     {
-        BO.Engineer boEngineer = new BO.Engineer
-            (Id: doEngineer.Id,
-             Name: doEngineer.Name,
-             Email: doEngineer.Email,
-             Cost: doEngineer.Cost,
-             Level: (DO.EngineerExperience)doEngineer.Level);
+        BO.Engineer boEngineer = new()
+        {
+            Id = doEngineer.Id,
+            Name = doEngineer.Name,
+            Email = doEngineer.Email,
+            Cost = doEngineer.Cost,
+            Level = (BO.EngineerExperience)doEngineer.Level
+        };
+            
 
         BO.TaskInEngineer? task = (from item in _dal.Task.ReadAll()
                                    where (item.EngineerId == boEngineer.Id &&
@@ -179,7 +182,7 @@ internal class EngineerImplementation : IEngineer
         return boEngineer;
     }
 
-    public void Assiagn( int engineerId,int taskId)
+    public void Assign(int engineerId, int taskId)
     {
         DO.Engineer? engineer = _dal.Engineer.Read(engineerId);
         DO.Task? task = _dal.Task.Read(taskId);

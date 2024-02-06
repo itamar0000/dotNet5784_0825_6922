@@ -9,5 +9,5 @@ public interface IEngineer
     public BO.Engineer Read(int id);
     public BO.Engineer? Read(Func<BO.Engineer?, bool>? filter);
     public IEnumerable<BO.Engineer>? ReadAll(Func<BO.Engineer?, bool>? filter = null);
-    public void Assiagn(int taskId, int engineerId);
+    public void Assign(int engineerId, int taskId);
 }

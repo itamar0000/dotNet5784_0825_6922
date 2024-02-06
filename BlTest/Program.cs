@@ -1,4 +1,4 @@
-﻿using DalApi;
+﻿using BO;
 using DalTest;
 
 namespace BlTest;
@@ -89,6 +89,7 @@ internal class Program
         Console.WriteLine(s_bl!.Task.Create(item));
     }
 
+
     /// <summary>
     /// gets the values for the task and check if it exists and update it
     /// </summary>
@@ -119,29 +120,11 @@ internal class Program
         Console.WriteLine("Enter Task's complexity:\n");
         DO.EngineerExperience? Complexity = (DO.EngineerExperience)(int.Parse(Console.ReadLine()));
 
-        Console.WriteLine("Enter Task's scheduled date:\n");
-        DateTime? scheduledDate = found.ScheduledDate;
-        bool flag = DateTime.TryParse(Console.ReadLine(), out DateTime temp);
-        if (flag)//checks if the parse succseeded if it didnt reassign the old value
-            scheduledDate = temp;
-
-        Console.WriteLine("Enter Task's start date:\n");
-        DateTime? start = found.StartDate;
-        flag = DateTime.TryParse(Console.ReadLine(), out temp);
-        if (flag)//checks if the parse succseeded if it didnt reassign the old value
-            start = temp;
-
         Console.WriteLine("Enter Task's required effort time:\n");
         TimeSpan? required = found.RequiredEffortTime;
-        flag = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan tempTS);
+        bool flag = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan tempTS);
         if (flag)//checks if the parse succseeded if it didnt reassign the old value
             required = tempTS;
-
-        Console.WriteLine("Enter Task's deadline date:\n");
-        DateTime? deadline = found.DeadlineDate;
-        flag = DateTime.TryParse(Console.ReadLine(), out temp);
-        if (flag)//checks if the parse succseeded if it didnt reassign the old value
-            deadline = temp;
 
         Console.WriteLine("Enter Task's deliverables:\n");
         string? deliverables = Console.ReadLine();
@@ -155,29 +138,89 @@ internal class Program
         if (remarks == "")//checks if the input is valid else assign previous value
             remarks = found.Remarks;
 
-        Console.WriteLine("Enter Task's engineer Id:\n");
-        int? engineerId = found.EngineerId;
-        flag = int.TryParse(Console.ReadLine(), out int tempInt);
-        if (flag)//checks if the parse succseeded if it didnt reassign the old value
-            engineerId = tempInt;
 
-        Task item = new(Id: id,
-            alias,
-            description,
-            DateTime.Now,
-            IsMileStone: false,
-            isActive: true,
-             scheduledDate,
-             start,
-             RequiredEffortTime: required,
-             deadline,
-             CompleteDate: null,
-             deliverables,
-             remarks,
-             engineerId);
+
+        Console.WriteLine("Enter dependencies to add. to end press Enter");
+        List<BO.TaskInList>? depToAdd = DependenciesTo();
+        
+        while (depToAdd.Any())
+        {
+            TaskInList taskInList = depToAdd.FirstOrDefault();
+            if (found.Dependencies.FirstOrDefault(item => item.Id == taskInList.Id) == null)
+            {
+                found.Dependencies.Add(taskInList);
+            }
+                depToAdd.Remove(taskInList);
+        }
+
+        Console.WriteLine("Enter dependencies to remove. to end press Enter");
+        List<BO.TaskInList>? depToRemove = DependenciesTo();
+
+        while (depToRemove.Any())
+        {
+            TaskInList taskInList = depToRemove.FirstOrDefault();
+            if (found.Dependencies.FirstOrDefault(item => item.Id == taskInList.Id) != null)
+            {
+                found.Dependencies.Remove(taskInList);
+            }
+                depToRemove.Remove(taskInList);
+        }
+
+
+
+        BO.Task item = new()
+        {
+            Id = found.Id,
+            Description = description,
+            Alias = alias,
+            CreatedAtDate = found.CreatedAtDate,
+            Complexity = (BO.EngineerExperience)Complexity,
+            RequiredEffortTime = required,
+            Deliverables = deliverables,
+            Remarks = remarks,
+            Dependencies = found.Dependencies
+        };
 
         s_bl!.Task.Update(item);
     }
+
+
+    public static List<BO.TaskInList> DependenciesTo()
+    {
+        bool flag = int.TryParse(Console.ReadLine(), out int IdDepend);
+
+        List<BO.TaskInList>? depTo = null;
+
+        while (flag)
+        {
+            BO.Task task = s_bl.Task.Read(IdDepend);
+
+            if (task == null)
+                Console.WriteLine($"Task with ID = {IdDepend} does not exist");
+            else
+            {
+                BO.TaskInList taskInList = new()
+                {
+                    Id = task.Id,
+                    Description = task.Description,
+                    Alias = task.Alias,
+                    Status = task.Status
+                };
+
+                depTo?.Add(taskInList);
+            }
+
+            flag = int.TryParse(Console.ReadLine(), out IdDepend);
+        }
+
+        return depTo;
+    }
+
+
+
+
+
+
 
     /// <summary>
     /// offers the user to choose what he wants to do with the engineer
@@ -252,10 +295,10 @@ internal class Program
     /// </summary>
     private static void UpdateEngineer()
     {
-        Console.WriteLine("Enter your ID:");
+        Console.WriteLine("Enter your ID: ");
         int id = int.Parse(Console.ReadLine()!);
 
-        Engineer? a = s_bl.Engineer.Read(id);
+        BO.Engineer? a = s_bl.Engineer.Read(id);
 
         if (a != null)
         {//checks if the object exists if it is prints it
@@ -267,31 +310,64 @@ internal class Program
             return;
         }
 
-        Console.WriteLine("Enter your name:");
+        Console.WriteLine("Enter your name: ");
         string username = Console.ReadLine()!;
         if (username == "")
         {// checks if the input is valid else assign previous value
-            username = s_bl!.Engineer.Read(id).Name;
+            username = a.Name;
         }
 
-        Console.WriteLine("Enter your email:");
+        Console.WriteLine("Enter your email: ");
         string useremail = Console.ReadLine()!;
         if (useremail == "")
         {// checks if the input is valid else assign previous value
-            useremail = s_bl!.Engineer.Read(id).Email;
+            useremail = a.Email;
         }
 
-        Console.WriteLine("Enter your experience:");
+        Console.WriteLine("Enter your experience: ");
         int exp = (int.Parse(Console.ReadLine()!));
 
-        Console.WriteLine("Enter your salary:");
+        Console.WriteLine("Enter your salary: ");
         bool flag = double.TryParse(Console.ReadLine()!, out double cost);
         if (!flag)
         {// checks if the parse succseeded if it didnt reassign the old value
             cost = a.Cost;
         }
 
-        Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
+        TaskInEngineer? task;
+        Console.WriteLine("Enter engineer's task: ");
+        flag = int.TryParse(Console.ReadLine()!, out int taskId);
+        if (!flag)
+        {// checks if the parse succseeded if it didnt reassign the old value
+            task = a.Task;
+        }
+        else
+        {
+            if(s_bl.Task.Read(taskId) == null)
+            {
+                Console.WriteLine($"Task with Id = {taskId} does not exist");
+                return;
+            }
+
+            TaskInEngineer? help = new()
+            {
+                Id = taskId,
+                Alias = s_bl.Task.Read(taskId)!.Alias
+            };
+
+            task = help;
+        }
+
+        BO.Engineer engineer = new()
+        {
+            Id = a.Id,
+            Name = username,
+            Email = useremail,
+            Cost = cost,
+            Level = (BO.EngineerExperience)exp,
+            Task = task
+        };
+
         s_bl!.Engineer.Update(engineer);
     }
 
@@ -315,13 +391,25 @@ internal class Program
         Console.WriteLine("Enter your salary:");
         int cost = int.Parse(Console.ReadLine()!);
 
-        Engineer engineer = new(id, username, useremail, cost, (DO.EngineerExperience)exp);
+        BO.Engineer engineer = new()
+        {
+            Id= id,
+            Name = username,
+            Email = useremail,
+            Cost = cost,
+            Level = (BO.EngineerExperience)exp
+        };
         Console.WriteLine(s_bl!.Engineer.Create(engineer));
     }
 
     /// <summary>
     /// offer the user action to do on the Dependency
     /// </summary>
+    
+    
+    
+    
+    
     private static void MenuDependency()
     {
         Console.WriteLine("choose:\n" +

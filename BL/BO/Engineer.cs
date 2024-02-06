@@ -10,12 +10,4 @@ public class Engineer
     public EngineerExperience Level { get; init; }
     public TaskInEngineer? Task { get; set; }
     public override string ToString() => this.ToStringProperty();
-
-    public Engineer(int Id, string Name, string Email, double Cost, DO.EngineerExperience Level)
-    {
-        this.Id = Id;
-        this.Name = Name;
-        this.Email = Email;
-        this.Cost = Cost;
-    }
 }
