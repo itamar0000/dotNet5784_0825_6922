@@ -8,24 +8,24 @@ namespace BlImplementation;
 
 internal class ClockImplementation : BlApi.IClock
 {
-    static readonly string s_dal = "dal-config";
+    private DalApi.IDal _dal = DalApi.Factory.Get;
     public DateTime? GetEndDate()
     {
-      
+        return _dal.Clock.GetEndDate();
     }
 
     public DateTime? GetStartDate()
     {
-        throw new NotImplementedException();
+        return _dal.Clock.GetStartDate();
     }
 
     public void SetEndDate(DateTime time)
     {
-        throw new NotImplementedException();
+        _dal.Clock.SetEndDate(time);
     }
 
     public void SetStartDate(DateTime time)
     {
-        throw new NotImplementedException();
+        _dal.Clock.SetStartDate(time);
     }
 }
