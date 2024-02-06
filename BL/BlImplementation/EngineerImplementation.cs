@@ -114,7 +114,7 @@ internal class EngineerImplementation : IEngineer
         {        
             _dal.Engineer.Update(doEngineer);
 
-            DO.Task task = _dal.Task.Read(task => task.Id == boEngineer.Task.Id) with { EngineerId = boEngineer.Id };
+            DO.Task task = _dal.Task.Read(task => task.Id == boEngineer.Task?.Id) with { EngineerId = boEngineer.Id };
 
             _dal.Task.Update(task);            
         }
