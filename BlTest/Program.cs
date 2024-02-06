@@ -1,6 +1,8 @@
 ﻿using BO;
 using DalApi;
 using DalTest;
+using System;
+using System.Security.Cryptography;
 
 namespace BlTest;
 
@@ -9,6 +11,7 @@ internal class Program
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     static void Main(string[] args)
     {
+
         Console.Write("Would you like to create Initial data? (Y/N)");
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
         if (ans == "Y")
@@ -16,33 +19,54 @@ internal class Program
             Initialization.Do(); //stage 4  
         }
         int a = 0;
+
         do
         {
-           
-        
-        switch(a)
-        {
-            case 1:
+          
+
+
+            try
+            {
+                Console.WriteLine("choose:\n" +
+                    "0.Exit\n" +
+                    "1.Open Engineer menu\n" +
+                    "2.Open Task menu\n" +
+                    "3.Open Dependency menu");
+                a = int.Parse(Console.ReadLine()!);
+
+                switch (a)
                 {
-                    MenuTask();
-                    break;
+                    case 1:
+                        {
+                            MenuEngineer();
+                            break;
+                        }
+                    case 2:
+                        {
+                            ;
+                            MenuTask();
+                            break;
+                        }
+                    case 3:
+                        {
+                            MenuClock();
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Invalid input");
+                            break;
+                        }
                 }
-            case 2:
-                {
-                    MenuEngineer();
-                    break;
-                }
-            case 3:
-                {
-                    MenuClock();
-                    break;
-                }
-            default:
-                {
-                    Console.WriteLine("Invalid input");
-                    break;
-                }
+            }
+
+
+            catch (Exception ex)
+            {
+
+            }
         }
+        while (a != 0);
         //if(s_bl.IClock.GetStartDate()>DateTime.Now)
         //{
 
@@ -52,6 +76,8 @@ internal class Program
         //{
 
         //}
+
+
     }
 
     private static void MenuClock()
