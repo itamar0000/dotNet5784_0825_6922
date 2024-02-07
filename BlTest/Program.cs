@@ -76,8 +76,8 @@ internal class Program
 
 
 
-
         //int num = 1;
+
         switch (s_bl.Clock.GetStatus())
         {
             case ProjectStatus.BeforeStart:
@@ -95,9 +95,6 @@ internal class Program
                     break;
                 }
         }
-
-
-
     }
 
     private static void MenuBeforeStart()
@@ -143,8 +140,6 @@ internal class Program
                     }
             }
         }
-
-        return num;
     }
 
     private static void MenuAfterStart()
@@ -162,8 +157,8 @@ internal class Program
             Console.WriteLine("choose:\n" +
                     "0. Exit\n" +
                     "1. Assign Task Into Engineer\n" +
-                    "2. Create Engineer\n" +
-                    "3. Delete Engineer");
+                    "2. Menu Engineer\n" +
+                    "3. Menu Task");
             c = int.Parse(Console.ReadLine()!);
 
             switch (c)
@@ -179,12 +174,12 @@ internal class Program
                     }
                 case 2:
                     {
-                        CreateEngineer();
+                        MenuEngineerAfterStart();
                         break;
                     }
                 case 3:
                     {
-                        DeleteEngineer();
+                        MenuTaskAfterStart();
                         break;
                     }
                 default:
@@ -209,6 +204,7 @@ internal class Program
         }
     }
 
+
     public static void AssignTaskIntoEngineer()
     {
         Console.WriteLine("Please enter Id task and Id Engineer to assign");
@@ -219,9 +215,128 @@ internal class Program
     }
 
 
+    private static void MenuEngineerAfterStart()
+    {
+        int num = 1;
 
+        do
+        {
+            Console.WriteLine("choose:\n" +
+            "0. Exit\n" +
+            "1. Create Engineer\n" +
+            "2. Read Engineer\n" +
+            "3. ReadAll Engineer\n" +
+            "4. Delete Engineer\n");
 
+            num = int.Parse(Console.ReadLine()!);
 
+            switch(num)
+            {
+                case 0:
+                    {
+                        break;
+                    }
+                case 1:
+                    {
+                        CreateEngineer();
+                        break;
+                    }
+                case 2:
+                    {
+                        // checks if engineer with this id exists if it is print it else print error message
+                        Console.WriteLine("Enter your ID:");
+                        Engineer? check = s_bl!.Engineer.Read(int.Parse(Console.ReadLine()!));
+
+                        if (check != null)
+                        {
+                            Console.WriteLine(check);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Engineer with this ID does not exist");
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        // print all the engineers
+                        var newEngineers = s_bl!.Engineer.ReadAll();
+                        foreach (Engineer? item in newEngineers)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        DeleteEngineer();
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Invalid input");
+                        break;
+                    }
+            }
+        } while (num != 0);
+
+    } 
+        
+
+    private static void MenuTaskAfterStart()
+    {
+        int num = 1;
+
+        do
+        {
+            Console.WriteLine("choose:\n" +
+           "0. Exit\n" +
+           "1. Read Task\n" +
+           "2. ReadAll Task\n");
+
+            num = int.Parse(Console.ReadLine()!);
+
+            switch (num)
+            {
+                case 0:
+                    {
+                        break;
+                    }
+                case 1:
+                    {
+                        // read checks if task with this id exists and print the task if it exists and print error message if it doesnt
+                        Console.WriteLine("Enter Task's id:\n");
+                        bool flag = int.TryParse(Console.ReadLine(), out int id);
+
+                        BO.Task? item = s_bl!.Task.Read(id);
+
+                        if (item != null)
+                            Console.WriteLine(item);
+
+                        else
+                            Console.WriteLine("Task with this ID does not exist");
+
+                        break;
+                    }
+                case 2:
+                    {
+                        // read all and print all the tasks
+                        var newTasks = s_bl!.Task.ReadAll();
+                        foreach (BO.Task? item in newTasks)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Invalid input");
+                        break;
+                    }
+            }
+        } while (num != 0);
+
+    }
 
 
 
