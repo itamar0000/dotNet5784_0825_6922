@@ -163,20 +163,37 @@ internal class EngineerImplementation : IEngineer
             Cost = doEngineer.Cost,
             Level = (BO.EngineerExperience)doEngineer.Level
         };
+
+
+        //BO.TaskInEngineer? task = (from item in _dal.Task.ReadAll()
+        //                           where (item.EngineerId == boEngineer.Id &&
+        //                           (item.StartDate <= DateTime.Now || item.StartDate == null) &&
+        //                           item.CompleteDate == null)
+        //                           select new BO.TaskInEngineer
+        //                           {
+        //                               Id = item.Id,
+        //                               Alias = item.Alias,
+        //                           }).FirstOrDefault();
+        int minID=0;
+        foreach (var item in _dal.Task.ReadAll())
+        {
+            DateTime? min = DateTime.MaxValue;
+            if (item.EngineerId == boEngineer.Id && (item.ScheduledDate<min && item.CompleteDate == null))
+            {
+                min = item.ScheduledDate;
+                minID=item.Id;
+            }
             
-
-        BO.TaskInEngineer? task = (from item in _dal.Task.ReadAll()
-                                   where (item.EngineerId == boEngineer.Id &&
-                                   item.StartDate <= DateTime.Now &&
-                                   item.CompleteDate == null)
-                                   select new BO.TaskInEngineer
-                                   {
-                                       Id = item.Id,
-                                       Alias = item.Alias,
-                                   }).FirstOrDefault();
-        if (task != null)
-            boEngineer.Task = task;
-
+        }
+        if (minID != 0)
+        {
+            boEngineer.Task = new BO.TaskInEngineer
+            {
+                Id = minID,
+                Alias = _dal.Task.Read(minID).Alias,
+            };
+        }
+        
         return boEngineer;
     }
 
@@ -194,6 +211,7 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlInvalidInputException($"Task with ID = {taskId} already completed");
         task=task with { EngineerId = engineerId };
         _dal.Task.Update(task);
+        Update(ConvertDoToBo(engineer));
     }
     public bool getIsMilestone(BO.Task item)
     {
