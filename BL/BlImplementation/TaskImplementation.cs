@@ -258,10 +258,10 @@ internal class TaskImplementation : BlApi.ITask
             return DateTime.Now ;
         }
         var tasks = _dal.Task.ReadAll();
-        var dependenttasks= deps.Select(items => _dal.Task.Read((int)items.DependentTask));
+        var dependenttasks= deps.Select(items => _dal.Task.Read((int)items.DependensOnTask));
        //if (dependenttasks.Any())
        //    throw new BlNullPropertyException($"not all the tasks before has start date");
-        return dependenttasks.Max(item => getForecastDate(item));
+        return dependenttasks.Max(items => getForecastDate(items));
 
     }
 
