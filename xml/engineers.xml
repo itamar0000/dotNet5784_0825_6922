@@ -140,11 +140,4 @@
     <Cost>230</Cost>
     <Level>Intermediate</Level>
   </Engineer>
-  <Engineer>
-    <Id>36173</Id>
-    <Name>eniedk</Name>
-    <Email>ein@gmail.com</Email>
-    <Cost>312</Cost>
-    <Level>Advanced</Level>
-  </Engineer>
 </ArrayOfEngineer>
