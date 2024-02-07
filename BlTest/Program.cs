@@ -18,7 +18,7 @@ internal class Program
         {//clears all the data from the file and reinitializes it
             Initialization.Do(); //stage 4  
         }
-        int a = 0;
+        //int a = 0;
 
         //do
         //{
@@ -77,51 +77,12 @@ internal class Program
 
 
 
-        int num = 1;
+        //int num = 1;
         switch (s_bl.Clock.GetStatus())
         {
             case ProjectStatus.BeforeStart:
                 {
-
-                    while (num != 0)
-                    {
-                        Console.WriteLine("choose:\n" +
-                        "0. Exit\n" +
-                        "1. Open Engineer menu\n" +
-                        "2. Open Task menu\n" +
-                        "3. assign dates\n");
-
-                        num = int.Parse(Console.ReadLine()!);
-
-                        switch (num)
-                        {
-                            case 0:
-                                {
-                                    break;
-                                }
-                            case 1:
-                                {
-                                    MenuEngineer();
-                                    break;
-                                }
-                            case 2:
-                                {
-
-                                    MenuTask();
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    MenuClock();
-                                    break;
-                                }
-                            default:
-                                {
-                                    Console.WriteLine("Invalid input");
-                                    break;
-                                }
-                        }
-                    }
+                    MenuBeforeStart();
                     break;
                 }
             case ProjectStatus.Start:
@@ -139,6 +100,52 @@ internal class Program
 
     }
 
+    private static void MenuBeforeStart()
+    {
+        int num = 1;
+
+        while (num != 0)
+        {
+            Console.WriteLine("choose:\n" +
+            "0. Exit\n" +
+            "1. Open Engineer menu\n" +
+            "2. Open Task menu\n" +
+            "3. assign dates\n");
+
+            num = int.Parse(Console.ReadLine()!);
+
+            switch (num)
+            {
+                case 0:
+                    {
+                        break;
+                    }
+                case 1:
+                    {
+                        MenuEngineer();
+                        break;
+                    }
+                case 2:
+                    {
+
+                        MenuTask();
+                        break;
+                    }
+                case 3:
+                    {
+                        MenuClock();
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Invalid input");
+                        break;
+                    }
+            }
+        }
+
+        return num;
+    }
 
     private static void MenuAfterStart()
     {
