@@ -18,11 +18,6 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BO.BlInvalidInputException("Alias cannot be null");
         }
-        if (item.Id <= 0)
-        {
-            throw new BO.BlInvalidInputException("Id cannot be negative");
-
-        }
         DO.Task task = new DO.Task
             (Id: item.Id,
             Alias: item.Alias,
@@ -199,15 +194,13 @@ internal class TaskImplementation : BlApi.ITask
     }
     public List<BO.TaskInList>? getDependencies(DO.Task item)
     {
-        var dependencies = _dal.Dependency.ReadAll().Where(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
+        return _dal.Dependency.ReadAll(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
         {
             Id = d.Id,
-            Alias = _dal.Task.Read(d.Id).Alias,
-            Description = _dal.Task.Read(d.Id).Description,
-            Status = getStatus(_dal.Task.Read(d.Id)),
-        });
-        var dependenciesList = dependencies.ToList();
-        return dependenciesList;
+            Alias = _dal.Task.Read((int)d.DependentTask).Alias,
+            Description = _dal.Task.Read((int)d.DependentTask).Description,
+            Status = getStatus(_dal.Task.Read((int)d.DependentTask)),
+        }).ToList();
     }
     public void Update(int id, DateTime? date)
     {

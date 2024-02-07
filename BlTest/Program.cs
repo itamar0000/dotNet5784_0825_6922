@@ -31,7 +31,7 @@ internal class Program
                     "0.Exit\n" +
                     "1.Open Engineer menu\n" +
                     "2.Open Task menu\n" +
-                    "3.Open Dependency menu");
+                    "3.assign date");
                 a = int.Parse(Console.ReadLine()!);
 
                 switch (a)
@@ -43,7 +43,7 @@ internal class Program
                         }
                     case 2:
                         {
-                            ;
+                            
                             MenuTask();
                             break;
                         }
@@ -63,7 +63,7 @@ internal class Program
 
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
         while (a != 0);

@@ -64,7 +64,7 @@ internal class TaskImplementation : ITask
         List<Task> tasksList = new List<Task>();
         XMLTools.SaveListToXMLSerializer<Task>(tasksList, s_tasks_xml);
         XElement configList = XMLTools.LoadListFromXMLElement(s_config_xml);
-        configList.Element("NextTaskId").Value = "0";
+        configList.Element("NextTaskId").Value = "1";
         XMLTools.SaveListToXMLElement(configList, s_config_xml);
     }
 
