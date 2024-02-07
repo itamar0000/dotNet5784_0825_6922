@@ -28,10 +28,11 @@ internal class Program
             try
             {
                 Console.WriteLine("choose:\n" +
-                    "0.Exit\n" +
-                    "1.Open Engineer menu\n" +
-                    "2.Open Task menu\n" +
-                    "3.assign date");
+                    "0. Exit\n" +
+                    "1. Open Engineer menu\n" +
+                    "2. Open Task menu\n" +
+                    "3. assign date\n" +
+                    "4. ");
                 a = int.Parse(Console.ReadLine()!);
 
                 switch (a)
@@ -50,6 +51,11 @@ internal class Program
                     case 3:
                         {
                             MenuClock();
+                            break;
+                        }
+                    case 4:
+                        {
+                            MenuAfterStart();
                             break;
                         }
                     default:
@@ -77,7 +83,110 @@ internal class Program
 
         //}
 
+        int num = 1;
+        switch(s_bl.Clock.GetStatus())
+        {
+            case ProjectStatus.BeforeStart:
+                {
 
+                    while (num != 0)
+                    {
+                        Console.WriteLine("choose:\n" +
+                        "0. Exit\n" +
+                        "1. Open Engineer menu\n" +
+                        "2. Open Task menu\n" +
+                        "3. assign date\n");
+
+                        num = int.Parse(Console.ReadLine()!);
+
+                        switch (num)
+                        {
+                            case 0:
+                                {
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    MenuEngineer();
+                                    break;
+                                }
+                            case 2:
+                                {
+
+                                    MenuTask();
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    MenuClock();
+                                    break;
+                                }
+                            default:
+                                {
+                                    Console.WriteLine("Invalid input");
+                                    break;
+                                }
+                        }
+                    }
+                    break;
+                }
+            case ProjectStatus.Start:
+                {
+
+                    break;
+                }
+            case ProjectStatus.end:
+                {
+                    break;
+                }
+        }
+
+
+
+    }
+
+
+    private static void MenuAfterStart()
+    {
+        int c = 0;
+        do
+        {
+            Console.WriteLine("choose:\n" +
+                    "0. Exit\n" +
+                    "1. Assign Task Into Engineer\n" +
+                    "2. Create Engineer\n" +
+                    "3. Delete Engineer");
+            c = int.Parse(Console.ReadLine()!);
+
+            switch(c)
+            {
+                case 0:
+                    {
+                        break;
+                    }
+                case 1:
+                    {
+                        AssignTaskIntoEngineer();
+                        break;
+                    }
+                case 2:
+                    {
+                        CreateEngineer();
+                        break;
+                    }
+                case 3:
+                    {
+                        DeleteEngineer();
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Invalid input");
+                        break;
+                    }
+            }
+
+        } while (c != 0);
     }
 
     private static void MenuClock()
@@ -92,7 +201,7 @@ internal class Program
         }
     }
 
-    public void AssignTaskIntoEngineer()
+    public static void AssignTaskIntoEngineer()
     {
         Console.WriteLine("Please enter Id task and Id Engineer to assign");
         int IdT = int.Parse(Console.ReadLine()!);
@@ -306,7 +415,7 @@ internal class Program
         {
             case 1:
                 {// create
-                    InputEngineer();
+                    CreateEngineer();
                     break;
                 }
             case 2:
@@ -340,9 +449,7 @@ internal class Program
                 }
             case 5:
                 {// delete the engineer with this id if exsits
-                    Console.WriteLine("Enter Engineer's ID to delete:");
-                    int del = int.Parse(Console.ReadLine()!);
-                    s_bl!.Engineer.Delete(del);
+                    DeleteEngineer();
                     break;
                 }
             case 6:
@@ -353,6 +460,13 @@ internal class Program
                     break;
                 }
         }
+    }
+
+    private static void DeleteEngineer()
+    {
+        Console.WriteLine("Enter Engineer's ID to delete:");
+        int del = int.Parse(Console.ReadLine()!);
+        s_bl!.Engineer.Delete(del);
     }
 
     /// <summary>
@@ -432,7 +546,7 @@ internal class Program
     /// <summary>
     /// get the values for the engineer
     /// </summary>
-    private static void InputEngineer()
+    private static void CreateEngineer()
     {
         Console.WriteLine("Enter your ID:");
         int id = int.Parse(Console.ReadLine()!);
