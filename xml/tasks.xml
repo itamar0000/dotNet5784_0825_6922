@@ -15,6 +15,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.592268+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P46D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>5</Id>
@@ -23,6 +24,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5933003+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P30D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>6</Id>
@@ -31,6 +33,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5942022+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P40D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>7</Id>
@@ -39,6 +42,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5950953+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P49D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>8</Id>
@@ -47,6 +51,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5959763+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P40D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>9</Id>
@@ -55,6 +60,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5968688+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P34D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>10</Id>
@@ -63,6 +69,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5977851+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P59D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>11</Id>
@@ -71,6 +78,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5987815+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P46D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>12</Id>
@@ -79,6 +87,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.5997299+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P48D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>13</Id>
@@ -87,6 +96,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6007372+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P46D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>14</Id>
@@ -95,6 +105,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6016609+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P38D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>15</Id>
@@ -103,6 +114,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6027119+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P45D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>16</Id>
@@ -111,6 +123,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6038274+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>17</Id>
@@ -119,6 +132,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6049172+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P40D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>18</Id>
@@ -127,6 +141,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6060061+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P30D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>19</Id>
@@ -135,6 +150,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6070561+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P31D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>20</Id>
@@ -143,6 +159,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6080332+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P48D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>21</Id>
@@ -151,6 +168,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6090091+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P39D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>22</Id>
@@ -159,6 +177,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6099964+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P52D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>23</Id>
@@ -167,6 +186,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6109847+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P50D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>24</Id>
@@ -175,6 +195,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6120926+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P45D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>25</Id>
@@ -183,6 +204,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6131089+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P30D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>26</Id>
@@ -191,6 +213,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6141426+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P31D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>27</Id>
@@ -199,6 +222,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6152171+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P37D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>28</Id>
@@ -207,6 +231,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6162923+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P33D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>29</Id>
@@ -215,6 +240,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6173765+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P40D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>30</Id>
@@ -223,6 +249,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6185779+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P53D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>31</Id>
@@ -231,6 +258,7 @@
     <CreatedAtDate>2024-02-07T20:56:22.6199597+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P46D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>1</Id>
@@ -248,5 +276,6 @@
     <CreatedAtDate>2024-02-07T20:56:22.5817606+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
+    <RequiredEffortTime>P58D</RequiredEffortTime>
   </Task>
 </ArrayOfTask>

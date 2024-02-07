@@ -142,11 +142,11 @@ internal class Program
 
     private static void MenuAfterStart()
     {
-        foreach(var item in s_bl.Task.ReadAll())
+        foreach (var item in s_bl.Task.ReadAll())
         {
-            if(!item.ScheduledDate.HasValue)
+            if (!item.ScheduledDate.HasValue)
             {
-               s_bl.Task.SetScheduele(item);
+                s_bl.Task.SetScheduele(item);
             }
         }
         int c = 0;

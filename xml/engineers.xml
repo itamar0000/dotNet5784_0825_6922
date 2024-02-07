@@ -130,8 +130,8 @@
     <Id>329526825</Id>
     <Name>Mason Johnson</Name>
     <Email>mason.johnson@example.com</Email>
-    <Cost>330</Cost>
-    <Level>Advanced</Level>
+    <Cost>30</Cost>
+    <Level>Beginner</Level>
   </Engineer>
   <Engineer>
     <Id>240941844</Id>

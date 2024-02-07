@@ -170,10 +170,11 @@ public static class Initialization
         {
             int level = s_rand.Next(5);
             DO.Task newTask = new(0,
-                tasks[i],
-                descriptions[i],
-                DateTime.Now.AddDays(-s_rand.Next(60)),
-                false
+                Alias: tasks[i],
+                Description: descriptions[i],
+                CreatedAtDate: DateTime.Now.AddDays(-s_rand.Next(60)),
+                IsMileStone: false,
+                RequiredEffortTime: TimeSpan.FromDays(s_rand.Next(30) + 30)
                 );
 
            s_dal!.Task.Create(newTask);
