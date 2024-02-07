@@ -144,7 +144,7 @@ internal class Program
             }
         }
 
-        return num;
+        return ;
     }
 
     private static void MenuAfterStart()
@@ -211,8 +211,10 @@ internal class Program
 
     public static void AssignTaskIntoEngineer()
     {
-        Console.WriteLine("Please enter Id task and Id Engineer to assign");
+        Console.WriteLine("Please enter Id task to assign");
         int IdT = int.Parse(Console.ReadLine()!);
+       
+        Console.WriteLine("Please enter Id engineer to assign");
         int IdE = int.Parse(Console.ReadLine()!);
 
         s_bl.Engineer.Assign(IdE, IdT);
