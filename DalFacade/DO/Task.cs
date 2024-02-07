@@ -38,7 +38,7 @@ public record Task
    /// Default constructor for the Task record.
    /// Initializes default values for some properties.
    /// </summary>
-    public Task() : this(Id: 0, Alias: "", Description: "", CreatedAtDate: DateTime.Now) { }
+    public Task() : this(Id: 0, Alias: "", Description: "", CreatedAtDate: DateTime.Now, RequiredEffortTime: TimeSpan.MinValue) { }
 
     /// <summary>
     /// Determines whether the ScheduledDate property should be included in serialization.

@@ -208,13 +208,13 @@ internal class TaskImplementation : BlApi.ITask
         DO.Task? task = _dal.Task.Read(id);
 
         if (task == null)
-            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+            throw new BO.BlDoesNotExistException($"Task with ID = {id} does Not exist");
 
         bool notScheduled = (from dependency in getDependencies(task)
                              where dependency.Status != Status.Scheduled
                              select dependency).Any();
         if (notScheduled)
-            throw new BlInvalidInputException($"Task date = {date}  not valid");
+            throw new BlInvalidInputException($"Task date = {date} not valid");
 
         var tasks = (from dependency in getDependencies(task)
                      where Read(dependency.Id).ForecastDate < date
@@ -252,13 +252,13 @@ internal class TaskImplementation : BlApi.ITask
     {
         if(item.ScheduledDate.HasValue)
             return item.ScheduledDate;
-       IEnumerable<DO.Dependency>deps=_dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
+        IEnumerable<DO.Dependency> deps = _dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
        if(!deps.Any())
         {
             return DateTime.Now ;
         }
         var tasks = _dal.Task.ReadAll();
-        var dependenttasks= deps.Select(items => _dal.Task.Read((int)items.DependentTask));
+        var dependenttasks = deps.Select(items => _dal.Task.Read((int)items.DependentTask));
        //if (dependenttasks.Any())
        //    throw new BlNullPropertyException($"not all the tasks before has start date");
         return dependenttasks.Max(item => getForecastDate(item));
