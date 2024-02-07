@@ -1,5 +1,4 @@
-﻿
-namespace BlImplementation;
+﻿namespace BlImplementation;
 using BlApi;
 using BO;
 using System.Collections.Generic;

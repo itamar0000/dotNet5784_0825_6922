@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BO;
 using DalApi;
+using System.Runtime.InteropServices;
 
 namespace BlImplementation;
 
@@ -194,12 +195,12 @@ internal class TaskImplementation : BlApi.ITask
     }
     public List<BO.TaskInList>? getDependencies(DO.Task item)
     {
-        return _dal.Dependency.ReadAll(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
+        return _dal.Dependency.ReadAll(d => d.DependentTask == item.Id).Select(d => new BO.TaskInList()
         {
-            Id = d.Id,
-            Alias = _dal.Task.Read((int)d.DependentTask).Alias,
-            Description = _dal.Task.Read((int)d.DependentTask).Description,
-            Status = getStatus(_dal.Task.Read((int)d.DependentTask)),
+            Id = (int)d.DependensOnTask!,
+            Alias = _dal.Task.Read((int)d.DependensOnTask).Alias,
+            Description = _dal.Task.Read((int)d.DependensOnTask).Description,
+            Status = getStatus(_dal.Task.Read((int)d.DependensOnTask))
         }).ToList();
     }
     public void Update(int id, DateTime? date)
@@ -220,8 +221,9 @@ internal class TaskImplementation : BlApi.ITask
                      select dependency).Any();
         if (tasks)
             throw new BlInvalidInputException($"Task date = {date}  not valid");
-                                        
-        _dal.Task.Update(task with { ScheduledDate= date});
+
+        task = task with { ScheduledDate = date };
+        _dal.Task.Update(task);
 
     }
 
@@ -248,23 +250,26 @@ internal class TaskImplementation : BlApi.ITask
 
     private DateTime? EarliestDate(BO.Task item)
     {
+        if(item.ScheduledDate.HasValue)
+            return item.ScheduledDate;
        IEnumerable<DO.Dependency>deps=_dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
-       if(deps.Any())
+       if(!deps.Any())
         {
             return DateTime.Now ;
         }
         var tasks = _dal.Task.ReadAll();
         var dependenttasks= deps.Select(items => _dal.Task.Read((int)items.DependentTask));
-        if (dependenttasks.Where(items => items.ScheduledDate == null).Any())
-            throw new BlNullPropertyException($"not all the tasks before has start date");
-
-        return dependenttasks.Max(item => item.DeadlineDate);
+       //if (dependenttasks.Any())
+       //    throw new BlNullPropertyException($"not all the tasks before has start date");
+        return dependenttasks.Max(item => getForecastDate(item));
 
     }
 
     public void SetScheduele(BO.Task item)
     {
+        item.Status = BO.Status.Scheduled;
         Update(item.Id, EarliestDate(item));
+     
     }
     private DateTime? getForecastDate(DO.Task item)
     {

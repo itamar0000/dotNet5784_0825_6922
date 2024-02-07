@@ -20,71 +20,65 @@ internal class Program
         }
         int a = 0;
 
-        do
-        {
-          
-
-
-            try
-            {
-                Console.WriteLine("choose:\n" +
-                    "0. Exit\n" +
-                    "1. Open Engineer menu\n" +
-                    "2. Open Task menu\n" +
-                    "3. assign date\n" +
-                    "4. ");
-                a = int.Parse(Console.ReadLine()!);
-
-                switch (a)
-                {
-                    case 1:
-                        {
-                            MenuEngineer();
-                            break;
-                        }
-                    case 2:
-                        {
-                            
-                            MenuTask();
-                            break;
-                        }
-                    case 3:
-                        {
-                            MenuClock();
-                            break;
-                        }
-                    case 4:
-                        {
-                            MenuAfterStart();
-                            break;
-                        }
-                    default:
-                        {
-                            Console.WriteLine("Invalid input");
-                            break;
-                        }
-                }
-            }
-
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-        while (a != 0);
-        //if(s_bl.IClock.GetStartDate()>DateTime.Now)
+        //do
         //{
 
-        //}
 
-        //else if(s_bl.IClock.GetStartDate()<=DateTime.Now)
-        //{
 
+        //    try
+        //    {
+        //        Console.WriteLine("choose:\n" +
+        //            "0. Exit\n" +
+        //            "1. Open Engineer menu\n" +
+        //            "2. Open Task menu\n" +
+        //            "3. assign date\n" +
+        //            "4. ");
+        //        a = int.Parse(Console.ReadLine()!);
+
+        //        switch (a)
+        //        {
+        //            case 1:
+        //                {
+        //                    MenuEngineer();
+        //                    break;
+        //                }
+        //            case 2:
+        //                {
+
+        //                    MenuTask();
+        //                    break;
+        //                }
+        //            case 3:
+        //                {
+        //                    MenuClock();
+        //                    break;
+        //                }
+        //            case 4:
+        //                {
+        //                    MenuAfterStart();
+        //                    break;
+        //                }
+        //            default:
+        //                {
+        //                    Console.WriteLine("Invalid input");
+        //                    break;
+        //                }
+        //        }
+        //    }
+
+
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
         //}
+        //while (a != 0);
+
+
+
 
         int num = 1;
-        switch(s_bl.Clock.GetStatus())
+        switch (s_bl.Clock.GetStatus())
         {
             case ProjectStatus.BeforeStart:
                 {
@@ -95,7 +89,7 @@ internal class Program
                         "0. Exit\n" +
                         "1. Open Engineer menu\n" +
                         "2. Open Task menu\n" +
-                        "3. assign date\n");
+                        "3. assign dates\n");
 
                         num = int.Parse(Console.ReadLine()!);
 
@@ -132,7 +126,7 @@ internal class Program
                 }
             case ProjectStatus.Start:
                 {
-
+                    MenuAfterStart();
                     break;
                 }
             case ProjectStatus.end:
@@ -148,6 +142,13 @@ internal class Program
 
     private static void MenuAfterStart()
     {
+        foreach(var item in s_bl.Task.ReadAll())
+        {
+            if(!item.ScheduledDate.HasValue)
+            {
+               s_bl.Task.SetScheduele(item);
+            }
+        }
         int c = 0;
         do
         {
@@ -158,7 +159,7 @@ internal class Program
                     "3. Delete Engineer");
             c = int.Parse(Console.ReadLine()!);
 
-            switch(c)
+            switch (c)
             {
                 case 0:
                     {
@@ -207,7 +208,7 @@ internal class Program
         int IdT = int.Parse(Console.ReadLine()!);
         int IdE = int.Parse(Console.ReadLine()!);
 
-        s_bl.Engineer.Assign(IdE, IdT);    
+        s_bl.Engineer.Assign(IdE, IdT);
     }
 
 
@@ -255,7 +256,7 @@ internal class Program
             Description = description,
             Alias = alias,
             CreatedAtDate = DateTime.Now,
-            Complexity = Complexity, 
+            Complexity = Complexity,
             RequiredEffortTime = required,
             Deliverables = deliverables,
             Remarks = remarks
@@ -317,7 +318,7 @@ internal class Program
 
         Console.WriteLine("Enter dependencies to add. to end press Enter");
         List<BO.TaskInList>? depToAdd = DependenciesTo();
-        
+
         while (depToAdd.Any())
         {
             TaskInList taskInList = depToAdd.FirstOrDefault();
@@ -325,7 +326,7 @@ internal class Program
             {
                 found.Dependencies.Add(taskInList);
             }
-                depToAdd.Remove(taskInList);
+            depToAdd.Remove(taskInList);
         }
 
         Console.WriteLine("Enter dependencies to remove. to end press Enter");
@@ -338,7 +339,7 @@ internal class Program
             {
                 found.Dependencies.Remove(taskInList);
             }
-                depToRemove.Remove(taskInList);
+            depToRemove.Remove(taskInList);
         }
 
 
@@ -491,10 +492,10 @@ internal class Program
 
         Console.WriteLine("Enter your name: ");
         string username = Console.ReadLine()!;
-        
+
         Console.WriteLine("Enter your email: ");
         string useremail = Console.ReadLine()!;
-       
+
 
         Console.WriteLine("Enter your experience: ");
         int exp = (int.Parse(Console.ReadLine()!));
@@ -506,29 +507,29 @@ internal class Program
             cost = a.Cost;
         }
 
-       /* TaskInEngineer? task;
-        Console.WriteLine("Enter engineer's task: ");
-        flag = int.TryParse(Console.ReadLine()!, out int taskId);
-        if (!flag)
-        {// checks if the parse succseeded if it didnt reassign the old value
-            task = a.Task;
-        }
-        else
-        {
-            if(s_bl.Task.Read(taskId) == null)
-            {
-                Console.WriteLine($"Task with Id = {taskId} does not exist");
-                return;
-            }
+        /* TaskInEngineer? task;
+         Console.WriteLine("Enter engineer's task: ");
+         flag = int.TryParse(Console.ReadLine()!, out int taskId);
+         if (!flag)
+         {// checks if the parse succseeded if it didnt reassign the old value
+             task = a.Task;
+         }
+         else
+         {
+             if(s_bl.Task.Read(taskId) == null)
+             {
+                 Console.WriteLine($"Task with Id = {taskId} does not exist");
+                 return;
+             }
 
-            TaskInEngineer? help = new()
-            {
-                Id = taskId,
-                Alias = s_bl.Task.Read(taskId)!.Alias
-            };
+             TaskInEngineer? help = new()
+             {
+                 Id = taskId,
+                 Alias = s_bl.Task.Read(taskId)!.Alias
+             };
 
-            task = help;
-        }*/
+             task = help;
+         }*/
 
         BO.Engineer engineer = new()
         {
@@ -565,7 +566,7 @@ internal class Program
 
         BO.Engineer engineer = new()
         {
-            Id= id,
+            Id = id,
             Name = username,
             Email = useremail,
             Cost = cost,
@@ -615,7 +616,7 @@ internal class Program
                     var newTasks = s_bl!.Task.ReadAll();
                     foreach (BO.Task? item in newTasks)
                     {
-                            Console.WriteLine(item);
+                        Console.WriteLine(item);
                     }
                     break;
                 }
@@ -638,7 +639,7 @@ internal class Program
                 }
         }
     }
-
-
-
 }
+
+
+

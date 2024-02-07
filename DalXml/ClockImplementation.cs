@@ -9,15 +9,15 @@ internal class ClockImplementation : IClock
     static readonly string s_fileName = "data-config";
     public DateTime? GetEndDate()
     {
-       XElement element= XMLTools.LoadListFromXMLElement(s_fileName).Element("StartDate")!;
-        if (element.Value == "")
+       string element= XMLTools.LoadListFromXMLElement(s_fileName).Element("endDate")!.Value;
+        if (element == "")
             return null;
-        return DateTime.Parse(element.Value);
+        return DateTime.Parse(element);
     }
 
     public DateTime? GetStartDate()
     {
-        XElement element= XMLTools.LoadListFromXMLElement(s_fileName).Element("EndDate")!;
+        XElement element= XMLTools.LoadListFromXMLElement(s_fileName).Element("startDate")!;
         if (element.Value == "")
             return null;
         return DateTime.Parse(element.Value);
@@ -26,14 +26,14 @@ internal class ClockImplementation : IClock
     public void SetEndDate(DateTime time)
     {
        XElement root=XMLTools.LoadListFromXMLElement(s_fileName);
-        root.Element("EndDate")!.Value = time.ToString();
+        root.Element("endDate")!.Value = time.ToString();
         XMLTools.SaveListToXMLElement(root, s_fileName);
     }
 
     public void SetStartDate(DateTime time)
     {
         XElement root=XMLTools.LoadListFromXMLElement(s_fileName);
-        root.Element("StartDate")!.Value = time.ToString();
+        root.Element("startDate")!.Value = time.ToString();
         XMLTools.SaveListToXMLElement(root, s_fileName);
         
     }
