@@ -4,12 +4,12 @@ namespace Dal;
 
 internal class ClockImplementation : IClock
 {
-    public void SetEndDate(DateTime time)
+    public void SetEndDate(DateTime? time)
     {
        DataSource.Config.startDate = time;
     }
 
-    public void SetStartDate(DateTime time)
+    public void SetStartDate(DateTime? time)
     {
         DataSource.Config.endDate = time;
     }

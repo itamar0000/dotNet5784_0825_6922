@@ -23,14 +23,14 @@ internal class ClockImplementation : IClock
         return DateTime.Parse(element.Value);
     }
 
-    public void SetEndDate(DateTime time)
+    public void SetEndDate(DateTime? time)
     {
        XElement root=XMLTools.LoadListFromXMLElement(s_fileName);
         root.Element("endDate")!.Value = time.ToString();
         XMLTools.SaveListToXMLElement(root, s_fileName);
     }
 
-    public void SetStartDate(DateTime time)
+    public void SetStartDate(DateTime? time)
     {
         XElement root=XMLTools.LoadListFromXMLElement(s_fileName);
         root.Element("startDate")!.Value = time.ToString();

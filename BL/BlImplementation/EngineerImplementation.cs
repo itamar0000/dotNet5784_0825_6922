@@ -174,20 +174,23 @@ internal class EngineerImplementation : IEngineer
         //                               Id = item.Id,
         //                               Alias = item.Alias,
         //                           }).FirstOrDefault();
-        int minID=0;
+
+        int minID = 0;
+        DateTime? min = DateTime.MaxValue;
+
         foreach (var item in _dal.Task.ReadAll())
         {
-            DateTime? min = DateTime.MaxValue;
-            if (item.EngineerId == boEngineer.Id && (item.ScheduledDate<min && item.CompleteDate == null))
+            if (item.EngineerId == boEngineer.Id && item.ScheduledDate < min && item.CompleteDate == null)
             {
                 min = item.ScheduledDate;
-                minID=item.Id;
+                minID = item.Id;
             }
             
         }
+
         if (minID != 0)
         {
-            boEngineer.Task = new BO.TaskInEngineer
+            boEngineer.Task = new BO.TaskInEngineer()
             {
                 Id = minID,
                 Alias = _dal.Task.Read(minID).Alias,

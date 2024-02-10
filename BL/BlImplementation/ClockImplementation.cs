@@ -32,6 +32,8 @@ internal class ClockImplementation : BlApi.IClock
 
     public ProjectStatus GetStatus()
     {
+        if (GetStartDate() == null)
+            return ProjectStatus.BeforeStart;
         if (DateTime.Now > GetEndDate())
             return ProjectStatus.end;
         else if (DateTime.Now < GetStartDate())
