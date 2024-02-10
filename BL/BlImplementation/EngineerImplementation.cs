@@ -6,9 +6,19 @@ using System.Data;
 using System.Net.Mail;
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// Implementation of the Engineer interface
+/// </summary>
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+
+    /// <summary>
+    /// Creates a new engineer.
+    /// </summary>
+    /// <param name="boEngineer">The engineer object to create.</param>
+    /// <returns>The ID of the newly created engineer.</returns>
+    /// <exception cref="BO.BlAlreadyExistsException">Thrown if an engineer with the same ID already exists.</exception>
     public int Create(BO.Engineer boEngineer)
     {
         checkEngineer(boEngineer);
@@ -26,7 +36,12 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
-
+    /// <summary>
+    /// Deletes an engineer.
+    /// </summary>
+    /// <param name="id">The ID of the engineer to delete.</param>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the engineer does not exist.</exception>
+    /// <exception cref="BO.BlDeletionImpossible">Thrown if deletion is impossible due to active tasks.</exception>
     public void Delete(int id)
     {
         DO.Engineer doEngineer = _dal.Engineer.Read(id)
@@ -67,6 +82,12 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
+    /// <summary>
+    /// Reads an engineer by ID.
+    /// </summary>
+    /// <param name="id">The ID of the engineer to read.</param>
+    /// <returns>The engineer object.</returns>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the engineer does not exist.</exception>
     public BO.Engineer Read(int id)
     {
         DO.Engineer doEngineer = _dal.Engineer.Read(id)
@@ -75,6 +96,11 @@ internal class EngineerImplementation : IEngineer
         return ConvertDoToBo(doEngineer);
     }
 
+    /// <summary>
+    /// Reads an engineer based on a filter.
+    /// </summary>
+    /// <param name="filter">The filter condition.</param>
+    /// <returns>The engineer object that matches the filter condition, if any.</returns>
     public BO.Engineer? Read(Func<BO.Engineer?, bool>? filter)
     {
         BO.Engineer? boEngineer = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item)).FirstOrDefault(filter);
@@ -82,6 +108,11 @@ internal class EngineerImplementation : IEngineer
         return boEngineer;
     }
 
+    /// <summary>
+    /// Reads all engineers optionally filtered by a condition.
+    /// </summary>
+    /// <param name="filter">The filter condition.</param>
+    /// <returns>A collection of engineer objects.</returns>
     public IEnumerable<BO.Engineer>? ReadAll(Func<BO.Engineer?, bool>? filter = null)
     {
         var boEngineers = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item));
@@ -94,6 +125,12 @@ internal class EngineerImplementation : IEngineer
         return boEngineers;
     }
 
+    /// <summary>
+    /// Updates an existing engineer.
+    /// </summary>
+    /// <param name="boEngineer">The engineer object to update.</param>
+    /// <exception cref="BO.BlInvalidInputException">Thrown if the input engineer data is invalid.</exception>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the engineer does not exist.</exception>
     public void Update(BO.Engineer boEngineer)
     {
         checkEngineer(boEngineer);
@@ -122,9 +159,11 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
-
-
-
+    /// <summary>
+    /// Checks if the engineer data is valid.
+    /// </summary>
+    /// <param name="boEngineer">The engineer object to validate.</param>
+    /// <exception cref="BO.BlInvalidInputException">Thrown if the engineer data is invalid.</exception>
     private static void checkEngineer(Engineer boEngineer)
     {
         if (boEngineer.Id <= 0)
@@ -140,7 +179,11 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlInvalidInputException("Engineer's Mail is invalid");
     }
 
-
+    /// <summary>
+    /// Converts a business object engineer to a data object engineer.
+    /// </summary>
+    /// <param name="boEngineer">The business object engineer to convert.</param>
+    /// <returns>The data object engineer.</returns>
     private DO.Engineer ConvertBoToDo(BO.Engineer boEngineer)
     {
         DO.Engineer doEngineer = new DO.Engineer
@@ -153,6 +196,11 @@ internal class EngineerImplementation : IEngineer
         return doEngineer;
     }
 
+    /// <summary>
+    /// Converts a data object engineer to a business object engineer.
+    /// </summary>
+    /// <param name="doEngineer">The data object engineer to convert.</param>
+    /// <returns>The business object engineer.</returns>
     private BO.Engineer ConvertDoToBo(DO.Engineer doEngineer)
     {
         BO.Engineer boEngineer = new()
@@ -197,6 +245,13 @@ internal class EngineerImplementation : IEngineer
         return boEngineer;
     }
 
+    /// <summary>
+    /// Assigns a task to an engineer.
+    /// </summary>
+    /// <param name="engineerId">The ID of the engineer.</param>
+    /// <param name="taskId">The ID of the task.</param>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if either the engineer or the task does not exist.</exception>
+    /// <exception cref="BO.BlInvalidInputException">Thrown if the task is already assigned to an engineer or if the task is completed.</exception>
     public void Assign(int engineerId, int taskId)
     {
         DO.Engineer? engineer = _dal.Engineer.Read(engineerId);
@@ -213,10 +268,22 @@ internal class EngineerImplementation : IEngineer
         _dal.Task.Update(task);
         Update(ConvertDoToBo(engineer));
     }
+
+    /// <summary>
+    /// Checks if a task is a milestone.
+    /// </summary>
+    /// <param name="item">The task to check.</param>
+    /// <returns>True if the task is a milestone, otherwise false.</returns>
     public bool getIsMilestone(BO.Task item)
     {
         return item.Milestone?.Id == null;
     }
+
+    /// <summary>
+    /// Gets the status of a task.
+    /// </summary>
+    /// <param name="item">The task.</param>
+    /// <returns>The status of the task.</returns>
     public BO.Status? getStatus(DO.Task? item)
     {
         if (item.CompleteDate != null)
@@ -227,6 +294,12 @@ internal class EngineerImplementation : IEngineer
             return BO.Status.Scheduled;
         return BO.Status.Unscheduled;
     }
+
+    /// <summary>
+    /// Gets the dependencies of a task.
+    /// </summary>
+    /// <param name="item">The task.</param>
+    /// <returns>A list of task dependencies.</returns>
     public List<BO.TaskInList>? getDependencies(DO.Task item)
     {
         var dependencies = _dal.Dependency.ReadAll().Where(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()

@@ -5,9 +5,18 @@ using System.Runtime.InteropServices;
 
 namespace BlImplementation;
 
+/// <summary>
+/// Represents the implementation of the task-related business logic.
+/// </summary>
 internal class TaskImplementation : BlApi.ITask
 {
     private IDal _dal = DalApi.Factory.Get;
+
+    /// <summary>
+    /// Creates a new task.
+    /// </summary>
+    /// <param name="item">The task to create.</param>
+    /// <returns>The ID of the newly created task.</returns>
     public int Create(BO.Task item)
     {
         /*   foreach(var dependency in item.Dependencies)
@@ -48,20 +57,41 @@ internal class TaskImplementation : BlApi.ITask
 
     }
 
+    /// <summary>
+    /// Deletes a task.
+    /// </summary>
+    /// <param name="id">The ID of the task to delete.</param>
+    /// <returns>An integer indicating the result of the deletion.</returns>
     public int Delete(int id)
     {
         DO.Task? task = _dal.Task.Read(id);
-        if(task == null||task.isActive==false)
+
+        // Task not found or already inactive
+        if (task == null||task.isActive==false)
             throw new  BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-        bool tasks=_dal.Dependency.ReadAll().Where(t =>t.DependensOnTask==id).Any();
+
+        // Checking if task has dependencies
+        bool tasks =_dal.Dependency.ReadAll().Where(t =>t.DependensOnTask==id).Any();
+
+        // Deleting task if no dependencies exist
         if (tasks == false)
             try {
-                Delete(id); } catch (Exception ex){ throw new BlDeletionImpossible($"Task with ID={id} cannot be deleted", ex); }
+                Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new BlDeletionImpossible($"Task with ID={id} cannot be deleted", ex);
+            }
         else
             throw new BlDeletionImpossible($"Task with ID={id}cannot be deleted");
         return 0;
     }
 
+    /// <summary>
+    /// Reads a task by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the task to read.</param>
+    /// <returns>The task with the specified ID.</returns>
     public BO.Task Read(int id)
 
     {
@@ -86,6 +116,11 @@ internal class TaskImplementation : BlApi.ITask
         };
     }
 
+    /// <summary>
+    /// Reads all tasks that match the specified filter.
+    /// </summary>
+    /// <param name="filter">A function to filter tasks.</param>
+    /// <returns>A collection of tasks that match the filter.</returns>
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task?, bool>? filter = null)
     {
         if(filter!=null)
@@ -129,6 +164,10 @@ internal class TaskImplementation : BlApi.ITask
         });
     }
 
+    /// <summary>
+    /// Updates a task.
+    /// </summary>
+    /// <param name="item">The task to update.</param>
     public void Update(BO.Task item)
     {
         if (item.Alias == "")
@@ -156,9 +195,9 @@ internal class TaskImplementation : BlApi.ITask
              EngineerId: item.Engineer.Id,
              Complexity: (DO.EngineerExperience?)item.Complexity
              );
-       if(item.Dependencies!=getDependencies(task))
+        if (item.Dependencies != getDependencies(task))
         {
-           _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items.Id));
+            _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items.Id));
             foreach (var dependency in item.Dependencies)
             {
                 DO.Dependency dep = new DO.Dependency
@@ -179,10 +218,22 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlDoesNotExistException($"Task with ID={task.Id} already exists", ex);
         }
     }
+
+    /// <summary>
+    /// Determines whether a task is a milestone.
+    /// </summary>
+    /// <param name="item">The task to check.</param>
+    /// <returns>True if the task is a milestone; otherwise, false.</returns>
     public bool getIsMilestone(BO.Task item)
     {
         return item.Milestone?.Id == null;
     }
+
+    /// <summary>
+    /// Gets the status of a task.
+    /// </summary>
+    /// <param name="item">The task to get the status for.</param>
+    /// <returns>The status of the task.</returns>
     public BO.Status? getStatus(DO.Task? item)
     {
         if (item.CompleteDate != null)
@@ -193,6 +244,12 @@ internal class TaskImplementation : BlApi.ITask
             return BO.Status.Scheduled;
         return BO.Status.Unscheduled;
     }
+
+    /// <summary>
+    /// Retrieves dependencies for a task.
+    /// </summary>
+    /// <param name="item">The task to retrieve dependencies for.</param>
+    /// <returns>A list of dependencies for the task.</returns>
     public List<BO.TaskInList>? getDependencies(DO.Task item)
     {
         return _dal.Dependency.ReadAll(d => d.DependentTask == item.Id).Select(d => new BO.TaskInList()
@@ -203,6 +260,11 @@ internal class TaskImplementation : BlApi.ITask
             Status = getStatus(_dal.Task.Read((int)d.DependensOnTask))
         }).ToList();
     }
+
+    /// <summary>
+    /// Updates the scheduled date of a task.
+    /// </summary>
+    /// <param name="item">The task to update the scheduled date for.</param>
     public void Update(int id, DateTime? date)
     {
         DO.Task? task = _dal.Task.Read(id);
@@ -220,6 +282,11 @@ internal class TaskImplementation : BlApi.ITask
 
     }
 
+    /// <summary>
+    /// Reads a task based on a filter function.
+    /// </summary>
+    /// <param name="filter">The filter function.</param>
+    /// <returns>The task that matches the filter.</returns>
     public BO.Task? Read(Func<BO.Task?, bool>? filter )
     {
         return _dal.Task.ReadAll().Select(item => new BO.Task()
@@ -241,6 +308,11 @@ internal class TaskImplementation : BlApi.ITask
         }).FirstOrDefault(item => filter(item));
     }
 
+    /// <summary>
+    /// Calculates the earliest date among the dependencies of a task.
+    /// </summary>
+    /// <param name="item">The task to calculate the earliest date for.</param>
+    /// <returns>The earliest date among the dependencies of the task.</returns>
     private DateTime? EarliestDate(BO.Task item)
     {
         if(item.ScheduledDate.HasValue)
@@ -252,19 +324,29 @@ internal class TaskImplementation : BlApi.ITask
         }
         var tasks = _dal.Task.ReadAll();
         var dependenttasks = deps.Select(items => _dal.Task.Read((int)items.DependensOnTask));
+
         //if (dependenttasks.Any())
         //    throw new BlNullPropertyException($"not all the tasks before has start date");
+        
         return dependenttasks.Max(items => getForecastDate(items));
-
-
     }
 
+    /// <summary>
+    /// Sets the status of a task to "Scheduled" and updates its scheduled date.
+    /// </summary>
+    /// <param name="item">The task to set the status and scheduled date for.</param>
     public void SetScheduele(BO.Task item)
     {
         item.Status = BO.Status.Scheduled;
         Update(item.Id, EarliestDate(item));
      
     }
+
+    /// <summary>
+    /// Calculates the forecast date for a task based on its scheduled date and required effort time.
+    /// </summary>
+    /// <param name="item">The task to calculate the forecast date for.</param>
+    /// <returns>The forecast date for the task.</returns>
     private DateTime? getForecastDate(DO.Task item)
     {
         return item.ScheduledDate + item.RequiredEffortTime;

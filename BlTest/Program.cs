@@ -39,7 +39,7 @@ internal class Program
     }
 
     /// <summary>
-    /// a switch case with a menu for before the start 
+    /// Presents a menu for actions to be taken before the project starts.
     /// </summary>
     private static void MenuBeforeStart()
     {
@@ -96,7 +96,7 @@ internal class Program
     }
 
     /// <summary>
-    /// a switch case with a menu for while the project is running
+    /// Presents a menu for actions to be taken after the project starts.
     /// </summary>
     private static void MenuAfterStart()
     {
@@ -172,7 +172,7 @@ internal class Program
     }
 
     /// <summary>
-    /// 
+    /// Presents a menu for task-related actions.
     /// </summary>
     private static void MenuTask()
     {
@@ -241,7 +241,7 @@ internal class Program
     }
 
     /// <summary>
-    /// offers the user to choose what he wants to do with the engineer
+    /// Presents a menu for engineer-related actions.
     /// </summary>
     private static void MenuEngineer()
     {
@@ -306,7 +306,7 @@ internal class Program
     }
 
     /// <summary>
-    /// 
+    /// Sets the start date of the project and initializes task scheduling.
     /// </summary>
     private static void MenuClock()
     {
@@ -321,7 +321,7 @@ internal class Program
     }
 
     /// <summary>
-    /// 
+    /// Assigns a task to an engineer by ID.
     /// </summary>
     public static void AssignTaskIntoEngineer()
     {
@@ -335,7 +335,7 @@ internal class Program
     }
 
     /// <summary>
-    /// 
+    /// Presents a menu for engineer-related actions after the project starts.
     /// </summary>
     private static void MenuEngineerAfterStart()
     {
@@ -405,7 +405,7 @@ internal class Program
     }
 
     /// <summary>
-    /// 
+    /// Presents a menu for task-related actions after the project starts.
     /// </summary>
     private static void MenuTaskAfterStart()
     {
@@ -466,7 +466,7 @@ internal class Program
 
 
 
-    //------------------------------------------------------------------------------------------//
+    //----------------------------------------------- inner functions -----------------------------------------------//
 
 
 
@@ -605,9 +605,8 @@ internal class Program
     }
 
     /// <summary>
-    /// 
+    /// Collects dependency information for a task being updated.
     /// </summary>
-    /// <returns></returns>
     public static List<BO.TaskInList> DependenciesTo()
     {
         bool flag = int.TryParse(Console.ReadLine(), out int IdDepend);
@@ -639,10 +638,8 @@ internal class Program
         return depTo;
     }
 
-
-
     /// <summary>
-    /// 
+    /// Deletes an engineer by ID.
     /// </summary>
     private static void DeleteEngineer()
     {
