@@ -1,4 +1,5 @@
 ﻿namespace BO;
+
 /// <summary>
 /// Exception for variable that does not exist
 /// </summary>
@@ -9,12 +10,15 @@ public class BlDoesNotExistException : Exception
     public BlDoesNotExistException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+
+/// <summary>
+/// Exception for null property is encountered
+/// </summary>
 [Serializable]
 public class BlNullPropertyException : Exception
 {
     public BlNullPropertyException(string? message) : base(message) { }
 }
-
 
 /// <summary>
 /// Exception for variable that already exist
@@ -37,6 +41,10 @@ public class BlDeletionImpossible : Exception
     public BlDeletionImpossible(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+
+/// <summary>
+/// Exception for invalid input
+/// </summary>
 [Serializable]
 public class BlInvalidInputException : Exception
 {
@@ -46,7 +54,7 @@ public class BlInvalidInputException : Exception
 }
 
 /// <summary>
-/// 
+/// Exception for XML file load create eroor
 /// </summary>
 public class BlXMLFileLoadCreateException : Exception
 {
