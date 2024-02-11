@@ -53,4 +53,3 @@ static public class Tools
         return result;
     }
 }
-}

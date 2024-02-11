@@ -213,15 +213,6 @@ internal class EngineerImplementation : IEngineer
         };
 
 
-        //BO.TaskInEngineer? task = (from item in _dal.Task.ReadAll()
-        //                           where (item.EngineerId == boEngineer.Id &&
-        //                           (item.StartDate <= DateTime.Now || item.StartDate == null) &&
-        //                           item.CompleteDate == null)
-        //                           select new BO.TaskInEngineer
-        //                           {
-        //                               Id = item.Id,
-        //                               Alias = item.Alias,
-        //                           }).FirstOrDefault();
 
         int minID = 0;
         DateTime? min = DateTime.MaxValue;
@@ -272,22 +263,13 @@ internal class EngineerImplementation : IEngineer
         Update(ConvertDoToBo(engineer));
     }
 
-    /// <summary>
-    /// Checks if a task is a milestone.
-    /// </summary>
-    /// <param name="item">The task to check.</param>
-    /// <returns>True if the task is a milestone, otherwise false.</returns>
-    public bool getIsMilestone(BO.Task item)
-    {
-        return item.Milestone?.Id == null;
-    }
-
+    
     /// <summary>
     /// Gets the status of a task.
     /// </summary>
     /// <param name="item">The task.</param>
     /// <returns>The status of the task.</returns>
-    public BO.Status? getStatus(DO.Task? item)
+    private BO.Status? getStatus(DO.Task? item)
     {
         if (item.CompleteDate != null)
             return BO.Status.Done;
@@ -303,7 +285,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item">The task.</param>
     /// <returns>A list of task dependencies.</returns>
-    public List<BO.TaskInList>? getDependencies(DO.Task item)
+    private List<BO.TaskInList>? getDependencies(DO.Task item)
     {
         var dependencies = _dal.Dependency.ReadAll().Where(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
         {

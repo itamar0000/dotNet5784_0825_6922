@@ -224,7 +224,7 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="item">The task to check.</param>
     /// <returns>True if the task is a milestone; otherwise, false.</returns>
-    public bool getIsMilestone(BO.Task item)
+    private bool getIsMilestone(BO.Task item)
     {
         return item.Milestone?.Id == null;
     }
@@ -234,7 +234,7 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="item">The task to get the status for.</param>
     /// <returns>The status of the task.</returns>
-    public BO.Status? getStatus(DO.Task? item)
+    private BO.Status? getStatus(DO.Task? item)
     {
         if (item.CompleteDate != null)
             return BO.Status.Done;
@@ -250,7 +250,7 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="item">The task to retrieve dependencies for.</param>
     /// <returns>A list of dependencies for the task.</returns>
-    public List<BO.TaskInList>? getDependencies(DO.Task item)
+    private List<BO.TaskInList>? getDependencies(DO.Task item)
     {
         return _dal.Dependency.ReadAll(d => d.DependentTask == item.Id).Select(d => new BO.TaskInList()
         {
@@ -335,7 +335,7 @@ internal class TaskImplementation : BlApi.ITask
     /// Sets the status of a task to "Scheduled" and updates its scheduled date.
     /// </summary>
     /// <param name="item">The task to set the status and scheduled date for.</param>
-    public void SetScheduele(BO.Task item)
+    private void SetScheduele(BO.Task item)
     {
         item.Status = BO.Status.Scheduled;
         Update(item.Id, EarliestDate(item));
