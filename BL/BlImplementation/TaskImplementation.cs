@@ -234,8 +234,8 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="item">The task to get the status for.</param>
     /// <returns>The status of the task.</returns>
-    private BO.Status? getStatus(DO.Task? item)
-    {
+    public BO.Status? getStatus(DO.Task? item)
+    { 
         if (item.CompleteDate != null)
             return BO.Status.Done;
         if (item.StartDate != null)
@@ -335,7 +335,7 @@ internal class TaskImplementation : BlApi.ITask
     /// Sets the status of a task to "Scheduled" and updates its scheduled date.
     /// </summary>
     /// <param name="item">The task to set the status and scheduled date for.</param>
-    private void SetScheduele(BO.Task item)
+    public void SetScheduele(BO.Task item)
     {
         item.Status = BO.Status.Scheduled;
         Update(item.Id, EarliestDate(item));
