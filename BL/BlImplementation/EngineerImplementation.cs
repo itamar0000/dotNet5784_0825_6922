@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Net.Mail;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 /// <summary>
 /// Implementation of the Engineer interface
@@ -47,9 +48,9 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer doEngineer = _dal.Engineer.Read(id)
             ?? throw new BO.BlDoesNotExistException($"Engineer with ID = {id} doe's not exists");
 
-        bool flag = _dal.Task.ReadAll().Where(item => item.EngineerId == id).Select(item => new BO.Task()
+        bool flag = _dal.Task.ReadAll().Where(item => item!.EngineerId == id).Select(item => new BO.Task()
         {
-            Id = item.Id,
+            Id = item!.Id,
             Alias = item.Alias,
             Description = item.Description,
             CreatedAtDate = item.CreatedAtDate,
@@ -103,7 +104,7 @@ internal class EngineerImplementation : IEngineer
     /// <returns>The engineer object that matches the filter condition, if any.</returns>
     public BO.Engineer? Read(Func<BO.Engineer?, bool>? filter)
     {
-        BO.Engineer? boEngineer = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item)).FirstOrDefault(filter);
+        BO.Engineer? boEngineer = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item!)).FirstOrDefault(filter);
 
         return boEngineer;
     }
@@ -115,13 +116,14 @@ internal class EngineerImplementation : IEngineer
     /// <returns>A collection of engineer objects.</returns>
     public IEnumerable<BO.Engineer>? ReadAll(Func<BO.Engineer?, bool>? filter = null)
     {
-        var boEngineers = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item));
+        var boEngineers = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item!));
 
         if(filter != null)
         {
-            boEngineers.Where(item => filter(item));
+            boEngineers = from item in boEngineers
+                          where (filter(item))
+                          select (item);
         }
-
         return boEngineers;
     }
 
@@ -137,13 +139,13 @@ internal class EngineerImplementation : IEngineer
 
         DO.Engineer doEngineer = ConvertBoToDo(boEngineer);
 
-        if ((DO.EngineerExperience)boEngineer.Level < _dal.Engineer.Read(boEngineer.Id).Level)
+        if ((DO.EngineerExperience)boEngineer.Level < _dal.Engineer.Read(boEngineer.Id)!.Level)
             throw new BO.BlInvalidInputException($"Engineer's Level can only go up");
 
          
-            var tasks = _dal.Task.ReadAll(task => task.EngineerId == boEngineer.Id);
+            var tasks = _dal.Task.ReadAll(task => task!.EngineerId == boEngineer.Id);
 
-            if ((tasks.Any(task => task.isActive == true && task.CompleteDate is null && task.StartDate is not null)))
+            if ((tasks.Any(task => task!.isActive == true && task.CompleteDate is null && task.StartDate is not null)))
                 throw new BO.BlInvalidInputException($"Engineer's Task can not be changed because he in a middle of another task");
 
         /* if((DO.EngineerExperience)boEngineer.Level < _dal.Task.Read(boEngineer.Task.Id)?.Complexity)
@@ -219,7 +221,7 @@ internal class EngineerImplementation : IEngineer
 
         foreach (var item in _dal.Task.ReadAll())
         {
-            if (item.EngineerId == boEngineer.Id && item.ScheduledDate < min && item.CompleteDate == null)
+            if (item!.EngineerId == boEngineer.Id && item.ScheduledDate < min && item.CompleteDate == null)
             {
                 min = item.ScheduledDate;
                 minID = item.Id;
@@ -232,7 +234,7 @@ internal class EngineerImplementation : IEngineer
             boEngineer.Task = new BO.TaskInEngineer()
             {
                 Id = minID,
-                Alias = _dal.Task.Read(minID).Alias,
+                Alias = _dal.Task.Read(minID)!.Alias,
             };
         }
         
@@ -271,7 +273,7 @@ internal class EngineerImplementation : IEngineer
     /// <returns>The status of the task.</returns>
     private BO.Status? getStatus(DO.Task? item)
     {
-        if (item.CompleteDate != null)
+        if (item!.CompleteDate != null)
             return BO.Status.Done;
         if (item.StartDate != null)
             return BO.Status.OnTrack;
@@ -287,11 +289,11 @@ internal class EngineerImplementation : IEngineer
     /// <returns>A list of task dependencies.</returns>
     private List<BO.TaskInList>? getDependencies(DO.Task item)
     {
-        var dependencies = _dal.Dependency.ReadAll().Where(d => d.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
+        var dependencies = _dal.Dependency.ReadAll().Where(d => d!.DependensOnTask == item.Id).Select(d => new BO.TaskInList()
         {
-            Id = d.Id,
-            Alias = _dal.Task.Read(d.Id).Alias,
-            Description = _dal.Task.Read(d.Id).Description,
+            Id = d!.Id,
+            Alias = _dal.Task.Read(d.Id)!.Alias,
+            Description = _dal.Task.Read(d.Id)!.Description,
             Status = getStatus(_dal.Task.Read(d.Id)),
         });
         var dependenciesList = dependencies.ToList();

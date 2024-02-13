@@ -18,7 +18,6 @@ internal class Program
         {//clears all the data from the file and reinitializes it
             Initialization.Do(); //stage 4  
         }
-
         switch (s_bl.Clock.GetStatus())
         {
             case ProjectStatus.BeforeStart:

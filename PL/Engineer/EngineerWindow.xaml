@@ -1,0 +1,29 @@
+﻿<Window x:Class="PL.Engineer.EngineerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Engineer"
+        mc:Ignorable="d"
+        DataContext="{Binding EngineerProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
+    Title="EngineerWindow" Height="400" Width="400">
+    <Grid>
+        <Label Content="ID" HorizontalAlignment="Left" Margin="74,10,0,0" VerticalAlignment="Top" Height="47" Width="37" FontSize="20" />
+        <Label Content="Name" HorizontalAlignment="Left" Margin="74,77.5,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="74,-50,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.175,0.81" FontSize="20"/>
+        <Label Content="Cost" HorizontalAlignment="Left" Margin="74,212.5,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Level" HorizontalAlignment="Left" Margin="74,280,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+        <!--Name Textbox-->
+        <TextBox HorizontalAlignment="Left" Margin="178,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <!--Email Textbox-->
+        <TextBox HorizontalAlignment="Left" Margin="178,-50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
+        <!--level ComboBox-->
+        <ComboBox HorizontalAlignment="Left" Margin="178,290,0,0" VerticalAlignment="Top" Width="120"/>
+        <!--ID Textbox-->
+        <TextBox HorizontalAlignment="Left" Margin="178,23,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <!--Cost Textbox-->
+        <TextBox HorizontalAlignment="Left" Margin="178,224,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="" HorizontalAlignment="Center" Margin="0,344,0,0" VerticalAlignment="Top" Height="30" Width="90"/>
+
+    </Grid>
+</Window>

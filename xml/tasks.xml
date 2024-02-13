@@ -4,310 +4,279 @@
     <Id>1</Id>
     <Alias>Requirement Analysis</Alias>
     <Description>Understand what needs to be done in the project.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2427736+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0021191+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P46D</RequiredEffortTime>
+    <RequiredEffortTime>P31D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>2</Id>
     <Alias>Feasibility Study</Alias>
     <Description>Check if it's possible and makes sense to do the project.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.252331+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0097343+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-03-27T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P38D</RequiredEffortTime>
+    <RequiredEffortTime>P35D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>3</Id>
     <Alias>System Architecture Design</Alias>
     <Description>Plan how the system will be built.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2612591+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0121742+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-03-27T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P53D</RequiredEffortTime>
+    <RequiredEffortTime>P30D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>4</Id>
     <Alias>Component Specification</Alias>
     <Description>Describe in detail what each part of the system should be like.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2625595+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0159999+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-05-19T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P57D</RequiredEffortTime>
+    <RequiredEffortTime>P36D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>5</Id>
     <Alias>Hardware Procurement</Alias>
     <Description>Buy the necessary hardware for the system.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2637251+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0168388+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-05-19T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P53D</RequiredEffortTime>
+    <RequiredEffortTime>P51D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>6</Id>
     <Alias>Software Development</Alias>
     <Description>Write the actual code for the software components.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2647364+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0178873+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-07-11T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P52D</RequiredEffortTime>
+    <RequiredEffortTime>P59D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>7</Id>
     <Alias>Prototyping</Alias>
     <Description>Make a simple version of the system to test its basic features.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2657348+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0193514+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-07-15T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <RequiredEffortTime>P51D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>8</Id>
     <Alias>Integration Testing</Alias>
     <Description>Put all the pieces together and make sure they work well.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2666878+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0207839+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-09-01T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P51D</RequiredEffortTime>
+    <RequiredEffortTime>P32D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>9</Id>
     <Alias>Quality Assurance Testing</Alias>
     <Description>Test the system thoroughly to find and fix any problems.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2676768+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0217705+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-09-01T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P38D</RequiredEffortTime>
+    <RequiredEffortTime>P41D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>10</Id>
     <Alias>User Training</Alias>
     <Description>Create all the necessary documents about the system.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2687366+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0228633+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-10-22T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <RequiredEffortTime>P35D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>11</Id>
     <Alias>System Deployment</Alias>
     <Description>Teach the users how to use the system.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2698121+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0238453+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-10-22T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P43D</RequiredEffortTime>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>12</Id>
     <Alias>Performance Testing</Alias>
     <Description>Put the system into use for everyone.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2708371+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0247739+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-12-17T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P30D</RequiredEffortTime>
+    <RequiredEffortTime>P35D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>13</Id>
     <Alias>Bug Fixing</Alias>
     <Description>Test how well the system performs in different situations.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2719633+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.025626+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-12-04T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P49D</RequiredEffortTime>
+    <RequiredEffortTime>P41D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>14</Id>
     <Alias>User Acceptance Testing</Alias>
     <Description>Fix any issues or problems in the system.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2737968+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0265657+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-01-16T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P52D</RequiredEffortTime>
+    <RequiredEffortTime>P51D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>15</Id>
     <Alias>Final Documentation</Alias>
     <Description>Let users try out the system to make sure they like it.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2748641+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0275374+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:54.9715601+02:00</ScheduledDate>
-    <RequiredEffortTime>P55D</RequiredEffortTime>
+    <RequiredEffortTime>P58D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>16</Id>
     <Alias>Project Sign-off</Alias>
     <Description>Finish all the documentation for the system.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2758564+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0284098+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:54.9733105+02:00</ScheduledDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <RequiredEffortTime>P37D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>17</Id>
     <Alias>Post-Implementation Review</Alias>
     <Description>Get formal approval to finish the project.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2768374+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0293208+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:54.9748438+02:00</ScheduledDate>
-    <RequiredEffortTime>P38D</RequiredEffortTime>
+    <RequiredEffortTime>P40D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>18</Id>
     <Alias>Project Closure</Alias>
     <Description>Look back at the project and see what went well and what can be improved.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2779718+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0302639+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-01-22T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P39D</RequiredEffortTime>
+    <RequiredEffortTime>P59D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>19</Id>
     <Alias>Security Audit</Alias>
     <Description>Officially finish the project, making sure everything is done.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2792017+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0312046+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-03-09T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P57D</RequiredEffortTime>
+    <RequiredEffortTime>P59D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>20</Id>
     <Alias>Capacity Planning</Alias>
     <Description>Check the security of the software.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2805011+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0321047+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-03-09T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P33D</RequiredEffortTime>
+    <RequiredEffortTime>P35D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>21</Id>
     <Alias>Usability Testing</Alias>
     <Description>Plan for the system's capacity and resources.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2816641+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0330578+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:54.9907689+02:00</ScheduledDate>
-    <RequiredEffortTime>P41D</RequiredEffortTime>
+    <RequiredEffortTime>P42D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>22</Id>
     <Alias>Regulatory Compliance Assessment</Alias>
     <Description>Evaluate the system's user interface and overall user experience.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2827955+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0342843+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:54.9932022+02:00</ScheduledDate>
-    <RequiredEffortTime>P47D</RequiredEffortTime>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>23</Id>
     <Alias>Data Migration</Alias>
     <Description>Verify that the system complies with relevant regulations, standards, and legal requirements.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2838858+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0356001+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-03-02T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P54D</RequiredEffortTime>
+    <RequiredEffortTime>P52D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>24</Id>
     <Alias>Continuous Integration/Continuous Deployment (CI/CD) Implementation</Alias>
     <Description>Plan and execute the transfer of data from existing systems to the newly developed system.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2850765+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0369162+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-03-02T23:28:54.9102516+02:00</ScheduledDate>
-    <RequiredEffortTime>P48D</RequiredEffortTime>
+    <RequiredEffortTime>P37D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>25</Id>
     <Alias>Change Management</Alias>
     <Description>Establish automated processes for code integration, testing, and deployment.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2865747+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0379249+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-05-05T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P58D</RequiredEffortTime>
+    <RequiredEffortTime>P36D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>26</Id>
     <Alias>Stakeholder Communication</Alias>
     <Description>Develop strategies and processes to manage and communicate changes effectively.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2878246+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0388849+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-04-11T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P52D</RequiredEffortTime>
+    <RequiredEffortTime>P44D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>27</Id>
     <Alias>User Feedback Collection</Alias>
     <Description>Maintain regular and transparent communication with project stakeholders.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2893903+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0398014+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-03-22T23:28:54.9907689+03:00</ScheduledDate>
-    <RequiredEffortTime>P31D</RequiredEffortTime>
+    <RequiredEffortTime>P39D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>28</Id>
     <Alias>Disaster Recovery Planning</Alias>
     <Description>Set up mechanisms to collect feedback from end-users during and after system deployment.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2906059+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0407077+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-04-25T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P30D</RequiredEffortTime>
+    <RequiredEffortTime>P36D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>29</Id>
     <Alias>Performance Monitoring and Optimization</Alias>
     <Description>Develop a comprehensive plan for recovering the system in the event of unexpected disruptions.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2918592+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0416353+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-07-02T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P51D</RequiredEffortTime>
+    <RequiredEffortTime>P57D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>30</Id>
     <Alias>Technology Stack Evaluation</Alias>
     <Description>Implement tools and processes to monitor the system's performance in real-time.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2930722+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0425784+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2025-08-22T23:28:54.9102516+03:00</ScheduledDate>
-    <RequiredEffortTime>P55D</RequiredEffortTime>
+    <RequiredEffortTime>P52D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>31</Id>
     <Alias>Technology Stack Adjustment</Alias>
     <Description>Assess and choose the appropriate technologies, frameworks, and tools for system development.</Description>
-    <CreatedAtDate>2024-02-10T23:27:48.2944274+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-02-13T16:54:52.0435076+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <ScheduledDate>2024-02-10T23:28:55.0361853+02:00</ScheduledDate>
-    <RequiredEffortTime>P57D</RequiredEffortTime>
+    <RequiredEffortTime>P49D</RequiredEffortTime>
   </Task>
 </ArrayOfTask>

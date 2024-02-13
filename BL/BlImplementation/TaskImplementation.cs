@@ -71,7 +71,7 @@ internal class TaskImplementation : BlApi.ITask
             throw new  BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
         // Checking if task has dependencies
-        bool tasks =_dal.Dependency.ReadAll().Where(t =>t.DependensOnTask==id).Any();
+        bool tasks =_dal.Dependency.ReadAll().Where(t =>t!.DependensOnTask==id).Any();
 
         // Deleting task if no dependencies exist
         if (tasks == false)
@@ -125,9 +125,9 @@ internal class TaskImplementation : BlApi.ITask
     {
         if(filter!=null)
         {
-            var tasks= _dal.Task.ReadAll().Where(item=>item.isActive).Select(item => new BO.Task()
+            var tasks= _dal.Task.ReadAll().Where(item=>item!.isActive).Select(item => new BO.Task()
             {
-                Id = item.Id,
+                Id = item!.Id,
                 Alias = item.Alias,
                 Description = item.Description,
                 CreatedAtDate = item.CreatedAtDate,
@@ -147,7 +147,7 @@ internal class TaskImplementation : BlApi.ITask
         }
         return _dal.Task.ReadAll().Select(item => new BO.Task()
         {
-            Id = item.Id,
+            Id = item!.Id,
             Alias = item.Alias,
             Description = item.Description,
             CreatedAtDate = item.CreatedAtDate,
@@ -192,12 +192,12 @@ internal class TaskImplementation : BlApi.ITask
              DeadlineDate: item.DeadlineDate,
              Deliverables: item.Deliverables,
              Remarks: item.Remarks,
-             EngineerId: item.Engineer.Id,
+             EngineerId: item.Engineer?.Id,
              Complexity: (DO.EngineerExperience?)item.Complexity
              );
         if (item.Dependencies != getDependencies(task))
         {
-            _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items.Id));
+            _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items!.Id));
             foreach (var dependency in item.Dependencies)
             {
                 DO.Dependency dep = new DO.Dependency
@@ -208,7 +208,6 @@ internal class TaskImplementation : BlApi.ITask
                 _dal.Dependency.Create(dep);
             }
         }
-        int id;
         try
         {
             _dal.Task.Update(task);
@@ -236,7 +235,7 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>The status of the task.</returns>
     public BO.Status? getStatus(DO.Task? item)
     { 
-        if (item.CompleteDate != null)
+        if (item!.CompleteDate != null)
             return BO.Status.Done;
         if (item.StartDate != null)
             return BO.Status.OnTrack;
@@ -252,11 +251,11 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>A list of dependencies for the task.</returns>
     private List<BO.TaskInList>? getDependencies(DO.Task item)
     {
-        return _dal.Dependency.ReadAll(d => d.DependentTask == item.Id).Select(d => new BO.TaskInList()
+        return _dal.Dependency.ReadAll(d => d!.DependentTask == item.Id).Select(d => new BO.TaskInList()
         {
             Id = (int)d.DependensOnTask!,
-            Alias = _dal.Task.Read((int)d.DependensOnTask).Alias,
-            Description = _dal.Task.Read((int)d.DependensOnTask).Description,
+            Alias = _dal.Task.Read((int)d.DependensOnTask)!.Alias,
+            Description = _dal.Task.Read((int)d.DependensOnTask)!.Description,
             Status = getStatus(_dal.Task.Read((int)d.DependensOnTask))
         }).ToList();
     }
