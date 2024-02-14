@@ -20,7 +20,7 @@
                 <ListView.View>
                     <GridView>
                         <!-- Id Column -->
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100"/>
 
                         <!-- Name Column -->
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
@@ -39,22 +39,21 @@
         </Border>
 
 
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid HorizontalAlignment="left" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="250">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="179*"/>
-                <ColumnDefinition Width="222*"/>
-                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Filter By Level" FontSize="12" Foreground="DarkBlue" FontWeight="Bold" VerticalAlignment="Bottom" Background="#F0F0F0" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+            <Label Grid.Column="0" Content="Filter By Level" FontSize="12" Foreground="DarkBlue" FontWeight="Bold" VerticalAlignment="Center" Background="#F0F0F0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="13,0,0,0"/>
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineerCollectionKey}}"
-          Grid.Column="2"
+          Grid.Column="1"
           SelectedValue="{Binding Path=EngineerLevel, Mode=TwoWay}"
           SelectionChanged="Combo_LevelChanged"
           FontSize="14"
           Foreground="DarkGreen"
           FontWeight="Bold"
           VerticalAlignment="Center"
-          Background="#F0F0F0"/>
+          Background="#F0F0F0" Margin="16,0,-16,0"/>
 
 
 
