@@ -29,7 +29,7 @@ public interface IEngineer
     /// </summary>
     /// <param name="id">The ID of the engineer to read.</param>
     /// <returns>The engineer with the specified ID.</returns>
-    public BO.Engineer Read(int id);
+    public BO.Engineer? Read(int id);
 
     /// <summary>
     /// Reads an engineer based on a custom filter.

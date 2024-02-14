@@ -89,11 +89,13 @@ internal class EngineerImplementation : IEngineer
     /// <param name="id">The ID of the engineer to read.</param>
     /// <returns>The engineer object.</returns>
     /// <exception cref="BO.BlDoesNotExistException">Thrown if the engineer does not exist.</exception>
-    public BO.Engineer Read(int id)
+    public BO.Engineer? Read(int id)
     {
-        DO.Engineer doEngineer = _dal.Engineer.Read(id)
-            ?? throw new BO.BlDoesNotExistException($"Engineer with ID = {id} does not exists");
-
+        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
+        if (doEngineer == null)
+        {
+            return null;
+        }
         return ConvertDoToBo(doEngineer);
     }
 

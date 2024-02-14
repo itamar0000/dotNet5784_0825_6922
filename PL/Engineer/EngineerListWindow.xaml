@@ -13,16 +13,25 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}"></ListView>
+        <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClick"></ListView>
         <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="179*"/>
+                <ColumnDefinition Width="222*"/>
+                <ColumnDefinition Width="400*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"  ></Label>
+            <Label Grid.Column="0" Content="Engineer List" FontSize="12" Foreground="DarkBlue" FontWeight="Bold" VerticalAlignment="Bottom" Background="#F0F0F0" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineerCollectionKey}}"
-             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedValue="{Binding Path=EngineerLevel, Mode=TwoWay}" SelectionChanged="Combo_LevelChanged"/>
+          Grid.Column="2"
+          SelectedValue="{Binding Path=EngineerLevel, Mode=TwoWay}"
+          SelectionChanged="Combo_LevelChanged"
+          FontSize="14"
+          Foreground="DarkGreen"
+          FontWeight="Bold"
+          VerticalAlignment="Center"
+          Background="#F0F0F0"/>
+
         </Grid>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddClick"/>
     </Grid>
 </Window>

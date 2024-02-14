@@ -25,6 +25,7 @@ namespace PL.Engineer
             InitializeComponent();
             EngineerList = s_bl?.Engineer.ReadAll()!;
         }
+
         public IEnumerable<BO.Engineer> EngineerList
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
@@ -41,5 +42,20 @@ namespace PL.Engineer
             EngineerList = (EngineerLevel == BO.EngineerExperience.None) ?
             s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == EngineerLevel)!;
         }
+
+        private void AddClick(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().ShowDialog();
+            EngineerList = s_bl.Engineer.ReadAll()!;
+        }
+
+        private void DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? EngineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
+            new EngineerWindow(EngineerInList!.Id).ShowDialog();
+            EngineerList=s_bl.Engineer.ReadAll()!;
+        }
+
+    
     }
 }
