@@ -32,7 +32,7 @@
                         <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="80"/>
 
                         <!-- Level Column -->
-                        <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="100"/>
+                        <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>
