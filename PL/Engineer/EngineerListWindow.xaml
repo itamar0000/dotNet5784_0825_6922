@@ -16,7 +16,7 @@
         <!-- <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClick"></ListView> -->
 
         <Border Grid.Row="1" Margin="10">
-            <ListView ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClick" Background="LightSteelBlue">
+            <ListView ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClick" Background="White">
                 <ListView.View>
                     <GridView>
                         <!-- Id Column -->
@@ -32,7 +32,12 @@
                         <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="80"/>
 
                         <!-- Level Column -->
-                        <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="200"/>
+                        <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="130"/>
+
+                        <GridViewColumn Header="TaskId" DisplayMemberBinding="{Binding Task.Id}" Width="100"/>
+
+                        <GridViewColumn Header="Task alias" DisplayMemberBinding="{Binding Task.Alias}" Width="100"/>
+
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -56,8 +61,7 @@
           Background="#F0F0F0" Margin="16,0,-16,0"/>
 
 
-
         </Grid>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddClick"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddClick" Background="#393A10"/>
     </Grid>
 </Window>

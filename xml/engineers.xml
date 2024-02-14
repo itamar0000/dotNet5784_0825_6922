@@ -57,13 +57,6 @@
     <Level>Advanced</Level>
   </Engineer>
   <Engineer>
-    <Id>341658747</Id>
-    <Name>Sophie Nguyen</Name>
-    <Email>sophie.nguyen@example.com</Email>
-    <Cost>230</Cost>
-    <Level>Intermediate</Level>
-  </Engineer>
-  <Engineer>
     <Id>280628038</Id>
     <Name>Ethan Murphy</Name>
     <Email>ethan.murphy@example.com</Email>
@@ -139,5 +132,19 @@
     <Email>oscar.chang@example.com</Email>
     <Cost>40</Cost>
     <Level>Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>31273823</Id>
+    <Name>dine</Name>
+    <Email>ejb@gmail.com</Email>
+    <Cost>293</Cost>
+    <Level>Advanced</Level>
+  </Engineer>
+  <Engineer>
+    <Id>341658747</Id>
+    <Name>Sophie Nguyen</Name>
+    <Email>sophie.nguyen@example.com</Email>
+    <Cost>230</Cost>
+    <Level>Intermediate</Level>
   </Engineer>
 </ArrayOfEngineer>
