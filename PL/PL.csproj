@@ -23,10 +23,14 @@
   <ItemGroup>
     <None Remove="background.jpg" />
     <None Remove="background2.jpg" />
+    <None Remove="backgroundb.jpg" />
+    <None Remove="Photos\background.jpg" />
+    <None Remove="Photos\backgroundb.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="background.jpg" />
+    <Resource Include="backgroundb.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +40,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
     <ProjectReference Include="..\DalTest\DalTest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Photos\" />
   </ItemGroup>
 
 </Project>
