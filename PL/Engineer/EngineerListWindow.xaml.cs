@@ -52,8 +52,11 @@ namespace PL.Engineer
         private void DoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.Engineer? EngineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
-            new EngineerWindow(EngineerInList!.Id).ShowDialog();
-            EngineerList=s_bl.Engineer.ReadAll()!;
+           if(EngineerInList != null)
+            {
+                new EngineerWindow(EngineerInList!.Id).ShowDialog();
+                EngineerList = s_bl.Engineer.ReadAll()!;
+            }         
         }
 
     

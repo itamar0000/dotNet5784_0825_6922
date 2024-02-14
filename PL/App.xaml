@@ -14,5 +14,12 @@
             <Setter Property="Foreground" Value="White"></Setter>
         </Style>
 
+        <Style TargetType="ListViewItem">
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Foreground" Value="SteelBlue"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>
