@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="/background.jpg"></ImageBrush>
+        <ImageBrush ImageSource="/backgroundb.jpg"></ImageBrush>
     </Window.Background>
     <Grid>
         <!--a button to go to Engineer's Window-->
-        <Button Content="Handle Engineer" HorizontalAlignment="Left" Margin="43,77,0,0" VerticalAlignment="Top" Click="btnEngineers_Click" RenderTransformOrigin="-1.351,0.378" Height="35" Width="129" FontSize="15"/>
-        <Button Content="Data Initilazation" HorizontalAlignment="Left" Margin="43,183,0,0" VerticalAlignment="Top" Click="btnInit_Click" Height="39" Width="129" FontSize="15"/>
+        <Button Content="Handle Engineer" HorizontalAlignment="Left" Margin="182,286,0,0" VerticalAlignment="Top" Click="btnEngineers_Click" RenderTransformOrigin="-1.351,0.378" Height="35" Width="129" FontSize="15"/>
+        <Button Content="Data Initilazation" HorizontalAlignment="Left" Margin="374,286,0,0" VerticalAlignment="Top" Click="btnInit_Click" Height="35" Width="129" FontSize="15"/>
 
 
     </Grid>
