@@ -15,10 +15,16 @@
 
   <ItemGroup>
     <None Remove="background.jpg" />
+    <None Remove="background2.jpg" />
+    <None Remove="Photos\background.jpg" />
+    <None Remove="Photos\backgroundb.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="background.jpg" />
+    <Resource Include="background2.jpg" />
+    <Resource Include="Photos\background.jpg" />
+    <Resource Include="Photos\backgroundb.jpg" />
   </ItemGroup>
 
   <ItemGroup>

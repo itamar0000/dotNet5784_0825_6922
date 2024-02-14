@@ -10,7 +10,7 @@
             <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
             <local:ConvertIdToEnable x:Key="ConvertIdToEnable"/>
         <Style TargetType="Button" >
-            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Background" Value="#ECEBF0"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
         </Style>
 

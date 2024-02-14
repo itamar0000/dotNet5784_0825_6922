@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
     Title="EngineerWindow" Height="400" Width="400"
+    Background="LightSteelBlue"
     DataContext="{Binding engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
     <Grid>
         <Label Content="ID" HorizontalAlignment="Left" Margin="74,10,0,0" VerticalAlignment="Top" Height="47" Width="37" FontSize="20" />
         <Label Content="Name" HorizontalAlignment="Left" Margin="74,77.5,0,0" VerticalAlignment="Top" FontSize="20"/>
