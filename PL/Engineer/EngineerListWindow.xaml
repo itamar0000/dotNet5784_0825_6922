@@ -15,23 +15,23 @@
         </Grid.RowDefinitions>
         <!-- <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClick"></ListView> -->
 
-        <Border Grid.Row="1" Margin="10">
+    <Border Grid.Row="1" Margin="10">
             <ListView ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClick" Background="White">
                 <ListView.View>
                     <GridView>
-                        <!-- Id Column -->
+                         <!--Id Column--> 
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100"/>
 
-                        <!-- Name Column -->
+                         <!--Name Column--> 
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
 
-                        <!-- Email Column -->
+                         <!--Email Column--> 
                         <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="200"/>
 
-                        <!-- Cost Column -->
+                         <!--Cost Column--> 
                         <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="80"/>
 
-                        <!-- Level Column -->
+                         <!--Level Column--> 
                         <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="130"/>
 
                         <GridViewColumn Header="TaskId" DisplayMemberBinding="{Binding Task.Id}" Width="100"/>

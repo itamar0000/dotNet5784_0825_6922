@@ -94,7 +94,7 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
         {
-            return null;
+            throw new BlDoesNotExistException($"engineer with id={id} does not exists");
         }
         return ConvertDoToBo(doEngineer);
     }
@@ -107,6 +107,9 @@ internal class EngineerImplementation : IEngineer
     public BO.Engineer? Read(Func<BO.Engineer?, bool>? filter)
     {
         BO.Engineer? boEngineer = _dal.Engineer.ReadAll().Select(item => ConvertDoToBo(item!)).FirstOrDefault(filter);
+
+        if(boEngineer==null)
+            throw new BlDoesNotExistException("Engineer does not exists");
 
         return boEngineer;
     }

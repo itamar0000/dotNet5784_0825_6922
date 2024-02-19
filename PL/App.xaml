@@ -9,6 +9,7 @@
             <local:EngineerCollection x:Key="EngineerCollectionKey" />
             <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
             <local:ConvertIdToEnable x:Key="ConvertIdToEnable"/>
+            <local:TaskCollection x:Key="TaskCollectionKey"/>
         <Style TargetType="Button" >
             <Setter Property="Background" Value="#393A10"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>

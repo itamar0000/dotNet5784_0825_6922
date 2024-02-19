@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing.IndexedProperties;
@@ -29,39 +30,39 @@ namespace PL.Engineer
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-
-
+        int id;
         public static readonly DependencyProperty EngineerProperty =
            DependencyProperty.Register("engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-       
+
         public EngineerWindow(int Id = 0)
         {
             InitializeComponent();
-
-            if(Id==0)
+            id = Id;
+            if (Id == 0)
             {
                 engineer = new BO.Engineer();
             }
             else
             {
-                if(s_bl.Engineer.Read(Id)==null)
+                try
                 {
-                    MessageBox.Show("Engineer not found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Close();
-                    return;
+                    engineer = s_bl.Engineer.Read(Id)!;
                 }
-                engineer= s_bl.Engineer.Read(Id)!;
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
         }
-       
+
 
         private void Add_UpdateEngineer_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (s_bl.Engineer.Read(engineer.Id)==null)
+                if(id==0)
                 {
                     s_bl.Engineer.Create(engineer);
                     MessageBox.Show("Engineer added successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -73,13 +74,13 @@ namespace PL.Engineer
                     MessageBox.Show("Engineer updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
-                Close();
-            }
+                    Close();
+                }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-           
+
         }
     }
 }

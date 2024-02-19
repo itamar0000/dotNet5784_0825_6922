@@ -6,7 +6,8 @@ public enum Status
     Scheduled,
     OnTrack,
     InJeopardy,
-    Done
+    Done,
+    None
 }
 
 public enum EngineerExperience
