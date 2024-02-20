@@ -16,15 +16,17 @@ using System.Windows.Shapes;
 namespace PL.Task
 {
     /// <summary>
-    /// Interaction logic for TaskInListWindow.xaml
+    /// Interaction logic for TaskListWindow.xaml
     /// </summary>
-    public partial class TaskInListWindow : Window
+    public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public TaskInListWindow()
+
+        public TaskListWindow()
         {
             InitializeComponent();
             TaskList = s_bl?.Task.ReadAll()!;
+
         }
 
 
@@ -36,14 +38,15 @@ namespace PL.Task
 
         // Using a DependencyProperty as the backing store for RaskList.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskList", typeof(BO.Task), typeof(BO.Task), new PropertyMetadata(0));
+            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+
 
         private void DoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.Task? TaskInList = (sender as ListView)?.SelectedItem as BO.Task;
             if (TaskInList != null)
             {
-                new EngineerWindow(TaskInList!.Id).ShowDialog();
+                new TaskWindow(TaskInList!.Id).ShowDialog();
                 TaskList = s_bl.Task.ReadAll()!;
             }
         }
@@ -51,8 +54,8 @@ namespace PL.Task
 
         private void Combo_LevelChanged(object sender, SelectionChangedEventArgs e)
         {
-             TaskList = (TaskLevel == BO.Status.None) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item?.Status == TaskLevel)!;
+            TaskList = (TaskLevel == BO.Status.None) ?
+           s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item?.Status == TaskLevel)!;
         }
 
         private void AddClick(object sender, RoutedEventArgs e)
@@ -62,3 +65,4 @@ namespace PL.Task
         }
     }
 }
+

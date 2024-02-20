@@ -1,5 +1,6 @@
 ﻿using System;
 using PL.Engineer;
+using PL.Task;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,12 +23,12 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-    private void btnEngineers_Click(object sender, RoutedEventArgs e)
+    private void BtnEngineers_Click(object sender, RoutedEventArgs e)
     {
         new EngineerListWindow().Show();
     }
 
-    private void btnInit_Click(object sender, RoutedEventArgs e)
+    private void BtnInit_Click(object sender, RoutedEventArgs e)
     {
         MessageBoxResult mbResult  =  MessageBox.Show("Are you sure you want to iniitalize the data?", "Initalize", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         if (mbResult == MessageBoxResult.Yes)
@@ -36,4 +37,8 @@ public partial class MainWindow : Window
         }
     }
 
+    private void BtnTasks_Click(object sender, RoutedEventArgs e)
+    {
+        new TaskListWindow().Show();
+    }
 }
