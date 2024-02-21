@@ -24,4 +24,8 @@ public interface IBl
     /// Gets the interface for clock-related operations.
     /// </summary>
     public IClock Clock { get; }
+
+    public void InitializeDB() => DalTest.Initialization.Do();
+
+    public void ResetDB() => DalTest.Initialization.Reset();
 }

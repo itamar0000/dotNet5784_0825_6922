@@ -24,7 +24,7 @@
         SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, 
         ValidatesOnExceptions=true}"/>
         <!--ID Textbox-->
-        <TextBox HorizontalAlignment="Left" Margin="178,23,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"  IsEnabled="{Binding Id, Converter ={StaticResource ConvertIdToEnable}}"/>
+        <TextBox HorizontalAlignment="Left" Margin="178,23,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"  IsEnabled="{Binding Id, Converter ={StaticResource ConvertIdToEnable}}" PreviewTextInput="Txt_Input"/>
         <!--Cost Textbox-->
         <TextBox HorizontalAlignment="Left" Margin="178,224,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
         <Button  HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateEngineer_Click" RenderTransformOrigin="0.,456.408" Margin="0,330,0,0" Background="Black"/>

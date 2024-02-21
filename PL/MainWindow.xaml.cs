@@ -1,7 +1,9 @@
-﻿using System;
-using PL.Engineer;
-using PL.Task;
+﻿using PL.Task;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,36 +11,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace PL
 {
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-    }
-    private void BtnEngineers_Click(object sender, RoutedEventArgs e)
-    {
-        new EngineerListWindow().Show();
-    }
-
-    private void BtnInit_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBoxResult mbResult  =  MessageBox.Show("Are you sure you want to iniitalize the data?", "Initalize", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-        if (mbResult == MessageBoxResult.Yes)
+        public MainWindow()
         {
-            DalTest.Initialization.Do();
+            InitializeComponent();
         }
-    }
 
-    private void BtnTasks_Click(object sender, RoutedEventArgs e)
-    {
-        new TaskListWindow().Show();
+        private void Btn_Manager(object sender, RoutedEventArgs e)
+        {
+            new ManagerWindow().Show();
+        }
+
+        private void Btn_Engineer(object sender, RoutedEventArgs e)
+        {
+            new GetIdWindow().Show();
+        }
     }
 }

@@ -79,9 +79,9 @@ public class Task
     public string? Deliverables { get; init; }
 
     /// <summary>
-    /// Gets or initializes the remarks related to the task.
+    /// Gets or set the remarks related to the task.
     /// </summary>
-    public string? Remarks { get; init; }
+    public string? Remarks { get; set; }
 
     /// <summary>
     /// Gets or sets the engineer associated with the task.

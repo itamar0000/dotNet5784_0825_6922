@@ -316,12 +316,15 @@ internal class TaskImplementation : BlApi.ITask
     {
         if(item.ScheduledDate.HasValue)
             return item.ScheduledDate;
-        IEnumerable<DO.Dependency> deps = _dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
+        //gets a list of all the dependencies of the task means all the task i depeneds on
+        IEnumerable<DO.Dependency?> deps = _dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
+        //sort the list by id
+        deps.OrderBy(item=>item?.Id);
        if(!deps.Any())
-        {
+        {//if it doesnt depend on anything return now
             return DateTime.Now ;
         }
-        var tasks = _dal.Task.ReadAll();
+       //gets a list of all the tasks i depeneds on
         var dependenttasks = deps.Select(items => _dal.Task.Read((int)items.DependensOnTask));
 
         //if (dependenttasks.Any())
@@ -337,6 +340,7 @@ internal class TaskImplementation : BlApi.ITask
     public void SetScheduele(BO.Task item)
     {
         item.Status = BO.Status.Scheduled;
+
         Update(item.Id, EarliestDate(item));
      
     }

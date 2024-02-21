@@ -1,9 +1,11 @@
 ﻿using BO;
+using Microsoft.Xaml.Behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing.IndexedProperties;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL.Engineer
 {
     /// <summary>
@@ -62,7 +63,7 @@ namespace PL.Engineer
         {
             try
             {
-                if(id==0)
+                if (id == 0)
                 {
                     s_bl.Engineer.Create(engineer);
                     MessageBox.Show("Engineer added successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -74,13 +75,24 @@ namespace PL.Engineer
                     MessageBox.Show("Engineer updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
-                    Close();
-                }
+                Close();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+        private void Txt_Input(object sender, TextCompositionEventArgs e)
+        {
+            foreach (char c in e.Text)
+            {
+                if (!Char.IsDigit(c))
+                {
+                    e.Handled = true; // Mark the event as handled, preventing the character from being entered
+                    return;
+                }
+            }
         }
     }
 }

@@ -508,7 +508,7 @@ internal class Program
 
                     Console.WriteLine(x);
                     Console.WriteLine("Enter task that depends ID");
-                    int? id3 = x.DependentTask, id4 = x.DependensOnTask;
+                    int id3 = x.DependentTask, id4 = x.DependensOnTask;
 
                     bool flag = int.TryParse(Console.ReadLine()!, out int id1);
                     if (flag)

@@ -23,14 +23,19 @@
                         <!--Name Column-->
                         <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="150"/>
 
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
 
                         <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
 
                         <GridViewColumn Header="Scheduled Date"  DisplayMemberBinding="{Binding ScheduledDate}" Width="100"/>
 
                         <GridViewColumn Header="Forecast Date" DisplayMemberBinding="{Binding ForecastDate}" Width="100"/>
-                        
+
+                        <GridViewColumn Header="Deliverables" DisplayMemberBinding="{Binding Deliverables}" Width="100"/>
+
+                        <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding Remarks}" Width="100"/>
+
+
 
                     </GridView>
                 </ListView.View>

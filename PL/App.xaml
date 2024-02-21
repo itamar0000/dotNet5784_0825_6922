@@ -10,6 +10,7 @@
             <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
             <local:ConvertIdToEnable x:Key="ConvertIdToEnable"/>
             <local:TaskCollection x:Key="TaskCollectionKey"/>
+
         <Style TargetType="Button" >
             <Setter Property="Background" Value="#393A10"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
@@ -22,5 +23,31 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="MyCustomLabelStyle" TargetType="Label">
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Top" />
+    <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="Label">
+                <Border>
+                    <ContentPresenter
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        RecognizesAccessKey="True" />
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsEnabled" Value="false">
+                        <Setter Property="Foreground">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{DynamicResource DisabledForegroundColor}" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+</Style>
+
     </Application.Resources>
 </Application>
