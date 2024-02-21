@@ -5,8 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="450" Width="800">
-    <Grid>  
-        
+        Title="TaskWindow" Height="450" Width="800"
+        DataContext="{Binding task, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
+    <Grid>
+
+        <Label Content="ID" HorizontalAlignment="Left" Margin="18,15,0,0" VerticalAlignment="Top" Height="47" Width="37" FontSize="20" />
+        <Label Content="Alias" HorizontalAlignment="Left" Margin="18,78,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="18,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.175,0.81" FontSize="20"/>
+        <Label Content="Dependencies" HorizontalAlignment="Left" Margin="18,296,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="ScheduledDate" HorizontalAlignment="Left" Margin="433,38,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+        <Label Content="Deliverables" HorizontalAlignment="Left" Margin="429,147,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+        <Label Content="Remarks" HorizontalAlignment="Left" Margin="433,210,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+        <Label Content="Engineer" HorizontalAlignment="Left" Margin="433,253,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+        <Label Content="Complexity" HorizontalAlignment="Left" Margin="433,297,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+
+        <!--ID Textbox-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Left" Margin="129,25,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"  IsEnabled="{Binding Id, Converter ={StaticResource ConvertIdToEnable}}"/>
+
+        <!--Alias Textbox-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Left" Margin="129,87,0,0" TextWrapping="Wrap" Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+
+        <!--Description Textbox-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Left" Margin="133,162,0,0" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="227" Height="113" />
+
+        <!--Dependencies _______ changeeeee-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Left" Margin="186,310,0,0" TextWrapping="Wrap" Text="{Binding Dependencies, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+
+        <!--ScheduledDate DatePicker-->
+        <DatePicker BorderBrush="#FF2F84AC" SelectedDate="{Binding ScheduledDate}" SelectedDateFormat="Short" HorizontalAlignment="Left" Margin="590,48,0,0" VerticalAlignment="Top"
+                    Text="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsDropDownOpen="False"/>
+
+        <!--Deliverables Textbox-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Right" Margin="0,162,108,0" TextWrapping="Wrap" Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+
+        <!--Remarks Textbox-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Right" Margin="0,218,108,0" TextWrapping="Wrap" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+
+        <!--Engineer Textbox-->
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Right" Margin="0,257,108,0" TextWrapping="Wrap" Text="{Binding Engineer, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
+
+        <!--Complexity Combotbox-->
+        <ComboBox  BorderBrush="#FF2F84AC"  Background="#FF97D5F2" HorizontalAlignment="Left" Margin="572,308,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Source={StaticResource EngineerCollectionKey}}" 
+                  SelectedValue="{Binding Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+
+        <!--partition-->
+        <Border BorderBrush="#FF2F84AC"  Background="#FF97D5F2" BorderThickness="2" Height="330" Width="10" VerticalAlignment="Top" Margin="395,25,395,0" />
+
+        <Button  HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateTask_Click" RenderTransformOrigin="0.,456.408" Margin="0,365,0,0"
+                 BorderBrush="#FF2F84AC"  Background="#FF97D5F2" BorderThickness="2"/>
+      
+
+
     </Grid>
 </Window>
