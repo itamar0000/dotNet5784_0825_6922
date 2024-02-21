@@ -12,6 +12,10 @@ internal class TaskImplementation : BlApi.ITask
 {
     private IDal _dal = DalApi.Factory.Get;
 
+    private readonly Bl _bl;
+    internal TaskImplementation(Bl bl) => _bl = bl;
+
+
     /// <summary>
     /// Creates a new task.
     /// </summary>
@@ -322,7 +326,7 @@ internal class TaskImplementation : BlApi.ITask
         deps.OrderBy(item=>item?.Id);
        if(!deps.Any())
         {//if it doesnt depend on anything return now
-            return DateTime.Now ;
+            return _bl.CurrentClock;
         }
        //gets a list of all the tasks i depeneds on
         var dependenttasks = deps.Select(items => _dal.Task.Read((int)items.DependensOnTask));
