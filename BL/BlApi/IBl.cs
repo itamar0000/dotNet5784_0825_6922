@@ -1,5 +1,6 @@
 ﻿namespace BlApi;
 
+
 /// <summary>
 /// Represents the interface for business logic operations.
 /// </summary>
@@ -28,4 +29,16 @@ public interface IBl
     public void InitializeDB() => DalTest.Initialization.Do();
 
     public void ResetDB() => DalTest.Initialization.Reset();
+
+
+    #region Time
+
+    public DateTime CurrentClock { get; }
+
+    public void PromoteHour();
+    public void PromoteDay();
+
+    public void ResetTime();
+    #endregion
+
 }

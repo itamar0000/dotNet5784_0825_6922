@@ -14,7 +14,7 @@
         <Label Content="Alias" HorizontalAlignment="Left" Margin="18,78,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="Description" HorizontalAlignment="Left" Margin="18,200,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.175,0.81" FontSize="20"/>
         <Label Content="Dependencies" HorizontalAlignment="Left" Margin="18,296,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="ScheduledDate" HorizontalAlignment="Left" Margin="433,38,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
+        <Label Content="Required Effort Time" HorizontalAlignment="Left" Margin="433,38,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
         <Label Content="Deliverables" HorizontalAlignment="Left" Margin="429,147,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
         <Label Content="Remarks" HorizontalAlignment="Left" Margin="433,210,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
         <Label Content="Engineer" HorizontalAlignment="Left" Margin="433,253,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>

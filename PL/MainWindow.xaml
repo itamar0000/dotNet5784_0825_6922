@@ -24,8 +24,13 @@
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
+                <Label Content="{Binding MyTime}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       BorderBrush="#FF2F84AC" Background="#FF97D5F2" BorderThickness="1" Canvas.Left="41" Canvas.Top="30" Height="21" Width="117"
+                       HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10" FontFamily="Ariel"/>
+                <Button Content="Add Day" Click="Button_Click_AddDay" Canvas.Left="38" Canvas.Top="60"/>
+                <Button Content="Add Hour" Click="Button_Click_AddHour" Canvas.Left="102" Canvas.Top="60"/>
+                <Button Content="Reset Time" Click="Button_Click_ResetTime" Canvas.Left="10" Canvas.Top="10"/>
             </Canvas>
         </Viewbox>
-
     </Grid>
 </Window>
