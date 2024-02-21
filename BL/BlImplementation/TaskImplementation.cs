@@ -111,6 +111,7 @@ internal class TaskImplementation : BlApi.ITask
             ForecastDate = getForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
+            Dependencies= getDependencies(item),
             Remarks = item.Remarks,
             Complexity = (BO.EngineerExperience?)item.Complexity
         };

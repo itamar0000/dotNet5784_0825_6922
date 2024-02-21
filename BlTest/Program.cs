@@ -201,12 +201,8 @@ internal class Program
                     bool flag = int.TryParse(Console.ReadLine(), out int id);
 
                     BO.Task? item = s_bl!.Task.Read(id);
+                    Console.WriteLine(item);
 
-                    if (item != null)
-                        Console.WriteLine(item);
-
-                    else
-                        Console.WriteLine("Task with this ID does not exist");
 
                     break;
                 }
@@ -563,30 +559,26 @@ internal class Program
 
 
 
-        Console.WriteLine("Enter dependencies to add. to end press Enter");
+        Console.WriteLine("Enter dependencies to add. to end press 0");
         List<BO.TaskInList>? depToAdd = DependenciesTo();
 
-        while (depToAdd.Any())
+        foreach (BO.TaskInList items in depToAdd)
         {
-            TaskInList taskInList = depToAdd.FirstOrDefault();
-            if (found.Dependencies.FirstOrDefault(item => item.Id == taskInList.Id) == null)
+            if (found.Dependencies.Any(item => item.Id == items.Id))
             {
-                found.Dependencies.Add(taskInList);
+                found.Dependencies.Add(items);
             }
-            depToAdd.Remove(taskInList);
         }
 
-        Console.WriteLine("Enter dependencies to remove. to end press Enter");
+        Console.WriteLine("Enter dependencies to remove. to end press 0");
         List<BO.TaskInList>? depToRemove = DependenciesTo();
 
-        while (depToRemove.Any())
+       foreach(BO.TaskInList items in depToRemove)
         {
-            TaskInList taskInList = depToRemove.FirstOrDefault();
-            if (found.Dependencies.FirstOrDefault(item => item.Id == taskInList.Id) != null)
+            if (found.Dependencies.FirstOrDefault(item => item.Id == item.Id) != null)
             {
-                found.Dependencies.Remove(taskInList);
+                found.Dependencies.Remove(items);
             }
-            depToRemove.Remove(taskInList);
         }
 
 
@@ -612,18 +604,13 @@ internal class Program
     /// </summary>
     public static List<BO.TaskInList> DependenciesTo()
     {
-        bool flag = int.TryParse(Console.ReadLine(), out int IdDepend);
+        int.TryParse(Console.ReadLine(), out int IdDepend);
+        List<BO.TaskInList> depTo = new();
 
-        List<BO.TaskInList>? depTo = null;
-
-        while (flag)
+        while (IdDepend!=0)
         {
             BO.Task task = s_bl.Task.Read(IdDepend);
 
-            if (task == null)
-                Console.WriteLine($"Task with ID = {IdDepend} does not exist");
-            else
-            {
                 BO.TaskInList taskInList = new()
                 {
                     Id = task.Id,
@@ -632,13 +619,14 @@ internal class Program
                     Status = task.Status
                 };
 
-                depTo?.Add(taskInList);
-            }
+                depTo.Add(taskInList);
+            
 
-            flag = int.TryParse(Console.ReadLine(), out IdDepend);
+           int.TryParse(Console.ReadLine(), out IdDepend);
         }
 
         return depTo;
+
     }
 
     /// <summary>
