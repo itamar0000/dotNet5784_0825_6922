@@ -2,6 +2,7 @@
 using BO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace PL.Task
 
 
 
-        public IEnumerable<BO.TaskInList> A { get; set; }
+        public List<BO.TaskInList> A { get; set; }
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -81,6 +82,9 @@ namespace PL.Task
                 try
                 {
                     task = s_bl.Task.Read(Id)!;
+                    TaskList = (from BO.Task t in s_bl.Task.ReadAll()
+                               where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
+                               select t);
                 }
                 catch (Exception ex)
                 {
@@ -96,25 +100,40 @@ namespace PL.Task
             {
                 if (id == 0)
                 {
-                    
-                    s_bl.Task.Create(task );
+
+                    s_bl.Task.Create(task);
                     MessageBox.Show("Task added successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
                 else
                 {
-                    task.Dependencies = A.ToList();
+                    foreach(var item in A)
+                    {
+                        foreach(var item2 in task.Dependencies)
+                        {
+                           if(item.Id==item2.Id)
+                            {
+                               A.Remove(item);
+                                break;
+                            }
+                        }
+                    }
+
+                    task.Dependencies.AddRange(A);
                     s_bl.Task.Update(task);
                     MessageBox.Show("Task updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-
                 }
+
+
                 Close();
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -124,7 +143,7 @@ namespace PL.Task
                 int Id = (int)checkb.Tag;
                 BO.Task? task=s_bl.Task.Read(Id);
                 BO.TaskInList tsk = new TaskInList { Id = Id, Alias = task.Alias, Status = task.Status, Description = task.Description };
-                A.Append(tsk);
+                A.Add(tsk);
                 
             }
         }
