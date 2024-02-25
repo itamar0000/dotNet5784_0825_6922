@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PL.Manager;
 
 namespace PL;
 
@@ -41,5 +42,10 @@ public partial class ManagerWindow : Window
     private void BtnTasks_Click(object sender, RoutedEventArgs e)
     {
         new TaskListWindow().Show();
+    }
+
+    private void Button_Click_Gantt(object sender, RoutedEventArgs e)
+    {
+        new GanttWindow().Show();
     }
 }

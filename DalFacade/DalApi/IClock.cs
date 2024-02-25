@@ -7,4 +7,6 @@ public interface IClock
     public DateTime? GetStartDate();
     public DateTime? GetEndDate();
 
+
+
 }

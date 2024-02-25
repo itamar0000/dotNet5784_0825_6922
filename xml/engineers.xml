@@ -67,22 +67,22 @@
     <Id>383557394</Id>
     <Name>Sophie Nguyen</Name>
     <Email>sophie.nguyen@example.com</Email>
-    <Cost>30</Cost>
-    <Level>Beginner</Level>
+    <Cost>130</Cost>
+    <Level>AdvancedBeginner</Level>
   </Engineer>
   <Engineer>
     <Id>231502843</Id>
     <Name>Ethan Murphy</Name>
     <Email>ethan.murphy@example.com</Email>
-    <Cost>330</Cost>
-    <Level>Advanced</Level>
+    <Cost>430</Cost>
+    <Level>Expert</Level>
   </Engineer>
   <Engineer>
     <Id>240151203</Id>
     <Name>Ava Martinez</Name>
     <Email>ava.martinez@example.com</Email>
-    <Cost>130</Cost>
-    <Level>AdvancedBeginner</Level>
+    <Cost>330</Cost>
+    <Level>Advanced</Level>
   </Engineer>
   <Engineer>
     <Id>320566394</Id>
@@ -95,8 +95,8 @@
     <Id>281874378</Id>
     <Name>Olivia Lee</Name>
     <Email>olivia.lee@example.com</Email>
-    <Cost>130</Cost>
-    <Level>AdvancedBeginner</Level>
+    <Cost>30</Cost>
+    <Level>Beginner</Level>
   </Engineer>
   <Engineer>
     <Id>251256796</Id>
@@ -137,7 +137,7 @@
     <Id>223194803</Id>
     <Name>Ella Jones</Name>
     <Email>ella.jones@example.com</Email>
-    <Cost>30</Cost>
-    <Level>Beginner</Level>
+    <Cost>230</Cost>
+    <Level>Intermediate</Level>
   </Engineer>
 </ArrayOfEngineer>

@@ -70,7 +70,7 @@
     <CreatedAtDate>2024-02-25T12:30:23.6756079+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
-    <RequiredEffortTime>P32D</RequiredEffortTime>
+    <RequiredEffortTime>P46D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>10</Id>

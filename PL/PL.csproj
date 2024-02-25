@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.26.1" />
+    <PackageReference Include="Syncfusion.Gantt.WPF" Version="24.2.7" />
   </ItemGroup>
 
   <ItemGroup>
