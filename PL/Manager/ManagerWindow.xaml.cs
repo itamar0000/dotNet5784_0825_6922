@@ -19,6 +19,7 @@ namespace PL;
 /// </summary>
 public partial class ManagerWindow : Window
 {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public ManagerWindow()
     {
         InitializeComponent();
@@ -33,7 +34,7 @@ public partial class ManagerWindow : Window
         MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to iniitalize the data?", "Initalize", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         if (mbResult == MessageBoxResult.Yes)
         {
-            DalTest.Initialization.Do();
+           s_bl.InitializeDB();
         }
     }
 

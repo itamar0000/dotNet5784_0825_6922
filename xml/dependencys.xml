@@ -6,11 +6,6 @@
     <DependensOnTask>1</DependensOnTask>
   </dependency>
   <dependency>
-    <Id>1001</Id>
-    <DependentTask>3</DependentTask>
-    <DependensOnTask>1</DependensOnTask>
-  </dependency>
-  <dependency>
     <Id>1002</Id>
     <DependentTask>4</DependentTask>
     <DependensOnTask>1</DependensOnTask>
@@ -43,6 +38,16 @@
   <dependency>
     <Id>1008</Id>
     <DependentTask>6</DependentTask>
+    <DependensOnTask>5</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1009</Id>
+    <DependentTask>7</DependentTask>
+    <DependensOnTask>4</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1010</Id>
+    <DependentTask>7</DependentTask>
     <DependensOnTask>5</DependensOnTask>
   </dependency>
   <dependency>
@@ -247,17 +252,7 @@
   </dependency>
   <dependency>
     <Id>1051</Id>
-    <DependentTask>7</DependentTask>
-    <DependensOnTask>4</DependensOnTask>
-  </dependency>
-  <dependency>
-    <Id>1052</Id>
-    <DependentTask>7</DependentTask>
-    <DependensOnTask>5</DependensOnTask>
-  </dependency>
-  <dependency>
-    <Id>1053</Id>
-    <DependentTask>7</DependentTask>
-    <DependensOnTask>3</DependensOnTask>
+    <DependentTask>3</DependentTask>
+    <DependensOnTask>1</DependensOnTask>
   </dependency>
 </ArrayOfDependency>

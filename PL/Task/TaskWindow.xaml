@@ -31,10 +31,10 @@
 
         <!--Dependencies _______ changeeeee-->
       <!--  <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Left" Margin="186,310,0,0" TextWrapping="Wrap" Text="{Binding task.Dependencies, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>-->
-       <ListBox x:Name="lst_box" ItemsSource="{Binding TaskList}" Width="300" Height="100" Margin="429,25,71,309" SelectionMode="Multiple"  >
+       <ListBox  ItemsSource="{Binding TaskList}" Width="300" Height="100" Margin="429,25,71,309" SelectionMode="Multiple"  >
             <ListBox.ItemTemplate>
                 <HierarchicalDataTemplate>
-                    <CheckBox Content="{Binding Alias}" Tag="{Binding Id}" Checked="CheckBox_Checked"/>
+                    <CheckBox Content="{Binding Alias}" Tag="{Binding Id}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                 </HierarchicalDataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

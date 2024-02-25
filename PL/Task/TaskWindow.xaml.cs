@@ -85,6 +85,8 @@ namespace PL.Task
                     TaskList = (from BO.Task t in s_bl.Task.ReadAll()
                                where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
                                select t);
+                    BO.TaskInList temp= new TaskInList { Id=task.Id, Alias=task.Alias, Status=task.Status, Description=task.Description };
+                    TaskList=TaskList.Where(item=>item.Id != task.Id);
                 }
                 catch (Exception ex)
                 {
@@ -145,6 +147,25 @@ namespace PL.Task
                 BO.TaskInList tsk = new TaskInList { Id = Id, Alias = task.Alias, Status = task.Status, Description = task.Description };
                 A.Add(tsk);
                 
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var checkb = sender as CheckBox;
+            if (checkb?.IsChecked == false)
+            {
+                int Id = (int)checkb.Tag;
+                BO.Task? task = s_bl.Task.Read(Id);
+                BO.TaskInList tsk = new TaskInList { Id = Id, Alias = task.Alias, Status = task.Status, Description = task.Description };
+                foreach (var item in A)
+                {
+                    if(item.Id==Id)
+                    {
+                        A.Remove(item);
+                        break;
+                    }
+                }
             }
         }
     }
