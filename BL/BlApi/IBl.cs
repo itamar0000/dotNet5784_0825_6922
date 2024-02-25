@@ -37,7 +37,6 @@ public interface IBl
 
     public void PromoteHour();
     public void PromoteDay();
-
     public void ResetTime();
     #endregion
 
