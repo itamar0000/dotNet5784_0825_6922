@@ -2,7 +2,8 @@
 using BO;
 using DalApi;
 using System.Runtime.InteropServices;
-
+using System.Collections.Generic;
+using System.Numerics;
 namespace BlImplementation;
 
 /// <summary>
@@ -71,15 +72,16 @@ internal class TaskImplementation : BlApi.ITask
         DO.Task? task = _dal.Task.Read(id);
 
         // Task not found or already inactive
-        if (task == null||task.isActive==false)
-            throw new  BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+        if (task == null || task.isActive == false)
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
         // Checking if task has dependencies
-        bool tasks =_dal.Dependency.ReadAll().Where(t =>t!.DependensOnTask==id).Any();
+        bool tasks = _dal.Dependency.ReadAll().Where(t => t!.DependensOnTask == id).Any();
 
         // Deleting task if no dependencies exist
         if (tasks == false)
-            try {
+            try
+            {
                 Delete(id);
             }
             catch (Exception ex)
@@ -112,10 +114,10 @@ internal class TaskImplementation : BlApi.ITask
             ScheduledDate = item.ScheduledDate,
             StartDate = item.StartDate,
             CompleteDate = item.CompleteDate,
-            ForecastDate = getForecastDate(item),
+            ForecastDate = GetForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
-            Dependencies= getDependencies(item),
+            Dependencies = getDependencies(item),
             Remarks = item.Remarks,
             Complexity = (BO.EngineerExperience?)item.Complexity
         };
@@ -128,9 +130,9 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>A collection of tasks that match the filter.</returns>
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task?, bool>? filter = null)
     {
-        if(filter!=null)
+        if (filter != null)
         {
-            var tasks= _dal.Task.ReadAll().Where(item=>item!.isActive).Select(item => new BO.Task()
+            var tasks = _dal.Task.ReadAll().Where(item => item!.isActive).Select(item => new BO.Task()
             {
                 Id = item!.Id,
                 Alias = item.Alias,
@@ -139,7 +141,7 @@ internal class TaskImplementation : BlApi.ITask
                 ScheduledDate = item.ScheduledDate,
                 StartDate = item.StartDate,
                 CompleteDate = item.CompleteDate,
-                ForecastDate = getForecastDate(item),
+                ForecastDate = GetForecastDate(item),
                 Deliverables = item.Deliverables,
                 RequiredEffortTime = item.RequiredEffortTime,
                 Remarks = item.Remarks,
@@ -147,8 +149,8 @@ internal class TaskImplementation : BlApi.ITask
                 Dependencies = getDependencies(item),
                 Complexity = (BO.EngineerExperience?)item.Complexity
             });
-           return tasks.Where(item => filter(item));
-   
+            return tasks.Where(item => filter(item));
+
         }
         return _dal.Task.ReadAll().Select(item => new BO.Task()
         {
@@ -159,7 +161,7 @@ internal class TaskImplementation : BlApi.ITask
             ScheduledDate = item.ScheduledDate,
             StartDate = item.StartDate,
             CompleteDate = item.CompleteDate,
-            ForecastDate = getForecastDate(item),
+            ForecastDate = GetForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
             Remarks = item.Remarks,
@@ -202,6 +204,8 @@ internal class TaskImplementation : BlApi.ITask
              );
         if (item.Dependencies != getDependencies(task))
         {
+            if(IsCircular(item))
+                throw new BlInvalidInputException("Circular dependency detected");
             _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items!.Id));
             foreach (var dependency in item.Dependencies)
             {
@@ -210,6 +214,7 @@ internal class TaskImplementation : BlApi.ITask
                     DependentTask = item.Id,
                     DependensOnTask = dependency.Id
                 };
+
                 _dal.Dependency.Create(dep);
             }
         }
@@ -239,7 +244,7 @@ internal class TaskImplementation : BlApi.ITask
     /// <param name="item">The task to get the status for.</param>
     /// <returns>The status of the task.</returns>
     public BO.Status? getStatus(DO.Task? item)
-    { 
+    {
         if (item!.CompleteDate != null)
             return BO.Status.Done;
         if (item.StartDate != null)
@@ -291,7 +296,7 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="filter">The filter function.</param>
     /// <returns>The task that matches the filter.</returns>
-    public BO.Task? Read(Func<BO.Task?, bool>? filter )
+    public BO.Task? Read(Func<BO.Task?, bool>? filter)
     {
         return _dal.Task.ReadAll().Select(item => new BO.Task()
         {
@@ -302,7 +307,7 @@ internal class TaskImplementation : BlApi.ITask
             ScheduledDate = item.ScheduledDate,
             StartDate = item.StartDate,
             CompleteDate = item.CompleteDate,
-            ForecastDate = getForecastDate(item),
+            ForecastDate = GetForecastDate(item),
             Deliverables = item.Deliverables,
             RequiredEffortTime = item.RequiredEffortTime,
             Remarks = item.Remarks,
@@ -319,23 +324,23 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>The earliest date among the dependencies of the task.</returns>
     private DateTime? EarliestDate(BO.Task item)
     {
-        if(item.ScheduledDate.HasValue)
+        if (item.ScheduledDate.HasValue)
             return item.ScheduledDate;
         //gets a list of all the dependencies of the task means all the task i depeneds on
         IEnumerable<DO.Dependency?> deps = _dal.Dependency.ReadAll(items => items.DependentTask == item.Id);
         //sort the list by id
-        deps.OrderBy(item=>item?.Id);
-       if(!deps.Any())
+        deps.OrderBy(item => item?.Id);
+        if (!deps.Any())
         {//if it doesnt depend on anything return now
             return _bl.CurrentClock;
         }
-       //gets a list of all the tasks i depeneds on
+        //gets a list of all the tasks i depeneds on
         var dependenttasks = deps.Select(items => _dal.Task.Read((int)items.DependensOnTask));
 
         //if (dependenttasks.Any())
         //    throw new BlNullPropertyException($"not all the tasks before has start date");
-        
-        return dependenttasks.Max(items => getForecastDate(items));
+
+        return dependenttasks.Max(items => GetForecastDate(items));
     }
 
     /// <summary>
@@ -347,7 +352,7 @@ internal class TaskImplementation : BlApi.ITask
         item.Status = BO.Status.Scheduled;
 
         Update(item.Id, EarliestDate(item));
-     
+
     }
 
     /// <summary>
@@ -355,8 +360,28 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="item">The task to calculate the forecast date for.</param>
     /// <returns>The forecast date for the task.</returns>
-    private DateTime? getForecastDate(DO.Task item)
+    private DateTime? GetForecastDate(DO.Task item)
     {
         return item.ScheduledDate + item.RequiredEffortTime;
     }
+    private bool IsCircular(BO.Task task)
+    {
+        // Check if the task values are valid
+
+        Graph graph = new(_dal.Task.ReadAll().Count());
+        foreach (TaskInList t in task.Dependencies)
+        {
+           
+            graph.AddEdge(task.Id - 1, t.Id - 1);
+        }
+        foreach (var t in _dal.Dependency.ReadAll())
+        {
+            if(t.DependentTask!=task.Id)
+            graph.AddEdge(t.DependentTask- 1, t.DependensOnTask - 1);
+        }
+        return graph.DetectCrossEdges();
+
+    }
+    
+
 }
