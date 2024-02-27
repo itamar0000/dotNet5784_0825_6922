@@ -25,10 +25,5 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
-        <LinearGradientBrush x:Key="cs.Background" StartPoint="0,0" EndPoint="0,5">
-            <GradientStop Color="#FF10658C" Offset="0.0"/>
-            <GradientStop Color="#FFF5ECEB" Offset="0.5"/>
-        </LinearGradientBrush>
-
     </Application.Resources>
 </Application>

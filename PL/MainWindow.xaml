@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="/welcomee.jpg"></ImageBrush>
+    </Window.Background>
     <Grid>
-        <Border Background="{StaticResource cs.Background}"/>
-
-          
         <Viewbox Stretch="Uniform">
             <!-- Arc Path -->
             <Grid>
                 <!-- TextBlock along the Arc -->
-                <TextBlock Text="Welcome to our project management application" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Canvas.Left="209" Canvas.Top="34" Margin="173,76,-173,-76">
+                <TextBlock Text="" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Canvas.Left="209" Canvas.Top="34" Margin="173,76,-173,-76">
                     <TextBlock.LayoutTransform>
                         <RotateTransform Angle="-90" CenterX="0" CenterY="0"/>
                     </TextBlock.LayoutTransform>
@@ -26,16 +26,16 @@
                     </TextBlock.RenderTransform>
                 </TextBlock>
                 <Label Content="{Binding MyTime}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                       BorderBrush="#FF2F84AC" Background="#FF97D5F2" BorderThickness="1" Canvas.Left="44" Canvas.Top="30" Height="21" Width="120"
-                       HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" FontFamily="Ariel" Margin="0,50,0,0"/>
-                <Button Content="Add Day" Click="Button_Click_AddDay" Width="35" Height="15" FontSize="8" Margin="87,71,2,191"/>
-                <Button Content="Add Hour" Click="Button_Click_AddHour" Width="40" Height="15" FontSize="8" Margin="47,71,37,191"/>
-                <Button Content="Reset Time" Click="Button_Click_ResetTime" Width="45" Height="15" FontSize="8" Margin="2,71,77,191"/>
+                       BorderBrush="#09275F" Background="#7D5893" BorderThickness="1" Canvas.Left="44" Canvas.Top="30" Height="21" Width="120"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontFamily="Ariel" Margin="-130,126,0,0"/>
+                <Button Content="Add Day" Click="Button_Click_AddDay" BorderBrush="#09275F" Background="#7D5893" Width="35" Height="15" FontSize="8" Margin="-45,146,142,115"/>
+                <Button Content="Add Hour" Click="Button_Click_AddHour" BorderBrush="#09275F" Background="#7D5893" Width="40" Height="15" FontSize="8" Margin="-85,146,177,115"/>
+                <Button Content="Reset Time" Click="Button_Click_ResetTime" BorderBrush="#09275F" Background="#7D5893" Width="45" Height="15" FontSize="8" Margin="-130,146,217,115"/>
             </Grid>
         </Viewbox>
-       
-        <Button Content="I am an Engineer" Width="105" Height="30" Click="Btn_Engineer" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="222,0,453,39"/>
-        <Button Content="I am the Manager" Width="105" Height="30" Click="Btn_Manager" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="466,0,209,39"/>
+
+        <Button Content="I am an Engineer" BorderBrush="#09275F" Background="#7D5893" Width="105" Height="30" Click="Btn_Engineer" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="58,0,637,72"/>
+        <Button Content="I am the Manager" BorderBrush="#09275F" Background="#7D5893" Width="105" Height="30" Click="Btn_Manager" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="227,0,468,72"/>
 
     </Grid>
 </Window>

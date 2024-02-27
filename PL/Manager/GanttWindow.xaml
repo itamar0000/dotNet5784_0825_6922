@@ -1,27 +1,44 @@
-﻿<Window
+﻿<Window x:Class="PL.Manager.GanttWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Manager"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="PL.Manager.GanttWindow"
         mc:Ignorable="d"
         Title="GanttWindow" Height="650" Width="1000"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
+    <Window.Resources>
+        <local:DateDifferenceMultiConverter x:Key="DateDifferenceMultiConverter"/>
+    </Window.Resources>
+
     <Grid>
-
-
-
-        <ListView ItemsSource="{Binding TaskList}">
+        <ListView ItemsSource="{Binding Tasks}">
             <ListView.View>
                 <GridView>
-
-                    <!--Alias Column-->
+                    <!-- Alias Column -->
                     <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="200"/>
-
-                    <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding DeadlineDate}" Width="800"/>
-
+                    <!-- Duration Column -->
+                    <GridViewColumn Header="Duration">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Rectangle>
+                                    <Rectangle.Width>
+                                        <MultiBinding Converter="{StaticResource DateDifferenceMultiConverter}">
+                                            <Binding Path="ScheduledDate" RelativeSource="{RelativeSource AncestorType={x:Type ListViewItem}}"/>
+                                            <Binding Path="ForecastDate" RelativeSource="{RelativeSource AncestorType={x:Type ListViewItem}}"/>
+                                        </MultiBinding>
+                                    </Rectangle.Width>
+                                    <Rectangle.Height>
+                                        <Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+                                    </Rectangle.Height>
+                                    <Rectangle.Fill>
+                                        <SolidColorBrush Color="LightBlue"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

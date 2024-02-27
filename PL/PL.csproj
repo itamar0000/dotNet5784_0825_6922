@@ -24,16 +24,20 @@
     <None Remove="background.jpg" />
     <None Remove="background2.jpg" />
     <None Remove="backgroundb.jpg" />
+    <None Remove="manager.jpg" />
+    <None Remove="welcome.jpg" />
+    <None Remove="welcomee.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="background.jpg" />
     <Resource Include="backgroundb.jpg" />
+    <Resource Include="manager.jpg" />
+    <Resource Include="welcomee.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="iNKORE.UI.WPF.Modern" Version="0.9.26.1" />
-    <PackageReference Include="Syncfusion.Gantt.WPF" Version="24.2.7" />
   </ItemGroup>
 
   <ItemGroup>
