@@ -14,8 +14,10 @@
         <local:DateDifferenceMultiConverter x:Key="DateDifferenceMultiConverter"/>
         <local:TimeSpanToWidthConverter x:Key="timespantowidth"/>
         <local:DateToCanvasLeftConverter  x:Key="datetolocation"/>
+        
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#393A10"></Setter>
+            <Setter Property="BorderBrush" Value="#09275F"></Setter>
+            <Setter Property="Background" Value="#7D5893"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
         </Style>
 

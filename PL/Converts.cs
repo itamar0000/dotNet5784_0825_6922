@@ -32,9 +32,11 @@ class ConvertIdToEnable : IValueConverter
 }
 class ConvertDatetimeToEnable : IValueConverter
 {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (DateTime?)value >= DateTime.Now ? true : false;
+        return (DateTime?)value >= s_bl.Clock.GetStartDate() ? true : false;
     }
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
