@@ -195,6 +195,7 @@ internal class TaskImplementation : BlApi.ITask
              isActive: true,
              ScheduledDate: item.ScheduledDate,
              StartDate: item.StartDate,
+             RequiredEffortTime: item.RequiredEffortTime,
              CompleteDate: item.CompleteDate,
              DeadlineDate: item.DeadlineDate,
              Deliverables: item.Deliverables,
