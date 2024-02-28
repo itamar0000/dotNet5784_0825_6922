@@ -15,24 +15,7 @@ using System.Windows.Shapes;
 
 namespace PL.Manager
 {
-    public class DateDifferenceMultiConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values != null && values.Length == 2 && values[0] is DateTime scheduledDate && values[1] is DateTime forecastDate)
-            {
-                return (forecastDate - scheduledDate).TotalDays;
-            }
-
-            return null;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
+ 
     /// <summary>
     /// Interaction logic for GantWindow.xaml
     /// </summary>
@@ -42,25 +25,15 @@ namespace PL.Manager
 
         public GanttWindow()
         {
+       
             InitializeComponent();
-            TaskList = s_bl?.Task.ReadAll()!;
+            TaskList = s_bl?.Task.ReadAll()!.OrderBy(item=>item.ScheduledDate);
+           foreach(var item in TaskList)
+            {
+                s_bl.Task.SetScheduele(item);
+            }
+
         }
-
-
-
-        public TimeSpan WidthWindow  
-        {
-            get { return (TimeSpan)GetValue(WidthWindowProperty); }
-            set { SetValue(WidthWindowProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty WidthWindowProperty =
-            DependencyProperty.Register("WidthWindow", typeof(TimeSpan), typeof(GanttWindow), new PropertyMetadata(0));
-
-
-
-
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -70,6 +43,7 @@ namespace PL.Manager
         // Using a DependencyProperty as the backing store for TaskList.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(GanttWindow), new PropertyMetadata(null));
+
 
 
 

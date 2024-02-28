@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
-    
+
     <Application.Resources>
 
-            <local:EngineerCollection x:Key="EngineerCollectionKey" />
-            <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
-            <local:ConvertIdToEnable x:Key="ConvertIdToEnable"/>
-            <local:TaskCollection x:Key="TaskCollectionKey"/>
-            <local:ConvertDatetimeToEnable x:Key="ConvertDateTime"/>
-
+        <local:EngineerCollection x:Key="EngineerCollectionKey" />
+        <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
+        <local:ConvertIdToEnable x:Key="ConvertIdToEnable"/>
+        <local:TaskCollection x:Key="TaskCollectionKey"/>
+        <local:ConvertDatetimeToEnable x:Key="ConvertDateTime"/>
+        <local:DateDifferenceMultiConverter x:Key="DateDifferenceMultiConverter"/>
+        <local:TimeSpanToWidthConverter x:Key="timespantowidth"/>
+        <local:DateToCanvasLeftConverter  x:Key="datetolocation"/>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#393A10"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>

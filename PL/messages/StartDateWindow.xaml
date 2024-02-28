@@ -1,0 +1,14 @@
+﻿<Window x:Class="PL.messages.StartDateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.messages"
+        mc:Ignorable="d"
+        Title="StartDateWindow" Height="200" Width="200"
+        DataContext="{Binding RelativeSource= {RelativeSource Mode=Self}}">
+    <Grid>
+        <Button Height="20" Width="80" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Btn_set" Margin="0,144,0,0"/>
+        <DatePicker Height="30" Width="100" VerticalAlignment="Top" HorizontalAlignment="Center" SelectedDate="{Binding StartDate , Mode=TwoWay}" Margin="0,37,0,0"/>
+    </Grid>
+</Window>
