@@ -1,6 +1,7 @@
 ﻿using System;
 using PL.Engineer;
 using PL.Task;
+using PL.messages;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +36,7 @@ public partial class ManagerWindow : Window
         MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to iniitalize the data?", "Initalize", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
         if (mbResult == MessageBoxResult.Yes)
         {
-           s_bl.InitializeDB();
+            s_bl.InitializeDB();
         }
     }
 
@@ -47,5 +48,24 @@ public partial class ManagerWindow : Window
     private void Button_Click_Gantt(object sender, RoutedEventArgs e)
     {
         new GanttWindow().Show();
+    }
+
+    private void Btn_reset(object sender, RoutedEventArgs e)
+    {
+        MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to reset the data?", "Initalize", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+        if (mbResult == MessageBoxResult.Yes)
+        {
+            s_bl.ResetDB();
+        }
+    }
+
+    private void Btn_setschedule(object sender, RoutedEventArgs e)
+    {
+        if (s_bl.Clock.GetStartDate() == null)
+        {
+            new StartDateWindow().Show();
+           
+        }
+
     }
 }

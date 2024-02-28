@@ -1,6 +1,5 @@
 ﻿using BlApi;
 using BO;
-using Syncfusion.ProjIO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -194,7 +193,6 @@ namespace PL.Task
          
             BO.Task? task = s_bl.Task.Read(Id);
             BO.TaskInList tsk = new TaskInList { Id = Id, Alias = task.Alias, Status = task.Status, Description = task.Description };
-                DelDependency.Add(tsk);
             foreach (var item in AddDependency)
             {
                 if (item.Id == Id)
