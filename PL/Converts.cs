@@ -91,15 +91,11 @@ public class DateToCanvasLeftConverter : IValueConverter
         {
             // Assuming that the Canvas width is fixed at 800 and the date range is from January 1st to December 31st
             double canvasWidth = 800;
-            DateTime startDate = new DateTime(dateTime.Year, 1, 1);
-            DateTime endDate = new DateTime(dateTime.Year, 12, 31);
+            DateTime startDate = (DateTime)value;
+            DateTime endDate = (DateTime)s_bl.Clock.GetStartDate()!;
 
-            double totalDays = (dateTime - startDate).Days;
-            double percentage = totalDays / (endDate - startDate).Days;
-            double leftPosition = percentage * canvasWidth;
-            if (dateTime <= s_bl.Clock.GetStartDate() )
-                return new Thickness(0, 0, 0, 0);
-            return new Thickness(leftPosition, 0, 0, 0);
+            double percentage = (startDate-endDate).Days;
+            return new Thickness(percentage*2, 0, 0, 0);
         }
 
         return 0; // Default value
