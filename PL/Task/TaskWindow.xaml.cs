@@ -203,7 +203,10 @@ namespace PL.Task
             }
         }
 
-
+        private void SetEngineerToTask_Click(object sender, RoutedEventArgs e)
+        {
+            new SetEngineerToTask().show();
+        }
     }
 }
 
