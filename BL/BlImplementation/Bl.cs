@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using System.Xml.Linq;
 
 /// <summary>
 /// Represents the Business Logic (BL) implementation.
@@ -26,7 +27,7 @@ internal class Bl : IBl
     /// <summary>
     /// Gets the clock-related functionality.
     /// </summary>
-    public IClock Clock => new ClockImplementation();
+    public IClock Clock => new ClockImplementation();  
 
 
     private static DateTime s_Clock = DateTime.Now.Date;

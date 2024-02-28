@@ -13,7 +13,7 @@
     </Window.Resources>
 
     <Grid>
-        <ListView ItemsSource="{Binding Tasks}">
+        <ListView ItemsSource="{Binding TaskList}">
             <ListView.View>
                 <GridView>
                     <!-- Alias Column -->

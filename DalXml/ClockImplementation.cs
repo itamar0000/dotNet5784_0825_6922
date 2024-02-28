@@ -1,5 +1,4 @@
-﻿
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using System;
 using System.Xml.Linq;
@@ -9,7 +8,7 @@ internal class ClockImplementation : IClock
     static readonly string s_fileName = "data-config";
     public DateTime? GetEndDate()
     {
-       string element= XMLTools.LoadListFromXMLElement(s_fileName).Element("endDate")!.Value;
+        string element = XMLTools.LoadListFromXMLElement(s_fileName).Element("endDate")!.Value;
         if (element == "")
             return null;
         return DateTime.Parse(element);
@@ -17,7 +16,7 @@ internal class ClockImplementation : IClock
 
     public DateTime? GetStartDate()
     {
-        XElement element= XMLTools.LoadListFromXMLElement(s_fileName).Element("startDate")!;
+        XElement element = XMLTools.LoadListFromXMLElement(s_fileName).Element("startDate")!;
         if (element.Value == "")
             return null;
         return DateTime.Parse(element.Value);
@@ -35,6 +34,6 @@ internal class ClockImplementation : IClock
         XElement root=XMLTools.LoadListFromXMLElement(s_fileName);
         root.Element("startDate")!.Value = time.ToString();
         XMLTools.SaveListToXMLElement(root, s_fileName);
-        
+
     }
 }
