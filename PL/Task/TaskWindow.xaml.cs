@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ namespace PL.Task
 
     public partial class TaskWindow : Window
     {
+        private int engineerId = 0;
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
@@ -126,6 +128,11 @@ namespace PL.Task
         {
             try
             {
+                if(engineerId != 0)
+                {
+                    task.Engineer = new EngineerInTask { Id = engineerId, Name = s_bl.Engineer.Read(engineerId)!.Name };
+                }
+
                 if (id == 0)
                 {
 
@@ -202,6 +209,31 @@ namespace PL.Task
                 }
             }
         }
+
+        private void SetEngineer_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SetEngineerWindow(BO.EngineerExperience.None, EngineerSelectedHandler);
+            if(task.Complexity != null)
+                window = new SetEngineerWindow(task.Complexity, EngineerSelectedHandler);
+            window.ShowDialog();
+        }
+
+        private void EngineerSelectedHandler(object sender, EngineerSelectedEventArgs args)
+        {
+            engineerId = args.SelectedEngineerId;
+        }
+
+
+
+        public int MyProperty
+        {
+            get { return (int)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));
 
 
     }

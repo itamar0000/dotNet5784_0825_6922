@@ -11,4 +11,8 @@ namespace PL
     {
     }
 
+    public class EngineerSelectedEventArgs : EventArgs
+    {
+        public int SelectedEngineerId { get; set; }
+    }
 }

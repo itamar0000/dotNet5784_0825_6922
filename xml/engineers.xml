@@ -11,8 +11,8 @@
     <Id>307772880</Id>
     <Name>Elena Rodriguez</Name>
     <Email>elena.rodriguez@example.com</Email>
-    <Cost>130</Cost>
-    <Level>AdvancedBeginner</Level>
+    <Cost>430</Cost>
+    <Level>Expert</Level>
   </Engineer>
   <Engineer>
     <Id>235272079</Id>
@@ -130,8 +130,8 @@
     <Id>284023332</Id>
     <Name>Mason Johnson</Name>
     <Email>mason.johnson@example.com</Email>
-    <Cost>330</Cost>
-    <Level>Advanced</Level>
+    <Cost>430</Cost>
+    <Level>Expert</Level>
   </Engineer>
   <Engineer>
     <Id>210527409</Id>

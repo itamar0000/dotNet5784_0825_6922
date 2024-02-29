@@ -19,9 +19,37 @@ namespace PL.Task
     /// </summary>
     public partial class SetEngineerWindow : Window
     {
-        public SetEngineerWindow()
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public SetEngineerWindow(BO.EngineerExperience? experience, EventHandler<EngineerSelectedEventArgs> EngineerSelectedHandler)
         {
             InitializeComponent();
+            EngineerList = s_bl?.Engineer.ReadAll(engineer => (int)engineer!.Level >= (int)experience)!;
+            EngineerSelected += EngineerSelectedHandler;
+
+        }
+
+        public IEnumerable<BO.Engineer> EngineerList // get list of all engineers
+        {
+            get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
+            set { SetValue(EngineerListProperty, value); }
+        }
+
+        public static readonly DependencyProperty EngineerListProperty =
+    DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(SetEngineerWindow), new PropertyMetadata(null));
+
+
+
+        public event EventHandler<EngineerSelectedEventArgs> EngineerSelected;
+
+        private void SelectedEngineer(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? engineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineerInList != null)
+            {
+                int id = engineerInList!.Id!; // convert from int? to int
+                EngineerSelected?.Invoke(this, new EngineerSelectedEventArgs { SelectedEngineerId = id });
+                Close();
+            }
         }
     }
 }
