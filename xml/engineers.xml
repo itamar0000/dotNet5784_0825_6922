@@ -12,14 +12,14 @@
     <Name>Elena Rodriguez</Name>
     <Email>elena.rodriguez@example.com</Email>
     <Cost>430</Cost>
-    <Level>Expert</Level>
+    <Level>Advanced</Level>
   </Engineer>
   <Engineer>
     <Id>257190561</Id>
     <Name>Oscar Chang</Name>
     <Email>oscar.chang@example.com</Email>
-    <Cost>130</Cost>
-    <Level>AdvancedBeginner</Level>
+    <Cost>30</Cost>
+    <Level>None</Level>
   </Engineer>
   <Engineer>
     <Id>398328301</Id>
@@ -33,7 +33,7 @@
     <Name>Dylan Sullivan</Name>
     <Email>dylan.sullivan@example.com</Email>
     <Cost>430</Cost>
-    <Level>Expert</Level>
+    <Level>Advanced</Level>
   </Engineer>
   <Engineer>
     <Id>213285855</Id>
@@ -74,8 +74,8 @@
     <Id>376080505</Id>
     <Name>Ethan Murphy</Name>
     <Email>ethan.murphy@example.com</Email>
-    <Cost>130</Cost>
-    <Level>AdvancedBeginner</Level>
+    <Cost>30</Cost>
+    <Level>None</Level>
   </Engineer>
   <Engineer>
     <Id>321919800</Id>
@@ -116,8 +116,8 @@
     <Id>223273192</Id>
     <Name>Caleb Brown</Name>
     <Email>caleb.brown@example.com</Email>
-    <Cost>130</Cost>
-    <Level>AdvancedBeginner</Level>
+    <Cost>330</Cost>
+    <Level>Intermediate</Level>
   </Engineer>
   <Engineer>
     <Id>374147025</Id>
@@ -131,7 +131,7 @@
     <Name>Mason Johnson</Name>
     <Email>mason.johnson@example.com</Email>
     <Cost>430</Cost>
-    <Level>Expert</Level>
+    <Level>Advanced</Level>
   </Engineer>
   <Engineer>
     <Id>348983890</Id>
