@@ -12,12 +12,12 @@ public enum Status
 
 public enum EngineerExperience
 {
+    None,
     Beginner,
     AdvancedBeginner,
     Intermediate,
     Advanced,
-    Expert,
-    None
+    Expert    
 }
 
 public enum ProjectStatus

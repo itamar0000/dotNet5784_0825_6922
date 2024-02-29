@@ -5,8 +5,116 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="SetEngineerWindow" Height="450" Width="800">
+        Title="SetEngineerWindow" Height="450" Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Internal, Upper Grid-->
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0" />
+        </Grid>
+
+        <Border Background="#f1f1f2" Margin="31,86,31,125" Grid.RowSpan="2" Grid.Row="1" >
+            <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="SelectedEngineer" Grid.RowSpan="2"  Background="Transparent" Margin="0,10,0,10" BorderBrush="{x:Null}">
+                <ListView.View>
+                    <!-- Define the view for ListView -->
+                    <GridView >
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border 
+                                   Background="#f1f1f2"
+                                   CornerRadius="5"
+                                   Margin="2"
+                                   BorderBrush="#f1f1f2"
+                                   BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Id}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border 
+                                   Background="#f1f1f2"
+                                   CornerRadius="5"
+                                   Margin="2"
+                                   BorderBrush="#f1f1f2"
+                                   BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=Email}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border 
+                                   Background="#f1f1f2"
+                                   CornerRadius="5"
+                                   Margin="2"
+                                   BorderBrush="#f1f1f2"
+                                   BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Email}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Path=Level}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border 
+                                   Background="#f1f1f2"
+                                   CornerRadius="5"
+                                   Margin="2"
+                                   BorderBrush="#f1f1f2"
+                                   BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Level}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Path=Cost}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border 
+                                   Background="#f1f1f2"
+                                   CornerRadius="5"
+                                   Margin="2"
+                                   BorderBrush="#f1f1f2"
+                                   BorderThickness="1">
+                                        <TextBlock Text="{Binding Path=Cost}"/>
+
+                                    </Border>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+                <ListView.Resources>
+
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Background" Value="Transparent" />
+                    </Style>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="BorderBrush" Value="#f1f1f2"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="Height"  Value="30" />
+                    </Style>
+                </ListView.Resources>
+
+            </ListView>
+        </Border>
     </Grid>
 </Window>

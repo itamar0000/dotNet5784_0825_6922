@@ -64,7 +64,7 @@
                  BorderBrush="#FF2F84AC"  Background="#FF97D5F2" BorderThickness="2"/>
 
         <!--Choose Enginner-->
-        <Button Content="Choose Engineer" Click="SetEngineerToTask_Click" HorizontalAlignment="Left" Margin="587,274,0,0" VerticalAlignment="Top"
+        <Button Content="Choose Engineer" Click="SetEngineer_Click" HorizontalAlignment="Left" Margin="587,274,0,0" VerticalAlignment="Top"
                 IsEnabled="{Binding StartDate, Converter={StaticResource ConvertDateTime}}"/>
 
 
