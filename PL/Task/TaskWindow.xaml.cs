@@ -103,6 +103,7 @@ namespace PL.Task
                 try
                 {
                      task = s_bl.Task.Read(Id)!;
+                    engineerId = (task.Engineer !=null) ? task.Engineer.Id : 0;
                     // TaskList = (from BO.Task t in s_bl.Task.ReadAll()
                     //             where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
                     //             select t);
@@ -225,17 +226,16 @@ namespace PL.Task
 
 
 
-        public int MyProperty
+        public int EngineerId
         {
-            get { return (int)GetValue(MyPropertyProperty); }
-            set { SetValue(MyPropertyProperty, value); }
+            get { return (int)GetValue(EngineerIdProperty); }
+            set { SetValue(EngineerIdProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));
+        // Using a DependencyProperty as the backing store for EngineerId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EngineerIdProperty =
+            DependencyProperty.Register("EngineerId", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
 
 
     }
 }
-
