@@ -103,6 +103,7 @@ namespace PL.Task
                 try
                 {
                      task = s_bl.Task.Read(Id)!;
+                    EngineerId = (task.Engineer !=null) ? task.Engineer.Id : 0;
                     // TaskList = (from BO.Task t in s_bl.Task.ReadAll()
                     //             where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
                     //             select t);
@@ -128,9 +129,9 @@ namespace PL.Task
         {
             try
             {
-                if(engineerId != 0)
+                if(EngineerId != 0)
                 {
-                    task.Engineer = new EngineerInTask { Id = engineerId, Name = s_bl.Engineer.Read(engineerId)!.Name };
+                    task.Engineer = new EngineerInTask { Id = EngineerId, Name = s_bl.Engineer.Read(EngineerId)!.Name };
                 }
 
                 if (id == 0)
@@ -220,20 +221,20 @@ namespace PL.Task
 
         private void EngineerSelectedHandler(object sender, EngineerSelectedEventArgs args)
         {
-            engineerId = args.SelectedEngineerId;
+            EngineerId = args.SelectedEngineerId;
         }
 
 
 
-        public int MyProperty
+        public int EngineerId
         {
-            get { return (int)GetValue(MyPropertyProperty); }
-            set { SetValue(MyPropertyProperty, value); }
+            get { return (int)GetValue(EngineerIdProperty); }
+            set { SetValue(EngineerIdProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));
+        // Using a DependencyProperty as the backing store for EngineerId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EngineerIdProperty =
+            DependencyProperty.Register("EngineerId", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
 
 
     }

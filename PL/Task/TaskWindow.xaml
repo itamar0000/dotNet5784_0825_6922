@@ -51,7 +51,7 @@
         <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Right" Margin="0,210,108,0" TextWrapping="Wrap" Text="{Binding task.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
 
         <!--Engineer Textbox-->
-        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Right" Margin="0,256,108,0" TextWrapping="Wrap" Text="{Binding task.Engineer.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding StartDate , Converter={StaticResource ConvertDateTime} }"/>
+        <TextBox BorderBrush="#FF2F84AC" HorizontalAlignment="Right" Margin="0,256,108,0" TextWrapping="Wrap" Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120" IsEnabled="{Binding StartDate , Converter={StaticResource ConvertDateTime} }"/>
 
         <!--Complexity Combotbox-->
         <ComboBox  BorderBrush="#FF2F84AC"  Background="#FF97D5F2" HorizontalAlignment="Left" Margin="572,308,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Source={StaticResource EngineerCollectionKey}}" 

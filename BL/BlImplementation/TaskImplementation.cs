@@ -105,6 +105,20 @@ internal class TaskImplementation : BlApi.ITask
         if (item == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
+
+        DO.Engineer? eng = null;
+        BO.EngineerInTask? engInTask = null;
+        if (item.EngineerId != null)
+        {
+            eng = _dal.Engineer.Read((int)item.EngineerId);
+
+        }
+        
+        if (eng != null)
+        {           
+            engInTask = new EngineerInTask { Id = eng.Id, Name = eng.Name };
+        }          
+
         return new BO.Task()
         {
             Id = item.Id,
@@ -119,7 +133,8 @@ internal class TaskImplementation : BlApi.ITask
             RequiredEffortTime = item.RequiredEffortTime,
             Dependencies = getDependencies(item),
             Remarks = item.Remarks,
-            Complexity = (BO.EngineerExperience?)item.Complexity
+            Complexity = (BO.EngineerExperience?)item.Complexity,
+            Engineer = engInTask
         };
     }
 

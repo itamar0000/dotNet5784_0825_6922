@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>1</Id>
-    <Alias>Requirement Analysis</Alias>
-    <Description>Understand what needs to be done in the project.</Description>
-    <CreatedAtDate>2024-02-29T00:36:22.7212871+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2024-02-29T00:00:00+02:00</ScheduledDate>
-    <RequiredEffortTime>P53D</RequiredEffortTime>
-  </Task>
-  <Task>
-    <Id>2</Id>
-    <Alias>Feasibility Study</Alias>
-    <Description>Check if it's possible and makes sense to do the project.</Description>
-    <CreatedAtDate>2024-02-29T00:36:22.7452496+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2024-04-22T00:00:00+03:00</ScheduledDate>
-    <RequiredEffortTime>P52D</RequiredEffortTime>
-  </Task>
-  <Task>
     <Id>3</Id>
     <Alias>System Architecture Design</Alias>
     <Description>Plan how the system will be built.</Description>
@@ -31,16 +11,6 @@
     <RequiredEffortTime>P36D</RequiredEffortTime>
   </Task>
   <Task>
-    <Id>4</Id>
-    <Alias>Component Specification</Alias>
-    <Description>Describe in detail what each part of the system should be like.</Description>
-    <CreatedAtDate>2024-02-29T00:36:22.7813392+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2024-06-13T00:00:00+03:00</ScheduledDate>
-    <RequiredEffortTime>P34D</RequiredEffortTime>
-  </Task>
-  <Task>
     <Id>5</Id>
     <Alias>Hardware Procurement</Alias>
     <Description>Buy the necessary hardware for the system.</Description>
@@ -49,16 +19,6 @@
     <isActive>true</isActive>
     <ScheduledDate>2024-06-13T00:00:00+03:00</ScheduledDate>
     <RequiredEffortTime>P46D</RequiredEffortTime>
-  </Task>
-  <Task>
-    <Id>7</Id>
-    <Alias>Prototyping</Alias>
-    <Description>Make a simple version of the system to test its basic features.</Description>
-    <CreatedAtDate>2024-02-29T00:36:22.837053+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2024-07-29T00:00:00+03:00</ScheduledDate>
-    <RequiredEffortTime>P47D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>8</Id>
@@ -91,16 +51,6 @@
     <RequiredEffortTime>P55D</RequiredEffortTime>
   </Task>
   <Task>
-    <Id>11</Id>
-    <Alias>System Deployment</Alias>
-    <Description>Teach the users how to use the system.</Description>
-    <CreatedAtDate>2024-02-29T00:36:22.9045645+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2024-11-06T00:00:00+02:00</ScheduledDate>
-    <RequiredEffortTime>P31D</RequiredEffortTime>
-  </Task>
-  <Task>
     <Id>12</Id>
     <Alias>Performance Testing</Alias>
     <Description>Put the system into use for everyone.</Description>
@@ -119,16 +69,6 @@
     <isActive>true</isActive>
     <ScheduledDate>2024-12-07T00:00:00+02:00</ScheduledDate>
     <RequiredEffortTime>P37D</RequiredEffortTime>
-  </Task>
-  <Task>
-    <Id>14</Id>
-    <Alias>User Acceptance Testing</Alias>
-    <Description>Fix any issues or problems in the system.</Description>
-    <CreatedAtDate>2024-02-29T00:36:22.9487559+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2025-02-09T00:00:00+02:00</ScheduledDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
   </Task>
   <Task>
     <Id>15</Id>
@@ -310,5 +250,71 @@
     <ScheduledDate>2024-07-29T00:00:00+03:00</ScheduledDate>
     <RequiredEffortTime>P48D</RequiredEffortTime>
     <Complexity>Beginner</Complexity>
+  </Task>
+  <Task>
+    <Id>11</Id>
+    <Alias>System Deployment</Alias>
+    <Description>Teach the users how to use the system.</Description>
+    <CreatedAtDate>2024-02-29T00:36:22.9045645+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-11-06T00:00:00+02:00</ScheduledDate>
+    <RequiredEffortTime>P31D</RequiredEffortTime>
+    <EngineerId>223712820</EngineerId>
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Alias>Feasibility Study</Alias>
+    <Description>Check if it's possible and makes sense to do the project.</Description>
+    <CreatedAtDate>2024-02-29T00:36:22.7452496+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-04-22T00:00:00+03:00</ScheduledDate>
+    <RequiredEffortTime>P52D</RequiredEffortTime>
+    <EngineerId>333966558</EngineerId>
+  </Task>
+  <Task>
+    <Id>4</Id>
+    <Alias>Component Specification</Alias>
+    <Description>Describe in detail what each part of the system should be like.</Description>
+    <CreatedAtDate>2024-02-29T00:36:22.7813392+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-06-13T00:00:00+03:00</ScheduledDate>
+    <RequiredEffortTime>P34D</RequiredEffortTime>
+    <EngineerId>333966558</EngineerId>
+  </Task>
+  <Task>
+    <Id>1</Id>
+    <Alias>Requirement Analysis</Alias>
+    <Description>Understand what needs to be done in the project.</Description>
+    <CreatedAtDate>2024-02-29T00:36:22.7212871+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-02-29T00:00:00+02:00</ScheduledDate>
+    <RequiredEffortTime>P53D</RequiredEffortTime>
+    <EngineerId>348983890</EngineerId>
+  </Task>
+  <Task>
+    <Id>7</Id>
+    <Alias>Prototyping</Alias>
+    <Description>Make a simple version of the system to test its basic features.</Description>
+    <CreatedAtDate>2024-02-29T00:36:22.837053+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-07-29T00:00:00+03:00</ScheduledDate>
+    <RequiredEffortTime>P47D</RequiredEffortTime>
+    <EngineerId>257190561</EngineerId>
+  </Task>
+  <Task>
+    <Id>14</Id>
+    <Alias>User Acceptance Testing</Alias>
+    <Description>Fix any issues or problems in the system.</Description>
+    <CreatedAtDate>2024-02-29T00:36:22.9487559+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2025-02-09T00:00:00+02:00</ScheduledDate>
+    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <EngineerId>333966558</EngineerId>
   </Task>
 </ArrayOfTask>

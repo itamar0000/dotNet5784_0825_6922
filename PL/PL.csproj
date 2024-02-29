@@ -30,10 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="background.jpg" />
-    <Resource Include="backgroundb.jpg" />
-    <Resource Include="manager.jpg" />
-    <Resource Include="welcomee.jpg" />
+    <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\backgroundb.jpg" />
+    <Resource Include="Images\manager.jpg" />
+    <Resource Include="Images\welcomee.jpg" />
   </ItemGroup>
 
   <ItemGroup>
