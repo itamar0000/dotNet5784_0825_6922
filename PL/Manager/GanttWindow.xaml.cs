@@ -28,10 +28,7 @@ namespace PL.Manager
        
             InitializeComponent();
             TaskList = s_bl?.Task.ReadAll()!.OrderBy(item=>item.ScheduledDate);
-           foreach(var item in TaskList)
-            {
-                s_bl.Task.SetScheduele(item);
-            }
+       
 
         }
         public IEnumerable<BO.Task> TaskList
@@ -44,26 +41,6 @@ namespace PL.Manager
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(GanttWindow), new PropertyMetadata(null));
 
-
-
- 
-
-     
-
-        /*
-             // Calculate the duration for each task
-            foreach (var task in TaskList)
-            {
-                if (task.StartDate.HasValue && task.ScheduledDate.HasValue)
-                {
-                    task.Duration = (task.ScheduledDate.Value - task.StartDate.Value).TotalDays;
-                }
-                else
-                {
-                    task.Duration = 0; // Or handle accordingly if either start date or scheduled date is missing
-                }
-            }
-         */
 
     }
 }
