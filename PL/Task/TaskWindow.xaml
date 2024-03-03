@@ -58,10 +58,10 @@
                   SelectedValue="{Binding task.Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
         <!--partition-->
-        <Border BorderBrush="#FF2F84AC"  Background="#FF97D5F2" BorderThickness="2" Height="330" Width="10" VerticalAlignment="Top" Margin="395,25,395,0" />
+        <Border BorderBrush="#09275F"  Background="#7D5893" BorderThickness="2" Height="330" Width="10" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="390,25,0,0" />
 
-        <Button  HorizontalAlignment="Center" Content="{Binding task.Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateTask_Click" RenderTransformOrigin="0.,456.408" Margin="0,365,0,0"
-                 BorderBrush="#FF2F84AC"  Background="#FF97D5F2" BorderThickness="2"/>
+        <Button HorizontalAlignment="Center" Content="{Binding task.Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateTask_Click" RenderTransformOrigin="0.,456.408" Margin="0,365,0,0"
+                BorderThickness="2"/>
 
         <!--Choose Enginner-->
         <Button Content="Choose Engineer" Click="SetEngineer_Click" HorizontalAlignment="Left" Margin="587,274,0,0" VerticalAlignment="Top"
