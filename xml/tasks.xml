@@ -54,7 +54,16 @@
     <Id>7</Id>
     <Alias>Prototyping</Alias>
     <Description>Make a simple version of the system to test its basic features.</Description>
-    <CreatedAtDate>2024-03-03T16:39:48.8705611+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-01T00:24:06.9609762+02:00</CreatedAtDate>
+    <IsMileStone>false</IsMileStone>
+    <isActive>true</isActive>
+    <RequiredEffortTime>P55D</RequiredEffortTime>
+  </Task>
+  <Task>
+    <Id>8</Id>
+    <Alias>Integration Testing</Alias>
+    <Description>Put all the pieces together and make sure they work well.</Description>
+    <CreatedAtDate>2024-03-03T00:07:26.9842873+02:00</CreatedAtDate>
     <IsMileStone>false</IsMileStone>
     <isActive>true</isActive>
     <ScheduledDate>2024-08-02T00:00:00</ScheduledDate>
