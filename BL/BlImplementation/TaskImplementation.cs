@@ -162,7 +162,8 @@ internal class TaskImplementation : BlApi.ITask
                 Remarks = item.Remarks,
                 Status = getStatus(item),
                 Dependencies = getDependencies(item),
-                Complexity = (BO.EngineerExperience?)item.Complexity
+                Complexity = (BO.EngineerExperience?)item.Complexity,
+                Engineer= new EngineerInTask { Id = item.EngineerId }
             });
             return tasks.Where(item => filter(item));
 
@@ -348,7 +349,7 @@ internal class TaskImplementation : BlApi.ITask
         deps.OrderBy(item => item?.Id);
         if (!deps.Any())
         {//if it doesnt depend on anything return now
-            return _bl.CurrentClock;
+            return _bl.Clock.GetStartDate();
         }
         //gets a list of all the tasks i depeneds on
         var dependenttasks = deps.Select(items => _dal.Task.Read((int)items.DependensOnTask));

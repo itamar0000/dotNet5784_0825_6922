@@ -9,7 +9,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <Border Grid.Row="1" Margin="10">
-            <ListView ItemsSource="{Binding TaskInLists}" Background="White">
+            <ListView ItemsSource="{Binding TaskInLists}" Background="White" MouseDoubleClick="Btn_startend">
                 <ListView.View>
                     <GridView>
                         <!--Id Column-->

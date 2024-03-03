@@ -54,5 +54,14 @@ namespace PL.Task
             }
 
         }
+
+        private void Btn_startend(object sender, MouseButtonEventArgs e)
+        {
+           
+            int id =  ((sender as ListView).SelectedItem as BO.TaskInList)!.Id;
+            new StartEndDateWindow(id).ShowDialog();
+
+
+        }
     }
 }
