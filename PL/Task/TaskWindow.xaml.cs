@@ -103,7 +103,7 @@ namespace PL.Task
                 try
                 {
                      task = s_bl.Task.Read(Id)!;
-                    EngineerId = (task.Engineer !=null) ? task.Engineer.Id : 0;
+                    EngineerId =(task.Engineer !=null) ? (int)task.Engineer.Id : 0;
                     // TaskList = (from BO.Task t in s_bl.Task.ReadAll()
                     //             where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
                     //             select t);
@@ -156,15 +156,7 @@ namespace PL.Task
                     }
 
                     task?.Dependencies?.AddRange(AddDependency);
-                    foreach (var item in DelDependency)
-                    {
-                        foreach (var item2 in task.Dependencies)
-                            if (item2.Id == item.Id)
-                            {
-                                task?.Dependencies?.Remove(item2);
-                                break;
-                            }
-                    }
+                    task?.Dependencies?.RemoveAll(item => DelDependency.Contains(item));
                     s_bl.Task.Update(task!);
                     MessageBox.Show("Task updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                 }

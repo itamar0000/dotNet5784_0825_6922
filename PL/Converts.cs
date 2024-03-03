@@ -1,9 +1,11 @@
 ﻿namespace PL;
 
 using BlApi;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 
 class ConvertIdToContent : IValueConverter
@@ -88,14 +90,13 @@ public class DateToCanvasLeftConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is DateTime dateTime)
-        {
-            // Assuming that the Canvas width is fixed at 800 and the date range is from January 1st to December 31st
-            double canvasWidth = 800;
+        { 
+            
             DateTime startDate = (DateTime)value;
             DateTime endDate = (DateTime)s_bl.Clock.GetStartDate()!;
 
-            double percentage = (startDate-endDate).Days;
-            return new Thickness(percentage*2, 0, 0, 0);
+            double percentage = (startDate - endDate).Days;
+            return new Thickness(percentage * 3, 0, 0, 0);
         }
 
         return 0; // Default value
@@ -108,3 +109,72 @@ public class DateToCanvasLeftConverter : IValueConverter
 }
 
 
+public class DateTimeToStringConverter : IValueConverter
+{
+    // Convert DateTime to string
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is DateTime dateTime)
+        {
+            // You can customize the format as per your requirement
+            return dateTime.ToString();
+        }
+
+        return string.Empty;
+    }
+
+    // Convert back from string to DateTime (not implemented for this example)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is string stringValue)
+        {
+            if (DateTime.TryParseExact(stringValue, "yyyy-MM-dd HH:mm:ss", culture, DateTimeStyles.None, out DateTime result))
+            {
+                return result;
+            }
+        }
+
+        // Return DependencyProperty.UnsetValue to indicate conversion failure
+        return DependencyProperty.UnsetValue;
+    }
+}
+
+public class DatetimeToBackgroundConverter : IMultiValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (values[0] is DateTime dateTime)
+        {
+            if (dateTime <= s_bl.CurrentClock)
+            {
+                return Brushes.Green;
+            }
+            if (dateTime > s_bl.CurrentClock)
+            {
+                return Brushes.Red;
+            }
+            return Brushes.LightGreen;
+        }
+        else
+        {
+            if (values[1] is DateTime dateTime1)
+            {
+                if(dateTime1 >= s_bl.CurrentClock)
+                {
+                    return Brushes.LightGreen;
+                }
+                
+            }
+            return Brushes.Red;
+        }
+
+    }
+
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

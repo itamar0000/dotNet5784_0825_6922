@@ -29,7 +29,13 @@
                     <DataTemplate>
                         <Border BorderBrush="Black" BorderThickness="1" Margin="{Binding ScheduledDate , Mode=OneWay ,Converter={StaticResource datetolocation}}"
                                 HorizontalAlignment="Left"
-                                Background="SkyBlue" Height="20">
+                                 Height="20">
+                            <Border.Background >
+                                <MultiBinding Converter="{StaticResource  datetobackground}">
+                                    <Binding Path="CompleteDate"/>
+                                    <Binding Path="ForecastDate"/>
+                                </MultiBinding>
+                            </Border.Background>
                             <TextBlock  Text="{Binding Id}" VerticalAlignment="Center" 
                                        HorizontalAlignment="Center" Width="{Binding RequiredEffortTime, Mode=OneWay, Converter={ StaticResource timespantowidth }}">
                                 <TextBlock.ToolTip>
