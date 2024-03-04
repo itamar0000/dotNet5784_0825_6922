@@ -113,11 +113,11 @@ internal class TaskImplementation : BlApi.ITask
             eng = _dal.Engineer.Read((int)item.EngineerId);
 
         }
-        
+
         if (eng != null)
-        {           
+        {
             engInTask = new EngineerInTask { Id = eng.Id, Name = eng.Name };
-        }          
+        }
 
         return new BO.Task()
         {
@@ -163,7 +163,7 @@ internal class TaskImplementation : BlApi.ITask
                 Status = getStatus(item),
                 Dependencies = getDependencies(item),
                 Complexity = (BO.EngineerExperience?)item.Complexity,
-                Engineer= new EngineerInTask { Id = item.EngineerId }
+                Engineer = new EngineerInTask { Id = item.EngineerId }
             });
             return tasks.Where(item => filter(item));
 
@@ -202,26 +202,78 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlInvalidInputException("Id cannot be negative");
 
         }
+
+
+
+
+        IEnumerable<BO.Task> engineerTasks = ReadAll(current => current.Engineer.Id == item.Engineer.Id);
+        if (engineerTasks != null)
+        {
+            foreach (var tsk in engineerTasks)
+            {
+                if (tsk.CompleteDate == null && tsk.Id != item.Id)
+                {
+                    throw new BO.BlInvalidInputException($"Cannot start that task, you are working on \"{tsk.Alias}\" task right now.");
+                }
+            }
+        }
+
+
+        List<BO.TaskInList> taskDependencies = item.Dependencies;
+        List<BO.TaskInList> taskDependenciesThatNotComplete = new List<BO.TaskInList> { };
+        if (taskDependencies != null)
+        {
+            foreach (BO.TaskInList tsk in taskDependencies)
+            {
+                var taskInList = Read(tsk.Id);
+                if (taskInList.CompleteDate == null)
+                {
+                    taskDependenciesThatNotComplete.Add(tsk);
+                }
+            }
+        }
+
+
+        if (taskDependenciesThatNotComplete.Count > 0)
+        {
+            int counter = 0;
+            string incompleteTaskAliases = "";
+            foreach (var tsk in taskDependenciesThatNotComplete)
+            {
+                counter++;
+                if (counter == taskDependenciesThatNotComplete.Count && counter > 1)
+                {
+                    incompleteTaskAliases = incompleteTaskAliases.TrimEnd(',', ' ');
+                    incompleteTaskAliases += " and ";
+                }
+
+                incompleteTaskAliases += "\"" + tsk.Alias + "\"" + ", ";
+            }
+            throw new BO.BlInvalidInputException($"Cannot start that task, the dependencies tasks: {incompleteTaskAliases.TrimEnd(',', ' ')} are not complete yet.");
+
+        }
+
+
         DO.Task task = new DO.Task
-            (Id: item.Id,
-             Alias: item.Alias,
-             Description: item.Description,
-             CreatedAtDate: item.CreatedAtDate,
-             IsMileStone: getIsMilestone(item),
-             isActive: true,
-             ScheduledDate: item.ScheduledDate,
-             StartDate: item.StartDate,
-             RequiredEffortTime: item.RequiredEffortTime,
-             CompleteDate: item.CompleteDate,
-             DeadlineDate: item.DeadlineDate,
-             Deliverables: item.Deliverables,
-             Remarks: item.Remarks,
-             EngineerId: item.Engineer?.Id,
-             Complexity: (DO.EngineerExperience?)item.Complexity
-             );
+        (Id: item.Id,
+         Alias: item.Alias,
+         Description: item.Description,
+         CreatedAtDate: item.CreatedAtDate,
+         IsMileStone: getIsMilestone(item),
+         isActive: true,
+         ScheduledDate: item.ScheduledDate,
+         StartDate: item.StartDate,
+         RequiredEffortTime: item.RequiredEffortTime,
+         CompleteDate: item.CompleteDate,
+         DeadlineDate: item.DeadlineDate,
+         Deliverables: item.Deliverables,
+         Remarks: item.Remarks,
+         EngineerId: item.Engineer?.Id,
+         Complexity: (DO.EngineerExperience?)item.Complexity
+         );
         if (item.Dependencies != getDependencies(task))
         {
-            if(IsCircular(item))
+            if (IsCircular(item))
                 throw new BlInvalidInputException("Circular dependency detected");
             _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items!.Id));
             foreach (var dependency in item.Dependencies)
@@ -243,8 +295,8 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BO.BlDoesNotExistException($"Task with ID={task.Id} already exists", ex);
         }
-    }
 
+    }
     /// <summary>
     /// Determines whether a task is a milestone.
     /// </summary>
@@ -388,17 +440,17 @@ internal class TaskImplementation : BlApi.ITask
         Graph graph = new(_dal.Task.ReadAll().Count());
         foreach (TaskInList t in task.Dependencies)
         {
-           
+
             graph.AddEdge(task.Id - 1, t.Id - 1);
         }
         foreach (var t in _dal.Dependency.ReadAll())
         {
-            if(t.DependentTask!=task.Id)
-            graph.AddEdge(t.DependentTask- 1, t.DependensOnTask - 1);
+            if (t.DependentTask != task.Id)
+                graph.AddEdge(t.DependentTask - 1, t.DependensOnTask - 1);
         }
         return graph.DetectCrossEdges();
 
     }
-    
+
 
 }

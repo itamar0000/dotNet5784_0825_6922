@@ -18,22 +18,22 @@
                 <ListView.View>
                     <GridView>
                         <!--Id Column-->
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100"/>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
 
                         <!--Name Column-->
-                        <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="150"/>
+                        <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}"/>
 
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
 
-                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
 
-                        <GridViewColumn Header="Scheduled Date"  DisplayMemberBinding="{Binding ScheduledDate}" Width="100"/>
+                        <GridViewColumn Header="Scheduled Date"  DisplayMemberBinding="{Binding ScheduledDate}"/>
 
-                        <GridViewColumn Header="Forecast Date" DisplayMemberBinding="{Binding ForecastDate}" Width="100"/>
+                        <GridViewColumn Header="Forecast Date" DisplayMemberBinding="{Binding ForecastDate}"/>
 
-                        <GridViewColumn Header="Deliverables" DisplayMemberBinding="{Binding Deliverables}" Width="100"/>
+                        <GridViewColumn Header="Deliverables" DisplayMemberBinding="{Binding Deliverables}"/>
 
-                        <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding Remarks}" Width="100"/>
+                        <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding Remarks}"/>
 
 
 

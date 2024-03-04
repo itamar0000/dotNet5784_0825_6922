@@ -60,7 +60,7 @@ public static class Initialization
                 id = s_rand.Next(MIN_ID, MAX_ID);   
             while (s_dal!.Engineer.Read(id) != null);
 
-            int level = s_rand.Next(5);
+            int level = s_rand.Next(5) + 1;
             Engineer newEng = new(id,
                 EngineerNames[i],
                 Engineeremails[i],
@@ -174,6 +174,7 @@ public static class Initialization
                 Description: descriptions[i],
                 CreatedAtDate: DateTime.Now.AddDays(-s_rand.Next(60)),
                 IsMileStone: false,
+                Complexity: (DO.EngineerExperience)(s_rand.Next(5) + 1),
                 RequiredEffortTime: TimeSpan.FromDays(s_rand.Next(30) + 30)
                 );
 
