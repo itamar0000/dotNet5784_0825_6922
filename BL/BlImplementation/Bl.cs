@@ -27,7 +27,7 @@ internal class Bl : IBl
     /// <summary>
     /// Gets the clock-related functionality.
     /// </summary>
-    public IClock Clock => new ClockImplementation();  
+    public IClock Clock => new ClockImplementation();
 
 
     private static DateTime s_Clock = DateTime.Now.Date;
@@ -38,4 +38,6 @@ internal class Bl : IBl
     public void PromoteHour() => CurrentClock = CurrentClock.AddHours(1);
 
     public void ResetTime() => CurrentClock = DateTime.Now;
+
+    public void ReadDateAtTheStart() => CurrentClock = Factory.Get().Clock.GetCurrentDate() ?? DateTime.Now.Date;
 }

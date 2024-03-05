@@ -24,6 +24,7 @@
     <None Remove="background.jpg" />
     <None Remove="background2.jpg" />
     <None Remove="backgroundb.jpg" />
+    <None Remove="Images\defaultImageOfEngineer.jpg" />
     <None Remove="manager.jpg" />
     <None Remove="welcome.jpg" />
     <None Remove="welcomee.jpg" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\backgroundb.jpg" />
+    <Resource Include="Images\defaultImageOfEngineer.jpg" />
     <Resource Include="Images\manager.jpg" />
     <Resource Include="Images\welcomee.jpg" />
   </ItemGroup>

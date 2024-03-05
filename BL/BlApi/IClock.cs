@@ -35,4 +35,7 @@ public interface IClock
     /// </summary>
     /// <returns>The current status of the project.</returns>
     public ProjectStatus GetStatus();
+
+    public DateTime? GetCurrentDate();
+    public void SetCurrentDate(DateTime time);
 }

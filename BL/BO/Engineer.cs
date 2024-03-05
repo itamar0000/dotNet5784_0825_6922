@@ -31,6 +31,11 @@ public class Engineer
     public EngineerExperience Level { get; init; }
 
     /// <summary>
+    /// The image of the engineer.
+    /// </summary>
+    public string? ImagePath { get; set; }
+
+    /// <summary>
     /// Gets or sets the task associated with the engineer.
     /// </summary>
     public TaskInEngineer? Task { get; set; }

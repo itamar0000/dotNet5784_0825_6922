@@ -59,7 +59,7 @@ public partial class StartEndDateWindow : Window
         {
             Currentask.StartDate = Start;
             Currentask.CompleteDate = Enddate;
-            s_bl.Task.Update(Currentask);
+            s_bl.Task.UpdateDatesForEngineerWork(Currentask);
             MessageBox.Show("Dates assaigned succusfully", "message", MessageBoxButton.OK, MessageBoxImage.Information);
             Close();
         }

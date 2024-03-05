@@ -49,6 +49,7 @@ namespace PL.Engineer
                 try
                 {
                     engineer = s_bl.Engineer.Read(Id)!;
+                    engineer.ImagePath = "C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg";
                 }
                 catch (Exception ex)
                 {
@@ -67,13 +68,11 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(engineer);
                     MessageBox.Show("Engineer added successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-
                 }
                 else
                 {
                     s_bl.Engineer.Update(engineer);
                     MessageBox.Show("Engineer updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-
                 }
                 Close();
             }

@@ -63,4 +63,14 @@ internal class ClockImplementation : BlApi.IClock
             return ProjectStatus.BeforeStart;
         return ProjectStatus.Start;
     }
+
+    public DateTime? GetCurrentDate()
+    {
+        return _dal.Clock.GetCurrentDate();
+    }
+
+    public void SetCurrentDate(DateTime time)
+    {
+        _dal.Clock.SetCurrentDate(time);
+    }
 }
