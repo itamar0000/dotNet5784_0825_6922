@@ -4,6 +4,7 @@ using DalApi;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Diagnostics.Metrics;
 namespace BlImplementation;
 
 /// <summary>
@@ -113,9 +114,9 @@ internal class TaskImplementation : BlApi.ITask
             eng = _dal.Engineer.Read((int)item.EngineerId);
 
         }
-        
+
         if (eng != null)
-        {           
+        {
             engInTask = new EngineerInTask { Id = eng.Id, Name = eng.Name };
         }
 
@@ -164,7 +165,7 @@ internal class TaskImplementation : BlApi.ITask
                 Status = getStatus(item),
                 Dependencies = getDependencies(item),
                 Complexity = (BO.EngineerExperience?)item.Complexity,
-                Engineer= new EngineerInTask { Id = item.EngineerId }
+                Engineer = new EngineerInTask { Id = item.EngineerId }
             });
             return tasks.Where(item => filter(item));
 
@@ -203,26 +204,28 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlInvalidInputException("Id cannot be negative");
 
         }
+
         DO.Task task = new DO.Task
-            (Id: item.Id,
-             Alias: item.Alias,
-             Description: item.Description,
-             CreatedAtDate: item.CreatedAtDate,
-             IsMileStone: getIsMilestone(item),
-             isActive: true,
-             ScheduledDate: item.ScheduledDate,
-             StartDate: item.StartDate,
-             RequiredEffortTime: item.RequiredEffortTime,
-             CompleteDate: item.CompleteDate,
-             DeadlineDate: item.DeadlineDate,
-             Deliverables: item.Deliverables,
-             Remarks: item.Remarks,
-             EngineerId: item.Engineer?.Id,
-             Complexity: (DO.EngineerExperience?)item.Complexity
-             );
+        (Id: item.Id,
+         Alias: item.Alias,
+         Description: item.Description,
+         CreatedAtDate: item.CreatedAtDate,
+         IsMileStone: getIsMilestone(item),
+         isActive: true,
+         ScheduledDate: item.ScheduledDate,
+         StartDate: item.StartDate,
+         RequiredEffortTime: item.RequiredEffortTime,
+         CompleteDate: item.CompleteDate,
+         DeadlineDate: item.DeadlineDate,
+         Deliverables: item.Deliverables,
+         Remarks: item.Remarks,
+         EngineerId: item.Engineer?.Id,
+         Complexity: (DO.EngineerExperience?)item.Complexity
+         );
+
         if (item.Dependencies != getDependencies(task))
         {
-            if(IsCircular(item))
+            if (IsCircular(item))
                 throw new BlInvalidInputException("Circular dependency detected");
             _dal.Dependency.ReadAll(items => items.DependentTask == item.Id).ToList().ForEach(items => _dal.Dependency.Delete(items!.Id));
             foreach (var dependency in item.Dependencies)
@@ -236,6 +239,7 @@ internal class TaskImplementation : BlApi.ITask
                 _dal.Dependency.Create(dep);
             }
         }
+
         try
         {
             _dal.Task.Update(task);
@@ -244,8 +248,8 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BO.BlDoesNotExistException($"Task with ID={task.Id} already exists", ex);
         }
-    }
 
+    }
     /// <summary>
     /// Determines whether a task is a milestone.
     /// </summary>
@@ -385,6 +389,7 @@ internal class TaskImplementation : BlApi.ITask
     {
         return item.ScheduledDate + item.RequiredEffortTime;
     }
+
     private bool IsCircular(BO.Task task)
     {
         // Check if the task values are valid
@@ -392,17 +397,105 @@ internal class TaskImplementation : BlApi.ITask
         Graph graph = new(_dal.Task.ReadAll().Count());
         foreach (TaskInList t in task.Dependencies)
         {
-           
+
             graph.AddEdge(task.Id - 1, t.Id - 1);
         }
         foreach (var t in _dal.Dependency.ReadAll())
         {
-            if(t.DependentTask!=task.Id)
-            graph.AddEdge(t.DependentTask- 1, t.DependensOnTask - 1);
+            if (t.DependentTask != task.Id)
+                graph.AddEdge(t.DependentTask - 1, t.DependensOnTask - 1);
         }
         return graph.DetectCrossEdges();
 
     }
-    
 
+    /// <summary>
+    /// Updates the StartDate and EndDate on that task.
+    /// </summary>
+    /// <param name="item">The task to update.</param>
+    public void UpdateDatesForEngineerWork(BO.Task item)
+    {
+        //    IEnumerable<BO.Task> engineerTasks = ReadAll(current => current.Engineer.Id == item.Engineer.Id);
+        //    if (engineerTasks != null)
+        //    {
+        //        foreach (var tsk in engineerTasks)
+        //        {
+        //            if (tsk.CompleteDate == null && tsk.Id != item.Id)
+        //            {
+        //                throw new BO.BlInvalidInputException($"Cannot start that task, you are working on \"{tsk.Alias}\" task right now.");
+        //            }
+        //        }
+        //    }
+
+
+        //    List<BO.TaskInList> taskDependencies = item.Dependencies;
+        //    List<BO.TaskInList> taskDependenciesThatNotComplete = new List<BO.TaskInList> { };
+        //    if (taskDependencies != null)
+        //    {
+        //        foreach (BO.TaskInList tsk in taskDependencies)
+        //        {
+        //            var taskInList = Read(tsk.Id);
+        //            if (taskInList.CompleteDate == null)
+        //            {
+        //                taskDependenciesThatNotComplete.Add(tsk);
+        //            }
+        //        }
+        //    }
+
+
+        //    if (taskDependenciesThatNotComplete.Count > 0)
+        //    {
+        //        int counter = 0;
+        //        string incompleteTaskAliases = "";
+        //        foreach (var tsk in taskDependenciesThatNotComplete)
+        //        {
+        //            counter++;
+        //            if (counter == taskDependenciesThatNotComplete.Count && counter > 1)
+        //            {
+        //                incompleteTaskAliases = incompleteTaskAliases.TrimEnd(',', ' ');
+        //                incompleteTaskAliases += " and ";
+        //            }
+
+        //            incompleteTaskAliases += "\"" + tsk.Alias + "\"" + ", ";
+        //        }
+        //        throw new BO.BlInvalidInputException($"Cannot start that task, the dependencies tasks: {incompleteTaskAliases.TrimEnd(',', ' ')} are not complete yet.");
+
+        //    }
+
+
+        IEnumerable<BO.Task> engineerTasks = ReadAll(current => current.Engineer.Id == item.Engineer.Id);
+        if (engineerTasks != null && engineerTasks.Any(tsk => tsk.CompleteDate == null && tsk.Id != item.Id))
+        {
+            var currentTask = engineerTasks.FirstOrDefault(tsk => tsk.CompleteDate == null && tsk.Id != item.Id);
+            throw new BO.BlInvalidInputException($"Cannot start that task, you are working on \"{currentTask?.Alias}\" task right now.");
+        }
+
+        List<BO.TaskInList> taskDependencies = item.Dependencies;
+        List<BO.TaskInList> taskDependenciesThatNotComplete = (taskDependencies != null) ? taskDependencies.Where(tsk => Read(tsk.Id).CompleteDate == null).ToList() : new List<BO.TaskInList>();
+
+        if (taskDependenciesThatNotComplete.Count > 0)
+        {
+            string incompleteTaskAliases = string.Join(", ", taskDependenciesThatNotComplete.Select(tsk => $"\"{tsk.Alias}\""));
+
+            if (taskDependenciesThatNotComplete.Count > 1)
+            {
+                // Add " and " before the last alias
+                incompleteTaskAliases = incompleteTaskAliases.Insert(incompleteTaskAliases.LastIndexOf(',') + 1, " and");
+
+                // Remove the last comma
+                incompleteTaskAliases = incompleteTaskAliases.Remove(incompleteTaskAliases.LastIndexOf(','), 1);
+            }
+
+            throw new BO.BlInvalidInputException($"Cannot start that task, the dependencies tasks: {incompleteTaskAliases} are not complete yet.");
+        }
+
+        if (item.StartDate == null && item.CompleteDate != null)
+            throw new BO.BlInvalidInputException("Cannot end that task, you didn't start it!!!");
+
+        if (item.StartDate != null && item.CompleteDate != null && item.StartDate > item.CompleteDate)
+            throw new BO.BlInvalidInputException("You can't end the task before you even start it!!!");
+
+        // if we get here - there's meen that the data is ok
+        Update(item);
+    }
 }

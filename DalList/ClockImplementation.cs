@@ -4,6 +4,16 @@ namespace Dal;
 
 internal class ClockImplementation : IClock
 {
+    public DateTime? GetCurrentDate()
+    {
+        return DataSource.Config.currentDate;
+    }
+
+    public void SetCurrentDate(DateTime time)
+    {
+        DataSource.Config.startDate = time;
+    }
+
     public void SetEndDate(DateTime? time)
     {
        DataSource.Config.startDate = time;

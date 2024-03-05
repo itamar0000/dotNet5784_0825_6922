@@ -14,7 +14,8 @@ public record Engineer
     string Name,
     string Email,
     double Cost,
-    DO.EngineerExperience Level = DO.EngineerExperience.Beginner
+    DO.EngineerExperience Level = DO.EngineerExperience.Beginner,
+    string? ImagePath = null
 )
 {
      public Engineer() : this(0, "", "", 0) { }

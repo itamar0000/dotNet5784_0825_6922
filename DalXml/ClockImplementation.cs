@@ -6,6 +6,15 @@ using System.Xml.Linq;
 internal class ClockImplementation : IClock
 {
     static readonly string s_fileName = "data-config";
+
+    public DateTime? GetCurrentDate()
+    {
+        XElement element = XMLTools.LoadListFromXMLElement(s_fileName).Element("currentDate")!;
+        if (element.Value == "")
+            return null;
+        return DateTime.Parse(element.Value);
+    }
+
     public DateTime? GetEndDate()
     {
         string element = XMLTools.LoadListFromXMLElement(s_fileName).Element("endDate")!.Value;
@@ -20,6 +29,13 @@ internal class ClockImplementation : IClock
         if (element.Value == "")
             return null;
         return DateTime.Parse(element.Value);
+    }
+
+    public void SetCurrentDate(DateTime time)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement(s_fileName);
+        root.Element("currentDate")!.Value = time.ToString();
+        XMLTools.SaveListToXMLElement(root, s_fileName);
     }
 
     public void SetEndDate(DateTime? time)

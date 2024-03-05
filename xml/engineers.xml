@@ -18,8 +18,8 @@
     <Id>388422672</Id>
     <Name>Oscar Chang</Name>
     <Email>oscar.chang@example.com</Email>
-    <Cost>30</Cost>
-    <Level>None</Level>
+    <Cost>130</Cost>
+    <Level>Beginner</Level>
   </Engineer>
   <Engineer>
     <Id>337277192</Id>
@@ -60,8 +60,8 @@
     <Id>250076948</Id>
     <Name>Nathan Carter</Name>
     <Email>nathan.carter@example.com</Email>
-    <Cost>430</Cost>
-    <Level>Advanced</Level>
+    <Cost>530</Cost>
+    <Level>Expert</Level>
   </Engineer>
   <Engineer>
     <Id>238144402</Id>
@@ -74,8 +74,8 @@
     <Id>396333690</Id>
     <Name>Ethan Murphy</Name>
     <Email>ethan.murphy@example.com</Email>
-    <Cost>130</Cost>
-    <Level>Beginner</Level>
+    <Cost>430</Cost>
+    <Level>Advanced</Level>
   </Engineer>
   <Engineer>
     <Id>373279732</Id>
@@ -88,8 +88,8 @@
     <Id>303932692</Id>
     <Name>Liam Williams</Name>
     <Email>liam.williams@example.com</Email>
-    <Cost>330</Cost>
-    <Level>Intermediate</Level>
+    <Cost>530</Cost>
+    <Level>Expert</Level>
   </Engineer>
   <Engineer>
     <Id>277619526</Id>

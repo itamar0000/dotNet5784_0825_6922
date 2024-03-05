@@ -64,7 +64,7 @@ internal class EngineerImplementation : IEngineer
             Status = getStatus(item),
             Dependencies = getDependencies(item),
             Complexity = (BO.EngineerExperience?)item.Complexity
-        }).Where(item=>item.Status==Status.OnTrack||item.Status==Status.Done).Any();
+        }).Where(item => item.Status == Status.OnTrack || item.Status == Status.Done).Any();
 
         if (flag == true)
             throw new BO.BlDeletionImpossible($"Engineer with ID = {id} cannot be deleted");
@@ -198,7 +198,8 @@ internal class EngineerImplementation : IEngineer
                 Name: boEngineer.Name,
                 Email: boEngineer.Email,
                 Cost: boEngineer.Cost,
-                Level: (DO.EngineerExperience)boEngineer.Level);
+                Level: (DO.EngineerExperience)boEngineer.Level,
+                ImagePath: boEngineer.ImagePath);
 
         return doEngineer;
     }
@@ -216,7 +217,8 @@ internal class EngineerImplementation : IEngineer
             Name = doEngineer.Name,
             Email = doEngineer.Email,
             Cost = doEngineer.Cost,
-            Level = (BO.EngineerExperience)doEngineer.Level
+            Level = (BO.EngineerExperience)doEngineer.Level,
+            ImagePath = doEngineer.ImagePath
         };
 
 

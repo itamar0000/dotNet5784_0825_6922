@@ -58,4 +58,10 @@ public interface ITask
     /// </summary>
     /// <param name="item">The task for which to set the schedule.</param>
     public void SetScheduele(BO.Task item);
+
+    /// <summary>
+    /// Updates the StartDate and EndDate on that task.
+    /// </summary>
+    /// <param name="item">The task to update.</param>
+    public void UpdateDatesForEngineerWork(BO.Task item);
 }

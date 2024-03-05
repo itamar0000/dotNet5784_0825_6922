@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BO;
+using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,11 +54,19 @@ public partial class StartEndDateWindow : Window
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        Currentask.StartDate=Start;
-        Currentask.CompleteDate=Enddate;
-        s_bl.Task.Update(Currentask);
-        MessageBox.Show("Dates assaigned succusfully", "message", MessageBoxButton.OK, MessageBoxImage.Information);
-        Close();
+    {      
+        try
+        {
+            Currentask.StartDate = Start;
+            Currentask.CompleteDate = Enddate;
+            s_bl.Task.UpdateDatesForEngineerWork(Currentask);
+            MessageBox.Show("Dates assaigned succusfully", "message", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Close();
+        }
     }
 }

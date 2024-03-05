@@ -29,10 +29,10 @@ namespace PL.Task
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-       public class Temp
+        public class Temp
         {
-            public TaskInList temp { get; set;}
-            public  bool IsChecked { get; set; }
+            public TaskInList temp { get; set; }
+            public bool IsChecked { get; set; }
         }
 
 
@@ -102,8 +102,8 @@ namespace PL.Task
             {
                 try
                 {
-                     task = s_bl.Task.Read(Id)!;
-                    EngineerId =(task.Engineer !=null) ? (int)task.Engineer.Id : 0;
+                    task = s_bl.Task.Read(Id)!;
+                    EngineerId = (task.Engineer != null) ? (int)task.Engineer.Id : 0;
                     // TaskList = (from BO.Task t in s_bl.Task.ReadAll()
                     //             where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
                     //             select t);
@@ -129,7 +129,7 @@ namespace PL.Task
         {
             try
             {
-                if(EngineerId != 0)
+                if (EngineerId != 0)
                 {
                     task.Engineer = new EngineerInTask { Id = EngineerId, Name = s_bl.Engineer.Read(EngineerId)!.Name };
                 }
@@ -143,17 +143,21 @@ namespace PL.Task
                 }
                 else
                 {
-                    foreach(var item in AddDependency)
+                    // var copyOfAddDependen = AddDependency.All(item => item.Id != 0);
+                    var copyOfAddDependency = AddDependency.ToArray();
+                    for (int i = 0; i < copyOfAddDependency.Length; ++i)
                     {
-                        foreach(var item2 in task.Dependencies)
+                        foreach (var item2 in task.Dependencies)
                         {
-                           if(item.Id==item2.Id)
+                            if (copyOfAddDependency[i].Id == item2.Id)
                             {
-                               AddDependency.Remove(item);
+                                AddDependency.Remove(copyOfAddDependency[i]);
                                 break;
                             }
                         }
                     }
+
+
 
                     task?.Dependencies?.AddRange(AddDependency);
                     task?.Dependencies?.RemoveAll(item => DelDependency.Contains(item));
@@ -182,22 +186,40 @@ namespace PL.Task
                 BO.TaskInList tsk = new TaskInList { Id = Id, Alias = task.Alias, Status = task.Status, Description = task.Description };
                 AddDependency.Add(tsk);
 
+                var copyOfDelDependency = DelDependency.ToArray();
+                for (int i = 0; i < copyOfDelDependency.Length; ++i)
+                {
+                    if (copyOfDelDependency[i].Id == Id)
+                    {
+                        DelDependency.Remove(copyOfDelDependency[i]);
+                        break;
+                    }
+                }
+
             }
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-      
+
             var checkb = sender as CheckBox;
             int Id = (int)checkb.Tag;
-         
-            BO.Task? task = s_bl.Task.Read(Id);
+
+            BO.Task? tasks = s_bl.Task.Read(Id);
             BO.TaskInList tsk = new TaskInList { Id = Id, Alias = task.Alias, Status = task.Status, Description = task.Description };
             foreach (var item in AddDependency)
             {
                 if (item.Id == Id)
                 {
-                    AddDependency.Remove(item);
+                    DelDependency.Add(item);
+                    break;
+                }
+            }
+            foreach (var item in task.Dependencies)
+            {
+                if (item.Id == Id)
+                {
+                    DelDependency.Add(item);
                     break;
                 }
             }
@@ -206,7 +228,7 @@ namespace PL.Task
         private void SetEngineer_Click(object sender, RoutedEventArgs e)
         {
             var window = new SetEngineerWindow(BO.EngineerExperience.None, EngineerSelectedHandler);
-            if(task.Complexity != null)
+            if (task.Complexity != null)
                 window = new SetEngineerWindow(task.Complexity, EngineerSelectedHandler);
             window.ShowDialog();
         }

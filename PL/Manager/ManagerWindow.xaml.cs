@@ -37,6 +37,7 @@ public partial class ManagerWindow : Window
         if (mbResult == MessageBoxResult.Yes)
         {
             s_bl.InitializeDB();
+            s_bl.ResetTime();
         }
     }
 

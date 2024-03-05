@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 class ConvertIdToContent : IValueConverter
@@ -198,5 +199,28 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
+    }
+}
+
+public class ImagePathToImageSourceConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        string imagePath = value as string;
+        if (string.IsNullOrEmpty(imagePath))
+        {
+            // Return a default image if imagePath is null or empty
+            return new BitmapImage(new Uri("C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg", UriKind.Relative)); // Provide the path to your default image
+        }
+        else
+        {
+            // Convert the imagePath to ImageSource
+            return new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute));
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value.ToString();
     }
 }
