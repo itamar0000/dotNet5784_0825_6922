@@ -145,6 +145,28 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
 
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
+        if (values[3] is List<BO.TaskInList> tasks)
+        {
+           if( tasks.Any(item => item.Status == BO.Status.InJeopardy))
+            {
+                foreach (var task in tasks)
+                {
+                   BO.Task temp =  s_bl.Task.Read(task.Id);
+                    temp.Status = BO.Status.InJeopardy;
+                }
+                if (values[4] is int Id)
+                {
+                    BO.Task temp = s_bl.Task.Read(Id);
+                    temp.Status=BO.Status.InJeopardy;
+                }
+                return Brushes.Red;
+
+            }
+        }
+        if (values[2] is BO.Status status)
+            if(status==BO.Status.InJeopardy)
+                return Brushes.Red;
+
         if (values[0] is DateTime dateTime)
         {
             if (dateTime <= s_bl.CurrentClock)

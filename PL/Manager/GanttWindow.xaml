@@ -34,6 +34,9 @@
                                 <MultiBinding Converter="{StaticResource  datetobackground}">
                                     <Binding Path="CompleteDate"/>
                                     <Binding Path="ForecastDate"/>
+                                    <Binding Path="Status"/>
+                                    <Binding Path="Dependencies"/>
+                                    <Binding Path="Id"/>
                                 </MultiBinding>
                             </Border.Background>
                             <TextBlock  Text="{Binding Id}" VerticalAlignment="Center" 

@@ -117,7 +117,7 @@ internal class TaskImplementation : BlApi.ITask
         if (eng != null)
         {           
             engInTask = new EngineerInTask { Id = eng.Id, Name = eng.Name };
-        }          
+        }
 
         return new BO.Task()
         {
@@ -134,7 +134,8 @@ internal class TaskImplementation : BlApi.ITask
             Dependencies = getDependencies(item),
             Remarks = item.Remarks,
             Complexity = (BO.EngineerExperience?)item.Complexity,
-            Engineer = engInTask
+            Engineer = engInTask,
+            Status = getStatus(item)
         };
     }
 
@@ -262,6 +263,9 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>The status of the task.</returns>
     public BO.Status? getStatus(DO.Task? item)
     {
+      
+        if ((!item.CompleteDate.HasValue&&_bl.CurrentClock>GetForecastDate(item)))
+            return BO.Status.InJeopardy;
         if (item!.CompleteDate != null)
             return BO.Status.Done;
         if (item.StartDate != null)
