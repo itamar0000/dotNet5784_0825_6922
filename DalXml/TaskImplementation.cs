@@ -136,4 +136,6 @@ internal class TaskImplementation : ITask
 
         XMLTools.SaveListToXMLSerializer<Task>(tasksList, s_tasks_xml);
     }
+
+  
 }

@@ -91,8 +91,8 @@ public class DateToCanvasLeftConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is DateTime dateTime)
-        { 
-            
+        {
+
             DateTime startDate = (DateTime)value;
             DateTime endDate = (DateTime)s_bl.Clock.GetStartDate()!;
 
@@ -148,24 +148,24 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
     {
         if (values[3] is List<BO.TaskInList> tasks)
         {
-           if( tasks.Any(item => item.Status == BO.Status.InJeopardy))
+            if (tasks.Any(item => item.Status == BO.Status.InJeopardy))
             {
                 foreach (var task in tasks)
                 {
-                   BO.Task temp =  s_bl.Task.Read(task.Id);
+                    BO.Task temp = s_bl.Task.Read(task.Id);
                     temp.Status = BO.Status.InJeopardy;
                 }
                 if (values[4] is int Id)
                 {
                     BO.Task temp = s_bl.Task.Read(Id);
-                    temp.Status=BO.Status.InJeopardy;
+                    temp.Status = BO.Status.InJeopardy;
                 }
                 return Brushes.Red;
 
             }
         }
         if (values[2] is BO.Status status)
-            if(status==BO.Status.InJeopardy)
+            if (status == BO.Status.InJeopardy)
                 return Brushes.Red;
 
         if (values[0] is DateTime dateTime)
@@ -184,11 +184,11 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
         {
             if (values[1] is DateTime dateTime1)
             {
-                if(dateTime1 >= s_bl.CurrentClock)
+                if (dateTime1 >= s_bl.CurrentClock)
                 {
                     return Brushes.LightGreen;
                 }
-                
+
             }
             return Brushes.Red;
         }
@@ -202,25 +202,32 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
     }
 }
 
-public class ImagePathToImageSourceConverter : IValueConverter
+public class ImagePathConverter : IValueConverter
 {
+    // Convert from image path to BitmapImage
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        string imagePath = value as string;
-        if (string.IsNullOrEmpty(imagePath))
+        if (value is string imagePath && !string.IsNullOrEmpty(imagePath))
         {
-            // Return a default image if imagePath is null or empty
-            return new BitmapImage(new Uri("C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg", UriKind.Relative)); // Provide the path to your default image
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.UriSource = new Uri(imagePath);
+            image.EndInit();
+            return image;
         }
-        else
-        {
-            // Convert the imagePath to ImageSource
-            return new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute));
-        }
+
+        return null;
     }
 
+    // Convert from BitmapImage to image path (not implemented in this case)
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value.ToString();
+        if (value is string imagePath && !string.IsNullOrEmpty(imagePath))
+        {
+            return imagePath;
+        }
+        return null;
+
     }
 }

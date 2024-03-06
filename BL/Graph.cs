@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using System.Threading.Tasks;
 namespace BlImplementation;
 
 class Graph
@@ -62,4 +65,47 @@ class Graph
 
         return false; // No cross edges found
     }
+    private void TopologicalSortUtil(int v, bool[] visited, Stack<int> stack)
+    {
+        visited[v] = true;
+
+        foreach (var neighbor in adj[v])
+        {
+            if (!visited[neighbor])
+            {
+                TopologicalSortUtil(neighbor, visited, stack);
+            }
+        }
+
+        // Push current vertex to stack which stores result
+        stack.Push(v);
+    }
+
+    // Function to perform topological sort
+    public int[] TopologicalSort()
+    {
+        Stack<int> stack = new Stack<int>();
+        bool[] visited = new bool[V];
+
+        // Mark all the vertices as not visited
+        for (int i = 0; i < V; i++)
+        {
+            visited[i] = false;
+        }
+
+        // Call the recursive helper function to store Topological Sort starting from all vertices one by one
+        for (int i = 0; i < V; i++)
+        {
+            if (!visited[i])
+            {
+                TopologicalSortUtil(i, visited, stack);
+            }
+        }
+
+        // Convert stack to array
+        int[] result = stack.ToArray();
+
+        return result;
+    }
 }
+

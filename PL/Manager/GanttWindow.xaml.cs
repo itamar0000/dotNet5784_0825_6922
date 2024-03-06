@@ -27,8 +27,9 @@ namespace PL.Manager
         {
        
             InitializeComponent();
-            TaskList = s_bl?.Task.ReadAll()!.OrderBy(item=>item.ScheduledDate);
-       
+            TaskList = s_bl.Task.Sort();
+                //s_bl?.Task.ReadAll()!.OrderBy(item => item.ScheduledDate);
+
 
         }
         public IEnumerable<BO.Task> TaskList

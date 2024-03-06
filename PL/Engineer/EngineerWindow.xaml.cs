@@ -1,4 +1,5 @@
 ﻿using BO;
+using Microsoft.Win32;
 using Microsoft.Xaml.Behaviors;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 namespace PL.Engineer
 {
     /// <summary>
@@ -38,6 +40,8 @@ namespace PL.Engineer
 
         public EngineerWindow(int Id = 0)
         {
+             BitmapImage imageSource = new BitmapImage(new Uri("C:\\Users\\olete\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg"));
+            Image = imageSource;
             InitializeComponent();
             id = Id;
             if (Id == 0)
@@ -49,7 +53,6 @@ namespace PL.Engineer
                 try
                 {
                     engineer = s_bl.Engineer.Read(Id)!;
-                    engineer.ImagePath = "C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg";
                 }
                 catch (Exception ex)
                 {
@@ -93,5 +96,47 @@ namespace PL.Engineer
                 }
             }
         }
+
+
+        public ImageSource Image
+        {
+            get { return (ImageSource)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ImageSourceProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImageProperty =
+            DependencyProperty.Register("Image", typeof(ImageSource), typeof(EngineerWindow), new PropertyMetadata(null));
+
+
+
+        private void Button_Photo(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+            if (openFileDialog.ShowDialog() == true)
+                {
+                    try
+                    {
+                        // Get the selected file path
+                        string imagePath = openFileDialog.FileName;
+
+                        // Store the image path in your class or wherever you need it
+                        engineer.ImagePath = imagePath;
+
+                        // Load the image into an Image control or any other appropriate control
+                        BitmapImage imageSource = new BitmapImage(new Uri(imagePath));
+                        Image = imageSource;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error loading image: " + ex.Message);
+                    }
+                }
+        }
+
     }
 }
+

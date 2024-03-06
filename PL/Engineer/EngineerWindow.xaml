@@ -12,7 +12,7 @@
     <Grid>
         <Label Content="ID" HorizontalAlignment="Left" Margin="74,10,0,0" VerticalAlignment="Top" Height="47" Width="37" FontSize="20" />
         <Label Content="Name" HorizontalAlignment="Left" Margin="74,77.5,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="Email" HorizontalAlignment="Left" Margin="74,-50,0,0" VerticalAlignment="Center" RenderTransformOrigin="-0.175,0.81" FontSize="20"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="70,145,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.175,0.81" FontSize="20"/>
         <Label Content="Cost" HorizontalAlignment="Left" Margin="74,212.5,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="Level" HorizontalAlignment="Left" Margin="74,280,0,0" VerticalAlignment="Top" Height="34" RenderTransformOrigin="-0.342,0.631" FontSize="20"/>
         <!--Name Textbox-->
@@ -28,8 +28,8 @@
         <!--Cost Textbox-->
         <TextBox HorizontalAlignment="Left" Margin="178,224,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
 
-        <Image Source="{Binding ImagePath, Mode=TwoWay, Converter={StaticResource imageForEngineer}, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="137,314,0,0" VerticalAlignment="Top" Height="100" Width="100"/>
-        
+        <Image Source="{Binding ImagePath, Converter={StaticResource imageForEngineer}}" HorizontalAlignment="Left" Margin="178,341,0,0" VerticalAlignment="Top" Height="76" Width="100"/>
+        <Button  HorizontalAlignment="Left" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" RenderTransformOrigin="0.,456.408"  Background="Black" Margin="300,341,0,0" Click="Button_Photo"/>
         <Button  HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateEngineer_Click" RenderTransformOrigin="0.,456.408" Margin="0,426,0,0" Background="Black"/>
 
     </Grid>

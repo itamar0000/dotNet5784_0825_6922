@@ -267,8 +267,8 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>The status of the task.</returns>
     public BO.Status? getStatus(DO.Task? item)
     {
-      
-        if ((!item.CompleteDate.HasValue&&_bl.CurrentClock>GetForecastDate(item)))
+
+        if ((!item.CompleteDate.HasValue && _bl.CurrentClock > GetForecastDate(item)))
             return BO.Status.InJeopardy;
         if (item!.CompleteDate != null)
             return BO.Status.Done;
@@ -497,5 +497,26 @@ internal class TaskImplementation : BlApi.ITask
 
         // if we get here - there's meen that the data is ok
         Update(item);
+    }
+    public IEnumerable<BO.Task> Sort()
+    {
+        Graph graph = new Graph(_dal.Task.ReadAll().Count());
+        foreach (var t in _dal.Dependency.ReadAll())
+        {
+                graph.AddEdge(t.DependentTask - 1, t.DependensOnTask - 1);
+        }
+        // Perform topological sort
+        List<int> sortedTasks = (graph.TopologicalSort()).ToList();
+        List<BO.Task> tasks = new();
+        // Output the sorted tasks
+        foreach (int taskIndex in sortedTasks)
+        {
+            // Add 1 to convert back to 1-indexed task IDs
+            int taskId = taskIndex + 1;
+            tasks.Add(Read(taskId));
+            
+        }
+         tasks.Reverse();
+        return tasks;
     }
 }

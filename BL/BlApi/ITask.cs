@@ -64,4 +64,8 @@ public interface ITask
     /// </summary>
     /// <param name="item">The task to update.</param>
     public void UpdateDatesForEngineerWork(BO.Task item);
+    /// <summary>
+    /// sort the task topologicly
+    /// </summary>
+    public IEnumerable<BO.Task> Sort();
 }
