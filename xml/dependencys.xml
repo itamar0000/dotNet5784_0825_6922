@@ -61,6 +61,21 @@
     <DependensOnTask>8</DependensOnTask>
   </dependency>
   <dependency>
+    <Id>1015</Id>
+    <DependentTask>11</DependentTask>
+    <DependensOnTask>7</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1016</Id>
+    <DependentTask>11</DependentTask>
+    <DependensOnTask>8</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1017</Id>
+    <DependentTask>11</DependentTask>
+    <DependensOnTask>9</DependensOnTask>
+  </dependency>
+  <dependency>
     <Id>1018</Id>
     <DependentTask>12</DependentTask>
     <DependensOnTask>10</DependensOnTask>

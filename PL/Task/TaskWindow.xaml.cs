@@ -80,7 +80,7 @@ namespace PL.Task
             set { SetValue(TaskProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for MyProperty.  This    enables animation, styling, binding, etc...
         int id;
         public static readonly DependencyProperty TaskProperty =
             DependencyProperty.Register("task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));

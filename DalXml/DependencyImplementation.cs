@@ -115,18 +115,27 @@ internal class DependencyImplementation : IDependency
     /// </summary>
     /// <param name="filter">The filter predicate for reading dependencies.</param>
     /// <returns>The collection of read dependencies.</returns>
-    public IEnumerable<Dependency?> ReadAll(Func<Dependency?, bool>? filter = null)
+    //public IEnumerable<Dependency?> ReadAll(Func<Dependency?, bool>? filter = null)
+    //{
+    //    XElement dependencysList = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
+    //    if (filter == null)
+    //    {
+    //        return dependencysList.Elements("dependency").Select(dependencyElement => GetDependency(dependencyElement));
+    //    }
+    //    else
+    //    {
+    //        return dependencysList.Elements("dependency").Where(dependencyElement =>
+    //            filter(GetDependency(dependencyElement))).Select(dependencyElement => GetDependency(dependencyElement));
+    //    }
+    //}
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        XElement dependencysList = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
-        if (filter == null)
-        {
-            return dependencysList.Elements("dependency").Select(dependencyElement => GetDependency(dependencyElement));
-        }
-        else
-        {
-            return dependencysList.Elements("dependency").Where(dependencyElement =>
-                filter(GetDependency(dependencyElement))).Select(dependencyElement => GetDependency(dependencyElement));
-        }
+        var elements = XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements();
+
+        if (filter is null)
+            return elements.Select(GetDependency);
+
+        return elements.Select(GetDependency).Where(filter);
     }
 
     /// <summary>
