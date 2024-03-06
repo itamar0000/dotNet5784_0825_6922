@@ -344,4 +344,16 @@
     <EngineerId>358998220</EngineerId>
     <Complexity>AdvancedBeginner</Complexity>
   </Task>
+  <Task>
+    <Id>4</Id>
+    <Alias>Component Specification</Alias>
+    <Description>Describe in detail what each part of the system should be like.</Description>
+    <CreatedAtDate>2024-03-04T22:12:56.6708905+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-05-26T00:00:00</ScheduledDate>
+    <RequiredEffortTime>P31D</RequiredEffortTime>
+    <EngineerId>357133747</EngineerId>
+    <Complexity>Expert</Complexity>
+  </Task>
 </ArrayOfTask>

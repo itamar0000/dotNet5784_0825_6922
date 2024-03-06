@@ -20,9 +20,9 @@ namespace PL
 
         protected override void OnExit(ExitEventArgs e)
         {
-            base.OnExit(e);
-
             s_bl.Clock.SetCurrentDate(s_bl.CurrentClock);
+
+            base.OnExit(e);
         }
     }
 

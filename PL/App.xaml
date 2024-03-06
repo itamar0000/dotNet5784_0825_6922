@@ -24,7 +24,71 @@
             <Setter Property="BorderBrush" Value="#09275F"></Setter>
             <Setter Property="Background" Value="#7D5893"></Setter>
             <Setter Property="Foreground" Value="White"></Setter>
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7D58C9"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                    <Setter Property="FontSize" Value="13"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+
         </Style>
+
+
+
+        <Storyboard x:Key="FadeInAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+        </Storyboard>
+
+        
+        
+        <Style TargetType="TextBox">
+            
+            <Style.Triggers>
+                
+                <!-- To change text box color based on a data-bound property -->
+                <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+                                
+                <!-- To apply Fade In animation -->
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}"/>
+                </EventTrigger>
+            </Style.Triggers>
+            
+        </Style>
+
+
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}"/>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
 
         <Style TargetType="ListViewItem">
             <Setter Property="Background" Value="WhiteSmoke"/>
@@ -34,5 +98,9 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
+      
+
+
+        
     </Application.Resources>
 </Application>

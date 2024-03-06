@@ -1,6 +1,7 @@
 ﻿using PL.Engineer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +19,17 @@ namespace PL.Task
     /// <summary>
     /// Interaction logic for TaskListWindow.xaml
     /// </summary>
-    public partial class TaskListWindow : Window
+    public partial class TaskListWindow : Window, INotifyPropertyChanged
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public TaskListWindow()
         {
+            StartAliasOfTask = "";
             InitializeComponent();
-            TaskList = s_bl?.Task.ReadAll()!;
-
+            TaskListAll = s_bl?.Task.ReadAll()!;
+            TaskList = TaskListAll;
         }
 
 
@@ -39,6 +42,9 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for RaskList.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+
+        IEnumerable<BO.Task> TaskListAll;
+
 
 
         private void DoubleClick(object sender, MouseButtonEventArgs e)
@@ -63,6 +69,28 @@ namespace PL.Task
             new TaskWindow().ShowDialog();
             TaskList = s_bl.Task.ReadAll()!;
         }
+    
+
+        public string StartAliasOfTask
+        {
+            get { return (string)GetValue(StartAliasOfTaskProperty); }
+            set { SetValue(StartAliasOfTaskProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for StartAliasOfTask.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StartAliasOfTaskProperty =
+            DependencyProperty.Register("StartAliasOfTask", typeof(string), typeof(TaskListWindow), new PropertyMetadata(null));
+
+
+        private void TextBox_SearchTasks(object sender, TextChangedEventArgs e)
+        {
+            StartAliasOfTask = (sender as TextBox)!.Text.ToLower();
+            if (StartAliasOfTask == "")
+                TaskList = TaskListAll;
+            else
+                TaskList = TaskListAll.Where(item => item.Alias.ToLower().Contains(StartAliasOfTask));
+        }
+
     }
 }
 

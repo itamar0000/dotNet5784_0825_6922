@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
+        Icon="../Images/Icons/IconOfTaskList.jpg"
         Title="TaskListWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
@@ -67,7 +68,11 @@
 
 
         </Grid>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddClick" Background="#393A10"/>
+
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddClick"/>
+
+        <!-- Search -->
+        <TextBox TextChanged="TextBox_SearchTasks" HorizontalAlignment="Left" Margin="655,0,0,0" TextWrapping="Wrap" Text="{Binding StartAliasOfTask}" VerticalAlignment="Center" Width="120"/>
     </Grid>
 
 </Window>

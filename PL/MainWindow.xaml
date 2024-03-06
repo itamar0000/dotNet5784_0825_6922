@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Icon="/Images/Icons/IconOfProject2.jpg">
     <Window.Background>
         <ImageBrush ImageSource="/Images/welcomee.jpg"></ImageBrush>
     </Window.Background>
@@ -14,28 +15,34 @@
             <!-- Arc Path -->
             <Grid>
                 <!-- TextBlock along the Arc -->
-                <TextBlock Text="" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Canvas.Left="209" Canvas.Top="34" Margin="173,76,-173,-76">
-                    <TextBlock.LayoutTransform>
-                        <RotateTransform Angle="-90" CenterX="0" CenterY="0"/>
-                    </TextBlock.LayoutTransform>
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <RotateTransform Angle="90" CenterX="0" CenterY="0"/>
-                            <TranslateTransform X="30" Y="50"/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-                <Label Content="{Binding MyTime}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+
+                <Label Content="{Binding MyTime, StringFormat=dd/mm/yy}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                        BorderBrush="#09275F" Background="#7D5893" BorderThickness="1" Canvas.Left="44" Canvas.Top="30" Height="21" Width="120"
                        HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontFamily="Ariel" Margin="-130,126,0,0"/>
-                <Button Content="Add Day" Click="Button_Click_AddDay" BorderBrush="#09275F" Background="#7D5893" Width="35" Height="15" FontSize="8" Margin="-45,146,142,115"/>
-                <Button Content="Add Hour" Click="Button_Click_AddHour" BorderBrush="#09275F" Background="#7D5893" Width="40" Height="15" FontSize="8" Margin="-85,146,177,115"/>
-                <Button Content="Reset Time" Click="Button_Click_ResetTime" BorderBrush="#09275F" Background="#7D5893" Width="45" Height="15" FontSize="8" Margin="-130,146,217,115"/>
+
+                <Border CornerRadius="0">
+                    <Button Content="Add Day" Click="Button_Click_AddDay" BorderBrush="#09275F" Background="#7D5893" Width="35" Height="15" FontSize="8" Margin="-45,146,142,115"/>
+
+                </Border>
+
+                <Button Content="Add Hour" Click="Button_Click_AddHour" Width="40" Height="15" FontSize="8" Margin="-85,146,177,115"/>
+                <Button Content="Reset Time" Click="Button_Click_ResetTime" Width="45" Height="15" FontSize="8" Margin="-130,146,217,115"/>
             </Grid>
         </Viewbox>
 
-        <Button Content="I am an Engineer" BorderBrush="#09275F" Background="#7D5893" Width="105" Height="30" Click="Btn_Engineer" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="58,0,637,72"/>
-        <Button Content="I am the Manager" BorderBrush="#09275F" Background="#7D5893" Width="105" Height="30" Click="Btn_Manager" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="227,0,468,72"/>
+        <Button BorderBrush="#09275F" Width="140" Height="30" Click="Btn_Engineer" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom" Margin="49,332,0,0" >
+            <Grid>
+                <Image Source="/Images/Icons/IconOfEngineer.jpg" Margin="-40,0,63,0" Width="25"/>
+                <TextBlock Text="I am an Engineer" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Margin="25,0,0,0"/>
+            </Grid>
+        </Button>
+
+        <Button Width="140" Height="30" Click="Btn_Manager" VerticalAlignment="Bottom" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="229,0,0,72"  >
+            <Grid>
+                <Image Source="/Images/Icons/IconOfManager.jpg" Margin="-43,0,63,0" Width="25"/>
+                <TextBlock Text="I am the Manager" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Margin="18,0,0,0"/>
+            </Grid>
+        </Button>
 
     </Grid>
 </Window>
