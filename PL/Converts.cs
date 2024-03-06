@@ -188,7 +188,7 @@ public class ImagePathToImageSourceConverter : IValueConverter
         if (string.IsNullOrEmpty(imagePath))
         {
             // Return a default image if imagePath is null or empty
-            return new BitmapImage(new Uri("C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg", UriKind.Relative)); // Provide the path to your default image
+            return new BitmapImage(new Uri(@"C:\Users\User\source\repos\dotNet5784_0825_6922\PL\Images\defaultImageOfEngineer.jpg", UriKind.Relative)); // Provide the path to your default image
         }
         else
         {

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
+        Icon="../Images/Icons/IconOfDate.jpg"
         Title="StartEndDateWindow" Height="300" Width="450"
-    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <Label Content="End Date:" VerticalAlignment="Top" Width=" 80" Height="30" HorizontalAlignment="Left" Margin="61,184,0,0"/>
         <Label Content="Start Date:" VerticalAlignment="Top" Width=" 80" Height="30" HorizontalAlignment="Left" Margin="61,35,0,0"/>

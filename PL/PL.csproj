@@ -25,6 +25,15 @@
     <None Remove="background2.jpg" />
     <None Remove="backgroundb.jpg" />
     <None Remove="Images\defaultImageOfEngineer.jpg" />
+    <None Remove="Images\Icons\IconOfDate.jpg" />
+    <None Remove="Images\Icons\IconOfEngineer.jpg" />
+    <None Remove="Images\Icons\IconOfEngineerList.jpg" />
+    <None Remove="Images\Icons\IconOfGantt.jpg" />
+    <None Remove="Images\Icons\IconOfManager.jpg" />
+    <None Remove="Images\Icons\IconOfProject.jpg" />
+    <None Remove="Images\Icons\IconOfProject2.jpg" />
+    <None Remove="Images\Icons\IconOfTask.jpg" />
+    <None Remove="Images\Icons\IconOfTaskList.jpg" />
     <None Remove="manager.jpg" />
     <None Remove="welcome.jpg" />
     <None Remove="welcomee.jpg" />
@@ -34,6 +43,15 @@
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\backgroundb.jpg" />
     <Resource Include="Images\defaultImageOfEngineer.jpg" />
+    <Resource Include="Images\Icons\IconOfDate.jpg" />
+    <Resource Include="Images\Icons\IconOfEngineer.jpg" />
+    <Resource Include="Images\Icons\IconOfEngineerList.jpg" />
+    <Resource Include="Images\Icons\IconOfGantt.jpg" />
+    <Resource Include="Images\Icons\IconOfManager.jpg" />
+    <Resource Include="Images\Icons\IconOfProject.jpg" />
+    <Resource Include="Images\Icons\IconOfProject2.jpg" />
+    <Resource Include="Images\Icons\IconOfTask.jpg" />
+    <Resource Include="Images\Icons\IconOfTaskList.jpg" />
     <Resource Include="Images\manager.jpg" />
     <Resource Include="Images\welcomee.jpg" />
   </ItemGroup>

@@ -11,21 +11,6 @@
     <DependensOnTask>1</DependensOnTask>
   </dependency>
   <dependency>
-    <Id>1002</Id>
-    <DependentTask>4</DependentTask>
-    <DependensOnTask>1</DependensOnTask>
-  </dependency>
-  <dependency>
-    <Id>1003</Id>
-    <DependentTask>4</DependentTask>
-    <DependensOnTask>2</DependensOnTask>
-  </dependency>
-  <dependency>
-    <Id>1004</Id>
-    <DependentTask>4</DependentTask>
-    <DependensOnTask>3</DependensOnTask>
-  </dependency>
-  <dependency>
     <Id>1005</Id>
     <DependentTask>5</DependentTask>
     <DependensOnTask>1</DependensOnTask>
@@ -254,5 +239,20 @@
     <Id>1053</Id>
     <DependentTask>11</DependentTask>
     <DependensOnTask>9</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1054</Id>
+    <DependentTask>4</DependentTask>
+    <DependensOnTask>1</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1055</Id>
+    <DependentTask>4</DependentTask>
+    <DependensOnTask>2</DependensOnTask>
+  </dependency>
+  <dependency>
+    <Id>1056</Id>
+    <DependentTask>4</DependentTask>
+    <DependensOnTask>3</DependensOnTask>
   </dependency>
 </ArrayOfDependency>

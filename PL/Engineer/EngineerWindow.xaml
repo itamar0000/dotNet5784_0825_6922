@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
+        Icon="../Images/Icons/IconOfEngineer.jpg"
     Title="EngineerWindow" Height="500" Width="400"
     Background="#FFFE91"
     DataContext="{Binding engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
@@ -21,15 +22,14 @@
         <TextBox HorizontalAlignment="Left" Margin="167,154,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="157" Height="18" />
         <!--level ComboBox-->
         <ComboBox HorizontalAlignment="Left" Margin="178,290,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Source={StaticResource EngineerCollectionKey}}" 
-        SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, 
-        ValidatesOnExceptions=true}"/>
+        SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
         <!--ID Textbox-->
         <TextBox HorizontalAlignment="Left" Margin="178,23,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"  IsEnabled="{Binding Id, Converter ={StaticResource ConvertIdToEnable}}" PreviewTextInput="Txt_Input"/>
         <!--Cost Textbox-->
         <TextBox HorizontalAlignment="Left" Margin="178,224,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
 
         <Image Source="{Binding ImagePath, Mode=TwoWay, Converter={StaticResource imageForEngineer}, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="137,314,0,0" VerticalAlignment="Top" Height="100" Width="100"/>
-        
+
         <Button  HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateEngineer_Click" RenderTransformOrigin="0.,456.408" Margin="0,426,0,0" Background="Black"/>
 
     </Grid>

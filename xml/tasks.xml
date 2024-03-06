@@ -34,17 +34,6 @@
     <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
-    <Id>4</Id>
-    <Alias>Component Specification</Alias>
-    <Description>Describe in detail what each part of the system should be like.</Description>
-    <CreatedAtDate>2024-03-04T22:12:56.6708905+02:00</CreatedAtDate>
-    <IsMileStone>false</IsMileStone>
-    <isActive>true</isActive>
-    <ScheduledDate>2024-05-26T00:00:00</ScheduledDate>
-    <RequiredEffortTime>P31D</RequiredEffortTime>
-    <Complexity>Expert</Complexity>
-  </Task>
-  <Task>
     <Id>5</Id>
     <Alias>Hardware Procurement</Alias>
     <Description>Buy the necessary hardware for the system.</Description>
@@ -341,5 +330,17 @@
     <RequiredEffortTime>P33D</RequiredEffortTime>
     <EngineerId>358578084</EngineerId>
     <Complexity>Beginner</Complexity>
+  </Task>
+  <Task>
+    <Id>4</Id>
+    <Alias>Component Specification</Alias>
+    <Description>Describe in detail what each part of the system should be like.</Description>
+    <CreatedAtDate>2024-03-04T22:12:56.6708905+02:00</CreatedAtDate>
+    <IsMileStone>true</IsMileStone>
+    <isActive>true</isActive>
+    <ScheduledDate>2024-05-26T00:00:00</ScheduledDate>
+    <RequiredEffortTime>P31D</RequiredEffortTime>
+    <EngineerId>357133747</EngineerId>
+    <Complexity>Expert</Complexity>
   </Task>
 </ArrayOfTask>
