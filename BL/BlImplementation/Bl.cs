@@ -29,7 +29,6 @@ internal class Bl : IBl
     /// </summary>
     public IClock Clock => new ClockImplementation();
 
-
     private static DateTime s_Clock = DateTime.Now.Date;
     public DateTime CurrentClock { get { return s_Clock; } private set { s_Clock = value; } }
 

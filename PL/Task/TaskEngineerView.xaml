@@ -10,7 +10,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <Border Grid.Row="1" Margin="10">
-            <ListView ItemsSource="{Binding TaskInLists}" Background="White" MouseDoubleClick="Btn_startend">
+            <ListView ItemsSource="{Binding TaskInLists}" Background="White" MouseDoubleClick="Button_Click">
                 <ListView.View>
                     <GridView>
                         <!--Id Column-->
@@ -22,6 +22,15 @@
                         <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
 
                         <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="150"/>
+
+                        <!-- Button Column -->
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding  StartDate ,Converter= {StaticResource DatetoContent}}" Click="Button_Click" Width="50" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
