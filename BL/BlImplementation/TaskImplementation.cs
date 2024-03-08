@@ -265,11 +265,11 @@ internal class TaskImplementation : BlApi.ITask
     /// </summary>
     /// <param name="item">The task to get the status for.</param>
     /// <returns>The status of the task.</returns>
-    public BO.Status? getStatus(DO.Task? item)
+    private BO.Status? getStatus(DO.Task? item)
     {
 
-        if ((!item.CompleteDate.HasValue && _bl.CurrentClock > GetForecastDate(item)))
-            return BO.Status.InJeopardy;
+        if(IsTaskInJeopardy(item))
+            return Status.InJeopardy;
         if (item!.CompleteDate != null)
             return BO.Status.Done;
         if (item.StartDate != null)
@@ -519,4 +519,26 @@ internal class TaskImplementation : BlApi.ITask
          tasks.Reverse();
         return tasks;
     }
+    // Add this method to the TaskImplementation class
+    private bool IsTaskInJeopardy(DO.Task task)
+    {
+        // Check if the task is incomplete and the forecast date has passed
+        if (!task.CompleteDate.HasValue && _bl.CurrentClock > GetForecastDate(task))
+        {
+            return true;
+        }
+
+        // Check if any of the dependencies are in jeopardy
+        foreach (var dependencyId in _dal.Dependency.ReadAll(dep => dep.DependentTask == task.Id).Select(dep => dep.DependensOnTask))
+        {
+            var dependencyTask = _dal.Task.Read(dependencyId);
+            if (dependencyTask != null && IsTaskInJeopardy(dependencyTask))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

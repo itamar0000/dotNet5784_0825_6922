@@ -52,6 +52,15 @@
 
                         <!--Status Column-->
                         <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="150"/>
+
+                        <!-- Button Column -->
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding  StartDate ,Converter= {StaticResource DatetoContent}}" Click="Button_Click" Width="50" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
