@@ -11,6 +11,34 @@
     <Grid>
         <Border Grid.Row="1" Margin="10">
             <ListView ItemsSource="{Binding TaskInLists}" Background="White" MouseDoubleClick="Btn_startend">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            
+                            <!-- trigger to set background color based on Status property -->
+                            <DataTrigger Binding="{Binding Status}" Value="Unscheduled">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="Scheduled">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="OnTrack">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="InJeopardy">
+                                <Setter Property="Background" Value="red"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="Done">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </DataTrigger>
+                           
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
                         <!--Id Column-->
@@ -19,12 +47,15 @@
                         <!--Name Column-->
                         <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="150"/>
 
+                        <!--Description Column-->
                         <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
 
+                        <!--Status Column-->
                         <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="150"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </Border>
     </Grid>
+
 </Window>

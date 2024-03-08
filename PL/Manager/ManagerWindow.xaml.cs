@@ -25,7 +25,37 @@ public partial class ManagerWindow : Window
     public ManagerWindow()
     {
         InitializeComponent();
+        DataContext = this;
+
+        TaskListAll = s_bl.Task.ReadAll();
+        TaskList = TaskListAll.Where(item => item.CompleteDate != null);
+        ProgressBarValue = (TaskList.Count() * 100) / TaskListAll.Count();
     }
+
+    public int ProgressBarValue
+    {
+        get { return (int)GetValue(ProgressBarValueProperty); }
+        set { SetValue(ProgressBarValueProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for ProgressBarValue.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ProgressBarValueProperty =
+        DependencyProperty.Register("ProgressBarValue", typeof(int), typeof(ManagerWindow), new PropertyMetadata(null));
+
+
+
+    public IEnumerable<BO.Task> TaskList
+    {
+        get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
+        set { SetValue(TaskListProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for RaskList.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty TaskListProperty =
+        DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(ManagerWindow), new PropertyMetadata(null));
+
+    IEnumerable<BO.Task> TaskListAll;
+
     private void BtnEngineers_Click(object sender, RoutedEventArgs e)
     {
         new EngineerListWindow().Show();
@@ -68,5 +98,5 @@ public partial class ManagerWindow : Window
            
         }
 
-    }
+    }  
 }

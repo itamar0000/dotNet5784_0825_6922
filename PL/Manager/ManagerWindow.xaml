@@ -12,11 +12,13 @@
     </Window.Background>
     <Grid>
         <!--a button to go to Engineer's Window-->
-        <Button Content="Handle Engineer" HorizontalAlignment="Left" Margin="49,179,0,0" VerticalAlignment="Top" Click="BtnEngineers_Click" RenderTransformOrigin="-1.351,0.378" Height="35" Width="130"/>
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Height="35" Width="130" RenderTransformOrigin="0.542,0.689"  Click="BtnTasks_Click" VerticalAlignment="Bottom" Margin="229,0,0,220"/>
-        <Button Content="Data Initilazation" HorizontalAlignment="Left" Margin="48,260,0,0" VerticalAlignment="Top" Click="BtnInit_Click" Height="35" Width="130"/>
-        <Button Content="Assign Date" Click="Btn_setschedule" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="229,0,0,139"/>
-        <Button Content="Gant" Click="Button_Click_Gantt" Height="35" Width="130" Margin="49,341,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="Reset" Click="Btn_reset" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="229,0,0,58"/>
+        <Button Content="Handle Engineer" Click="BtnEngineers_Click" RenderTransformOrigin="-1.351,0.378" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,160,0,0"/>
+        <Button Content="Handle Tasks" Height="35" Width="130" RenderTransformOrigin="0.542,0.689"  Click="BtnTasks_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,160,0,0"/>
+        <Button Content="Data Initilazation" Click="BtnInit_Click" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,240,0,0"/>
+        <Button Content="Assign Date" Click="Btn_setschedule" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,240,0,0"/>
+        <Button Content="Gant" Click="Button_Click_Gantt" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,320,0,0"/>
+        <Button Content="Reset" Click="Btn_reset" Height="35" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,320,0,0"/>
+
+        <ProgressBar Value="{Binding ProgressBarValue}" Foreground="#7D5893" HorizontalAlignment="Left" Height="13" Margin="137,375,0,0" VerticalAlignment="Top" Width="130"/>
     </Grid>
 </Window>

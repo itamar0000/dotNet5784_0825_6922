@@ -11,38 +11,36 @@
         <ImageBrush ImageSource="/Images/welcomee.jpg"></ImageBrush>
     </Window.Background>
     <Grid>
-        <Viewbox Stretch="Uniform">
-            <!-- Arc Path -->
-            <Grid>
-                <!-- TextBlock along the Arc -->
 
-                <Label Content="{Binding MyTime, StringFormat=dd/mm/yy}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                       BorderBrush="#09275F" Background="#7D5893" BorderThickness="1" Canvas.Left="44" Canvas.Top="30" Height="21" Width="120"
-                       HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontFamily="Ariel" Margin="-130,126,0,0"/>
-
-                <Border CornerRadius="0">
-                    <Button Content="Add Day" Click="Button_Click_AddDay" BorderBrush="#09275F" Background="#7D5893" Width="35" Height="15" FontSize="8" Margin="-45,146,142,115"/>
-
-                </Border>
-
-                <Button Content="Add Hour" Click="Button_Click_AddHour" Width="40" Height="15" FontSize="8" Margin="-85,146,177,115"/>
-                <Button Content="Reset Time" Click="Button_Click_ResetTime" Width="45" Height="15" FontSize="8" Margin="-130,146,217,115"/>
-            </Grid>
-        </Viewbox>
-
-        <Button BorderBrush="#09275F" Width="140" Height="30" Click="Btn_Engineer" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom" Margin="49,332,0,0" >
+        <Button Width="140" Height="30" Click="Btn_Engineer" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom" Margin="23,337,0,0" >
             <Grid>
                 <Image Source="/Images/Icons/IconOfEngineer.jpg" Margin="-40,0,63,0" Width="25"/>
                 <TextBlock Text="I am an Engineer" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Margin="25,0,0,0"/>
             </Grid>
         </Button>
 
-        <Button Width="140" Height="30" Click="Btn_Manager" VerticalAlignment="Bottom" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="229,0,0,72"  >
-            <Grid>
-                <Image Source="/Images/Icons/IconOfManager.jpg" Margin="-43,0,63,0" Width="25"/>
-                <TextBlock Text="I am the Manager" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Margin="18,0,0,0"/>
-            </Grid>
+        <Button Width="140" Height="30" Click="Btn_Manager" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="189,337,0,0"  >
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Images/Icons/IconOfManager.jpg" Margin="0,0,5,0" Width="25"/>
+                <TextBlock Text="I am the Manager" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </StackPanel>
         </Button>
+
+
+
+        <Grid Width="170" Height="100" Background="#A0C1D1" Margin="0,30,555,0">
+
+            <Label Content="{Binding MyTime, StringFormat=d/m/y}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+             BorderBrush="#09275F" Background="#7D5893" BorderThickness="1" Canvas.Left="44" Canvas.Top="30" Width="140" Height="30"
+             HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" FontFamily="Ariel" Margin="0,10,0,0"/>
+
+
+            <Button Content="Add Day" Click="Button_Click_AddDay" Width="40" Height="20" FontSize="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,45,0,0" />
+            <Button Content="Add Hour" Click="Button_Click_AddHour" Width="40" Height="20" FontSize="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,45,0,0"/>
+            <Button Content="Reset Time" Click="Button_Click_ResetTime" Width="44" Height="20" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,70,0,0"/>
+
+
+        </Grid>
 
     </Grid>
 </Window>

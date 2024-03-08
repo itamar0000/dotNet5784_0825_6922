@@ -19,6 +19,13 @@
         <local:ImagePathConverter x:Key="imageForEngineer"/>
 
 
+        <!--#region Gradient Color-->
+        <LinearGradientBrush x:Key="cs_Background" StartPoint="0,0" EndPoint="0,2">
+            <GradientStop Color="#09275F" Offset="0.0"/>
+            <GradientStop Color="#7D5893" Offset="0.5"/>
+        </LinearGradientBrush>
+        <!--#endregion-->
+
 
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="#09275F"></Setter>
@@ -34,11 +41,24 @@
                                 BorderThickness="1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
+                        
+                        <ControlTemplate.Triggers>
+                            
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7D58C9"/>
+                            </Trigger>
+
+                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                                <Setter Property="FontSize" Value="13"/>
+                            </DataTrigger>
+                            
+                        </ControlTemplate.Triggers>
+                        
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
 
-            <Style.Triggers>
+            <!--<Style.Triggers>
 
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#7D58C9"/>
@@ -48,7 +68,7 @@
                     <Setter Property="FontSize" Value="13"/>
                 </DataTrigger>
 
-            </Style.Triggers>
+            </Style.Triggers>-->
 
         </Style>
 

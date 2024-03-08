@@ -223,11 +223,6 @@ public class ImagePathConverter : IValueConverter
     // Convert from BitmapImage to image path (not implemented in this case)
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is string imagePath && !string.IsNullOrEmpty(imagePath))
-        {
-            return imagePath;
-        }
-        return null;
-
+        throw new NotImplementedException();
     }
 }

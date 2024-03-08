@@ -15,7 +15,7 @@ public record Engineer
     string Email,
     double Cost,
     DO.EngineerExperience Level = DO.EngineerExperience.Beginner,
-    string? ImagePath = "C:\\\\Users\\\\olete\\\\source\\\\repos\\\\dotNet5784_0825_6922\\\\PL\\\\Images\\\\defaultImageOfEngineer.jpg"
+    string? ImagePath = "C:\\\\Users\\\\User\\\\source\\\\repos\\\\dotNet5784_0825_6922\\\\PL\\\\Images\\\\defaultImageOfEngineer.jpg"
 )
 {
      public Engineer() : this(0, "", "", 0) { }

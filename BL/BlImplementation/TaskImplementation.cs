@@ -464,7 +464,7 @@ internal class TaskImplementation : BlApi.ITask
 
 
         IEnumerable<BO.Task> engineerTasks = ReadAll(current => current.Engineer.Id == item.Engineer.Id);
-        if (engineerTasks != null && engineerTasks.Any(tsk => tsk.CompleteDate == null && tsk.Id != item.Id))
+        if (engineerTasks != null && engineerTasks.Any(tsk => tsk.Id != item.Id && tsk.StartDate != null && tsk.CompleteDate == null))
         {
             var currentTask = engineerTasks.FirstOrDefault(tsk => tsk.CompleteDate == null && tsk.Id != item.Id);
             throw new BO.BlInvalidInputException($"Cannot start that task, you are working on \"{currentTask?.Alias}\" task right now.");

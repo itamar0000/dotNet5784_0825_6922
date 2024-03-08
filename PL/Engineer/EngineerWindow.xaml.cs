@@ -40,7 +40,7 @@ namespace PL.Engineer
 
         public EngineerWindow(int Id = 0)
         {
-             BitmapImage imageSource = new BitmapImage(new Uri("C:\\Users\\olete\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg"));
+            BitmapImage imageSource = new BitmapImage(new Uri("C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg"));
             Image = imageSource;
             InitializeComponent();
             id = Id;
@@ -117,25 +117,48 @@ namespace PL.Engineer
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
             if (openFileDialog.ShowDialog() == true)
+            {
+                try
                 {
-                    try
-                    {
-                        // Get the selected file path
-                        string imagePath = openFileDialog.FileName;
+                    // Get the selected file path
+                    string imagePath = openFileDialog.FileName;
 
-                        // Store the image path in your class or wherever you need it
-                        engineer.ImagePath = imagePath;
+                    // Construct the destination folder path within your project
+                    string projectFolderPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    string relativeFolderPath = @"..\..\Images\EngineersImages";
+                    string destinationFolder = System.IO.Path.Combine(projectFolderPath, relativeFolderPath);
 
-                        // Load the image into an Image control or any other appropriate control
-                        BitmapImage imageSource = new BitmapImage(new Uri(imagePath));
-                        Image = imageSource;
-                    }
-                    catch (Exception ex)
+                    // Create the destination folder if it doesn't exist
+                    if (!System.IO.Directory.Exists(destinationFolder))
                     {
-                        MessageBox.Show("Error loading image: " + ex.Message);
+                        System.IO.Directory.CreateDirectory(destinationFolder);
                     }
+
+                    // Get the file name without the path
+                    string fileName = System.IO.Path.GetFileName(imagePath);
+
+                    // Define the destination path for the copied file
+                    string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
+
+                    // Copy the file to the destination folder
+                    System.IO.File.Copy(imagePath, destinationPath, true);
+
+                    // Set the ImagePath property of the Engineer object
+                    engineer.ImagePath = destinationPath;
+
+                    // Load the copied image into an Image control or any other appropriate control
+                    BitmapImage imageSource = new BitmapImage(new Uri(destinationPath));
+                    Image = imageSource;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image: " + ex.Message);
+                }
+            }
         }
+
+
+
 
     }
 }
