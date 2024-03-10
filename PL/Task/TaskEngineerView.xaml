@@ -10,7 +10,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <Border Grid.Row="1" Margin="10">
-            <ListView ItemsSource="{Binding TaskInLists}" Background="White" MouseDoubleClick="Btn_startend">
+            <ListView ItemsSource="{Binding TaskInLists}" Background="White">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
@@ -57,7 +57,7 @@
                         <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding  StartDate ,Converter= {StaticResource DatetoContent}}" Click="Button_Click" Width="50" HorizontalAlignment="Center"/>
+                                    <Button Content="{Binding  StartDate ,Converter= {StaticResource DatetoContent}}" Click="Button_Click" Width="50" HorizontalAlignment="Center" IsEnabled="{Binding CompleteDate, Converter={StaticResource datetoenable}}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

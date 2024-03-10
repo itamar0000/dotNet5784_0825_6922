@@ -8,8 +8,8 @@
         Title="GetIdWindow" Height="150" Width="250"
         DataContext="{Binding RelativeSource= {RelativeSource Mode=Self}}">
     <Grid>
-        <Label Content="Enter your ID:" Width="80" HorizontalAlignment="Left" Height="30" Margin="5,21,0,33"/>
-        <TextBox Text="{Binding Id}" Width="100" Height="15" Margin="100,31,50,43"/>
-        <Button Content="Enter" Click="Btn_EnterId" Width="40" Height=" 10" Margin="0,100,0,0" FontSize="5" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+        <Label Content="Enter your ID:"  HorizontalAlignment="Center" Height="30" Margin="0,23,0,81"  />
+        <TextBox Text="{Binding Id}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="158" />
+        <Button Content="Enter" Click="Btn_EnterId" Width="98" Height="16" Margin="0,100,0,0" FontSize="5" HorizontalAlignment="Center" VerticalAlignment="Top"  />
     </Grid>
 </Window>

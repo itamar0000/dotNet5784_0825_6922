@@ -240,3 +240,25 @@ public class DatetoContentConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+public class DatetoEnableConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        DateTime? dateTime = (DateTime?)value;
+        if(dateTime!=null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+     
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        // This method is not used in one-way binding
+        throw new NotImplementedException();
+    }
+}

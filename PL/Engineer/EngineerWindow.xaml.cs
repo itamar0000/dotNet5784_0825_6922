@@ -40,7 +40,7 @@ namespace PL.Engineer
 
         public EngineerWindow(int Id = 0)
         {
-            BitmapImage imageSource = new BitmapImage(new Uri("C:\\Users\\User\\source\\repos\\dotNet5784_0825_6922\\PL\\Images\\defaultImageOfEngineer.jpg"));
+            BitmapImage imageSource = new BitmapImage(new Uri("PL\\Images\\defaultImageOfEngineer.jpg"));
             Image = imageSource;
             InitializeComponent();
             id = Id;

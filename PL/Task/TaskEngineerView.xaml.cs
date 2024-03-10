@@ -36,17 +36,7 @@ namespace PL.Task
 
 
 
-        public BO.Task CurrentTask
-        {
-            get { return (BO.Task)GetValue(CurrentTaskProperty); }
-            set { SetValue(CurrentTaskProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for CurrentTask.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CurrentTaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskEngineerView), new PropertyMetadata(null));
-
-
+       
         public TaskEngineerView(int Id)
         {
             try
@@ -66,23 +56,35 @@ namespace PL.Task
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Get the DataContext of the button, which should be the Task object
-            if (sender is Button button && button.DataContext is BO.Task task)
+            try
             {
-                CurrentTask = task;
-               if( button.Content=="Start")
+                // Get the DataContext of the button, which should be the Task object
+                if (sender is Button button && button.DataContext is BO.Task task)
                 {
-                    task.StartDate = DateTime.Now;
-                    s_bl.Task.UpdateDatesForEngineerWork(task);
-                }
-                else
-                {
-                    task.CompleteDate = DateTime.Now;
-                    s_bl.Task.UpdateDatesForEngineerWork(task);
-                }
-               
+                   
+                    if (button.Content == "Start")
+                    {
+                        task.StartDate = DateTime.Now;
+                        s_bl.Task.UpdateDatesForEngineerWork(task);
+                        MessageBox.Show("Task started successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                        TaskInLists=s_bl.Task.ReadAll(Item => Item?.Engineer?.Id == task.Engineer.Id);
+                    }
+                    else
+                    {
+                        task.CompleteDate = DateTime.Now;
+                        s_bl.Task.UpdateDatesForEngineerWork(task);
+                        MessageBox.Show("Task ended successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                        TaskInLists = s_bl.Task.ReadAll(Item => Item?.Engineer?.Id == task.Engineer.Id);
 
-                // You might want to update your UI bindings or notify changes to reflect the changes made to the task object
+
+                    }
+
+
+                    // You might want to update your UI bindings or notify changes to reflect the changes made to the task object
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

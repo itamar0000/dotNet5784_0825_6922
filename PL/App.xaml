@@ -18,6 +18,7 @@
         <local:DatetimeToBackgroundConverter x:Key="datetobackground"/>
         <local:ImagePathConverter x:Key="imageForEngineer"/>
         <local:DatetoContentConverter x:Key="DatetoContent"/>
+        <local:DatetoEnableConverter x:Key="datetoenable"/>
 
         <!--#region Gradient Color-->
         <LinearGradientBrush x:Key="cs_Background" StartPoint="0,0" EndPoint="0,2">
