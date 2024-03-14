@@ -3,11 +3,14 @@
 using BlApi;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 class ConvertIdToContent : IValueConverter
 {
@@ -150,12 +153,12 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
         {
             if (status == BO.Status.InJeopardy)
                 return Brushes.Red;
-            else if(status==BO.Status.Done)
+            else if (status == BO.Status.Done)
             {
                 return Brushes.Green;
             }
         }
-     
+
 
         if (values[0] is DateTime dateTime)
         {
@@ -193,43 +196,64 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
 
 public class ImagePathConverter : IValueConverter
 {
-    // Convert from image path to BitmapImage
+    private const string DefaultImagePath = @"..\Images\defaultImageOfEngineer.jpg";
+
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is string imagePath && !string.IsNullOrEmpty(imagePath))
+        if (value is string encodedImageText)
         {
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.UriSource = new Uri(imagePath);
-            image.EndInit();
-            return image;
-        }
+            if (string.IsNullOrEmpty(encodedImageText))
+            {
+                // Load the default image
+                return new BitmapImage(new Uri(DefaultImagePath, UriKind.Relative));
+            }
 
-        return null;
+            try
+            {
+                byte[] imageData = System.Convert.FromBase64String(encodedImageText);
+                BitmapImage image = new BitmapImage();
+                using (MemoryStream stream = new MemoryStream(imageData))
+                {
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = stream;
+                    image.EndInit();
+                }
+                return image;
+            }
+            catch (Exception ex)
+            {
+                // Return the default image if an error occurs during conversion
+                return new BitmapImage(new Uri(DefaultImagePath, UriKind.Relative));
+            }
+        }
+        else
+        {
+            // Return the default image for non-string input
+            return new BitmapImage(new Uri(DefaultImagePath, UriKind.Relative));
+        }
     }
 
-    // Convert from BitmapImage to image path (not implemented in this case)
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 }
 public class DatetoContentConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-             DateTime? dateTime = (DateTime?)value;
-            // Check if DateTime is assigned
-            if (dateTime != null)
-            {
-                return "End";
-            }
-            else
-            {
-                return "Start";
-            }
-      
+        DateTime? dateTime = (DateTime?)value;
+        // Check if DateTime is assigned
+        if (dateTime != null)
+        {
+            return "End";
+        }
+        else
+        {
+            return "Start";
+        }
+
 
 
     }
@@ -245,7 +269,7 @@ public class DatetoEnableConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         DateTime? dateTime = (DateTime?)value;
-        if(dateTime!=null)
+        if (dateTime != null)
         {
             return false;
         }
@@ -254,7 +278,7 @@ public class DatetoEnableConverter : IValueConverter
             return true;
         }
 
-     
+
     }
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {

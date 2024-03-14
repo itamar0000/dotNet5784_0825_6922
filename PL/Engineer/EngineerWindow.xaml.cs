@@ -2,164 +2,128 @@
 using Microsoft.Win32;
 using Microsoft.Xaml.Behaviors;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Printing.IndexedProperties;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
-namespace PL.Engineer
+
+namespace PL.Engineer;
+
+/// <summary>
+/// Interaction logic for EngineerWindow.xaml
+/// </summary>
+
+/// <summary>
+/// Interaction logic for EngineerWindow.xaml
+/// </summary>
+public partial class EngineerWindow : Window, INotifyPropertyChanged
 {
-    /// <summary>
-    /// Interaction logic for EngineerWindow.xaml
-    /// </summary>
-    public partial class EngineerWindow : Window
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+
+    public BO.Engineer Engineer
     {
-        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        get { return (BO.Engineer)GetValue(EngineerProperty); }
+        set { SetValue(EngineerProperty, value); }
+    }
 
-        public BO.Engineer engineer
+    public static readonly DependencyProperty EngineerProperty =
+    DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
+
+    int id;
+
+    public EngineerWindow(int Id = 0)
+    {
+        InitializeComponent();
+        id = Id;
+
+        if (Id == 0)
         {
-            get { return (BO.Engineer)GetValue(EngineerProperty); }
-            set { SetValue(EngineerProperty, value); }
+            Engineer = new BO.Engineer();
         }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        int id;
-        public static readonly DependencyProperty EngineerProperty =
-           DependencyProperty.Register("engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
-
-
-        public EngineerWindow(int Id = 0)
-        {
-            BitmapImage imageSource = new BitmapImage(new Uri("PL\\Images\\defaultImageOfEngineer.jpg"));
-            Image = imageSource;
-            InitializeComponent();
-            id = Id;
-            if (Id == 0)
-            {
-                engineer = new BO.Engineer();
-            }
-            else
-            {
-                try
-                {
-                    engineer = s_bl.Engineer.Read(Id)!;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
-        }
-
-
-        private void Add_UpdateEngineer_Click(object sender, RoutedEventArgs e)
+        else
         {
             try
             {
-                if (id == 0)
-                {
-                    s_bl.Engineer.Create(engineer);
-                    MessageBox.Show("Engineer added successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    s_bl.Engineer.Update(engineer);
-                    MessageBox.Show("Engineer updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                Close();
+                Engineer = s_bl.Engineer.Read(Id)!;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
-        private void Txt_Input(object sender, TextCompositionEventArgs e)
+    }
+
+    private void Add_UpdateEngineer_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            foreach (char c in e.Text)
+            if (id == 0)
             {
-                if (!Char.IsDigit(c))
-                {
-                    e.Handled = true; // Mark the event as handled, preventing the character from being entered
-                    return;
-                }
+                s_bl.Engineer.Create(Engineer);
+                MessageBox.Show("Engineer added successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                s_bl.Engineer.Update(Engineer);
+                MessageBox.Show("Engineer updated successfully", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            Close();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void Txt_Input(object sender, TextCompositionEventArgs e)
+    {
+        foreach (char c in e.Text)
+        {
+            if (!Char.IsDigit(c))
+            {
+                e.Handled = true; // Mark the event as handled, preventing the character from being entered
+                return;
             }
         }
+    }
 
+    private void Button_Photo(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
+        openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
-        public ImageSource Image
+        if (openFileDialog.ShowDialog() == true)
         {
-            get { return (ImageSource)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ImageSourceProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(ImageSource), typeof(EngineerWindow), new PropertyMetadata(null));
-
-
-
-        private void Button_Photo(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-
-            if (openFileDialog.ShowDialog() == true)
+            try
             {
-                try
-                {
-                    // Get the selected file path
-                    string imagePath = openFileDialog.FileName;
-
-                    // Construct the destination folder path within your project
-                    string projectFolderPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                    string relativeFolderPath = @"..\..\Images\EngineersImages";
-                    string destinationFolder = System.IO.Path.Combine(projectFolderPath, relativeFolderPath);
-
-                    // Create the destination folder if it doesn't exist
-                    if (!System.IO.Directory.Exists(destinationFolder))
-                    {
-                        System.IO.Directory.CreateDirectory(destinationFolder);
-                    }
-
-                    // Get the file name without the path
-                    string fileName = System.IO.Path.GetFileName(imagePath);
-
-                    // Define the destination path for the copied file
-                    string destinationPath = System.IO.Path.Combine(destinationFolder, fileName);
-
-                    // Copy the file to the destination folder
-                    System.IO.File.Copy(imagePath, destinationPath, true);
-
-                    // Set the ImagePath property of the Engineer object
-                    engineer.ImagePath = destinationPath;
-
-                    // Load the copied image into an Image control or any other appropriate control
-                    BitmapImage imageSource = new BitmapImage(new Uri(destinationPath));
-                    Image = imageSource;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error loading image: " + ex.Message);
-                }
+                string imagePath = openFileDialog.FileName;
+                ConvertPhotoToEncodedText(imagePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error selecting image: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+    }
 
-
-
-
+    private void ConvertPhotoToEncodedText(string imagePath)
+    {
+        try
+        {
+            byte[] imageData = File.ReadAllBytes(imagePath);
+            string encodedImageText = Convert.ToBase64String(imageData);
+            Engineer.ImagePath = encodedImageText;
+            MessageBox.Show("Image selected successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error converting photo to encoded text: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
-

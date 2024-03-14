@@ -8,7 +8,7 @@
         Icon="../Images/Icons/IconOfEngineer.jpg"
     Title="EngineerWindow" Height="500" Width="400"
     Background="{StaticResource cs_Background}"
-    DataContext="{Binding engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    DataContext="{Binding Engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
     <Grid>
         <Label Content="ID" HorizontalAlignment="Left" Margin="74,10,0,0" VerticalAlignment="Top" Height="47" Width="37" FontSize="20" />
@@ -28,7 +28,12 @@
         <!--Cost Textbox-->
         <TextBox HorizontalAlignment="Left" Margin="178,224,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
 
-        <Image Source="{Binding ImagePath, Converter={StaticResource imageForEngineer}}" HorizontalAlignment="Left" Margin="178,341,0,0" VerticalAlignment="Top" Height="76" Width="100"/>
+        <Image HorizontalAlignment="Left" Margin="178,341,0,0" VerticalAlignment="Top" Height="76" Width="100">
+            <Image.Source>
+                <Binding Path="ImagePath" Converter="{StaticResource imageForEngineer}"/>
+            </Image.Source>
+        </Image>
+        
         <Button Content="Select Photo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="120" Margin="300,341,0,0" Click="Button_Photo"/>
 
         <Button  HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateEngineer_Click" RenderTransformOrigin="0.,456.408" Margin="0,426,0,0" Background="Black"/>
