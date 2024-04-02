@@ -21,7 +21,7 @@ internal class ClockImplementation : IClock
 
     public void SetStartDate(DateTime? time)
     {
-        DataSource.Config.endDate = time;
+        DataSource.Config.startDate = time;
     }
 
     DateTime? IClock.GetEndDate()

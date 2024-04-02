@@ -28,15 +28,18 @@
         <!--Cost Textbox-->
         <TextBox HorizontalAlignment="Left" Margin="178,224,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
 
+        <!-- Image -->
         <Image HorizontalAlignment="Left" Margin="178,341,0,0" VerticalAlignment="Top" Height="76" Width="100">
             <Image.Source>
                 <Binding Path="ImagePath" Converter="{StaticResource imageForEngineer}"/>
             </Image.Source>
         </Image>
-        
+
+        <!-- Button Select Photo -->
         <Button Content="Select Photo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="120" Margin="300,341,0,0" Click="Button_Photo"/>
 
-        <Button  HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateEngineer_Click" RenderTransformOrigin="0.,456.408" Margin="0,426,0,0" Background="Black"/>
+        <!-- Button Add / Update -->
+        <Button HorizontalAlignment="Center" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" VerticalAlignment="Top" Height="30" Width="90" Click="Add_UpdateEngineer_Click" RenderTransformOrigin="0.,456.408" Margin="0,426,0,0" Background="Black"/>
 
     </Grid>
 </Window>

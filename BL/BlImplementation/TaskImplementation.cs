@@ -374,9 +374,10 @@ internal class TaskImplementation : BlApi.ITask
     /// <param name="item">The task to set the status and scheduled date for.</param>
     public void SetScheduele(BO.Task item)
     {
-        item.Status = BO.Status.Scheduled;
+        BO.Task temp = Read(item.Id);
+        temp.Status = BO.Status.Scheduled;
 
-        Update(item.Id, EarliestDate(item));
+        Update(item.Id, EarliestDate(temp));
 
     }
 

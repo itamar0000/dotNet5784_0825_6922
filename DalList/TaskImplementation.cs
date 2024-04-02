@@ -62,7 +62,7 @@ internal class TaskImplementation : ITask
     {
         Task? found = DataSource.Tasks.Find(task => (item.Id == task.Id && task.isActive == true));
         DataSource.Tasks.RemoveAll(x=>x.Id == item.Id);
-        item = item with { CreatedAtDate = item.CreatedAtDate };
+        item = item with { ScheduledDate = item.ScheduledDate };
         DataSource.Tasks.Add(item);
     }
 

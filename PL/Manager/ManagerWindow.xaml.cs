@@ -29,7 +29,12 @@ public partial class ManagerWindow : Window
 
         TaskListAll = s_bl.Task.ReadAll();
         TaskList = TaskListAll.Where(item => item.CompleteDate != null);
-        ProgressBarValue = (TaskList.Count() * 100) / TaskListAll.Count();
+        if (TaskList.Count() == 0)
+        {
+            ProgressBarValue = 0;
+        }
+        else
+            ProgressBarValue = (TaskList.Count() * 100) / TaskListAll.Count();
     }
 
     public int ProgressBarValue
@@ -95,8 +100,8 @@ public partial class ManagerWindow : Window
         if (s_bl.Clock.GetStartDate() == null)
         {
             new StartDateWindow().Show();
-           
+
         }
 
-    }  
+    }
 }
