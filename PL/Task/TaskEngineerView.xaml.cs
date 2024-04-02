@@ -41,9 +41,10 @@ namespace PL.Task
         {
             try
             {
-               TaskInLists = s_bl.Task.ReadAll(Item => Item?.Engineer?.Id == Id);
-             
+
                 InitializeComponent();
+                TaskInLists = s_bl.Task.ReadAll(Item => Item?.Engineer?.Id == Id);
+             
             }
             catch(Exception ex)
             {

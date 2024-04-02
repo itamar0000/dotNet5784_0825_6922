@@ -12,46 +12,68 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+/// <summary>
+/// Converts ID to content based on its value.
+/// </summary>
 class ConvertIdToContent : IValueConverter
 {
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return (int)value == 0 ? "Add" : "Update";
     }
 
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts ID to enable state based on its value.
+/// </summary>
 class ConvertIdToEnable : IValueConverter
 {
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return (int)value == 0 ? true : false;
     }
 
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts DateTime to enable state based on the current clock.
+/// </summary>
 class ConvertDatetimeToEnable : IValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return (DateTime?)value >= s_bl.Clock.GetStartDate() ? true : false;
     }
+
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
 
+/// <summary>
+/// Converts date difference to total days.
+/// </summary>
 public class DateDifferenceMultiConverter : IMultiValueConverter
 {
+    /// <inheritdoc/>
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values != null && values.Length == 2 && values[0] is DateTime scheduledDate && values[1] is DateTime forecastDate)
@@ -62,14 +84,19 @@ public class DateDifferenceMultiConverter : IMultiValueConverter
         return null;
     }
 
+    /// <inheritdoc/>
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
 
+/// <summary>
+/// Converts TimeSpan to width.
+/// </summary>
 public class TimeSpanToWidthConverter : IValueConverter
 {
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is TimeSpan timeSpan)
@@ -82,20 +109,25 @@ public class TimeSpanToWidthConverter : IValueConverter
         return DependencyProperty.UnsetValue;
     }
 
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts date to canvas left position.
+/// </summary>
 public class DateToCanvasLeftConverter : IValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is DateTime dateTime)
         {
-
             DateTime startDate = (DateTime)value;
             DateTime endDate = (DateTime)s_bl.Clock.GetStartDate()!;
 
@@ -106,16 +138,20 @@ public class DateToCanvasLeftConverter : IValueConverter
         return 0; // Default value
     }
 
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
 
-
+/// <summary>
+/// Converts DateTime to string and vice versa.
+/// </summary>
 public class DateTimeToStringConverter : IValueConverter
 {
     // Convert DateTime to string
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is DateTime dateTime)
@@ -128,6 +164,7 @@ public class DateTimeToStringConverter : IValueConverter
     }
 
     // Convert back from string to DateTime (not implemented for this example)
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is string stringValue)
@@ -143,10 +180,15 @@ public class DateTimeToStringConverter : IValueConverter
     }
 }
 
+
+/// <summary>
+/// Converts DateTime to background color based on various conditions.
+/// </summary>
 public class DatetimeToBackgroundConverter : IMultiValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    /// <inheritdoc/>
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values[2] is BO.Status status)
@@ -187,17 +229,21 @@ public class DatetimeToBackgroundConverter : IMultiValueConverter
 
     }
 
-
+    /// <inheritdoc/>
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
 
+/// <summary>
+/// Converts image path to a BitmapImage.
+/// </summary>
 public class ImagePathConverter : IValueConverter
 {
     private const string DefaultImagePath = @"..\Images\defaultImageOfEngineer.jpg";
 
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is string encodedImageText)
@@ -234,13 +280,19 @@ public class ImagePathConverter : IValueConverter
         }
     }
 
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotSupportedException();
     }
 }
+
+/// <summary>
+/// Converts date to content based on its value.
+/// </summary>
 public class DatetoContentConverter : IValueConverter
 {
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         DateTime? dateTime = (DateTime?)value;
@@ -253,19 +305,22 @@ public class DatetoContentConverter : IValueConverter
         {
             return "Start";
         }
-
-
-
     }
 
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         // This method is not used in one-way binding
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// Converts date to enable state based on its value.
+/// </summary>
 public class DatetoEnableConverter : IValueConverter
 {
+    /// <inheritdoc/>
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         DateTime? dateTime = (DateTime?)value;
@@ -277,9 +332,9 @@ public class DatetoEnableConverter : IValueConverter
         {
             return true;
         }
-
-
     }
+
+    /// <inheritdoc/>
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         // This method is not used in one-way binding
