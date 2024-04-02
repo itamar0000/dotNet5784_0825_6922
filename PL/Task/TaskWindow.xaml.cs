@@ -50,18 +50,12 @@ namespace PL.Task
 
 
         public List<BO.TaskInList> AddDependency { get; set; }
-        //public IEnumerable<BO.Task> TaskList
-        //{
-        //    get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
-        //    set { SetValue(TaskListProperty, value); }
-        //}
 
-        //// Using a DependencyProperty as the backing store for TaskList.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty TaskListProperty =
-        //    DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskWindow), new PropertyMetadata(null));
         public List<BO.TaskInList> DelDependency { get; set; }
 
-
+        /// <summary>
+        /// start date of the task
+        /// </summary>
         public DateTime? StartDate
         {
             get { return (DateTime?)GetValue(StartDateProperty); }
@@ -71,7 +65,6 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for StartDate.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StartDateProperty =
             DependencyProperty.Register("StartDate", typeof(DateTime?), typeof(TaskWindow), new PropertyMetadata(null));
-
 
 
         public BO.Task task
@@ -88,11 +81,9 @@ namespace PL.Task
 
         public TaskWindow(int Id = 0)
         {
-            // clear A:
             AddDependency = new List<BO.TaskInList>();
             DelDependency = new List<BO.TaskInList>();
             StartDate = s_bl.Clock.GetStartDate();
-            //       TaskList = s_bl.Task.ReadAll();
             id = Id;
             if (Id == 0)
             {
@@ -104,11 +95,7 @@ namespace PL.Task
                 {
                     task = s_bl.Task.Read(Id)!;
                     EngineerId = (task.Engineer != null) ? (int)task.Engineer.Id : 0;
-                    // TaskList = (from BO.Task t in s_bl.Task.ReadAll()
-                    //             where task.Dependencies==null || task.Dependencies.FirstOrDefault(item => item.Id == t.Id) == null
-                    //             select t);
-                    //  BO.TaskInList temp= new TaskInList { Id=task.Id, Alias=task.Alias, Status=task.Status, Description=task.Description };
-                    //  TaskList=TaskList.Where(item=>item.Id != task.Id);
+
                     TaskinList = (from t in s_bl.Task.ReadAll()
                                   select new Temp()
                                   {
@@ -176,6 +163,11 @@ namespace PL.Task
         }
 
 
+        /// <summary>
+        /// Handles the event when a checkbox is checked.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkb = sender as CheckBox;
@@ -199,9 +191,17 @@ namespace PL.Task
             }
         }
 
+        // Other methods and properties...
+
+
+
+        /// <summary>
+        /// Handles the event when a checkbox is unchecked.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-
             var checkb = sender as CheckBox;
             int Id = (int)checkb.Tag;
 
@@ -225,6 +225,11 @@ namespace PL.Task
             }
         }
 
+        /// <summary>
+        /// Handles the event when the Set Engineer button is clicked.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void SetEngineer_Click(object sender, RoutedEventArgs e)
         {
             var window = new SetEngineerWindow(BO.EngineerExperience.None, EngineerSelectedHandler);
@@ -233,23 +238,30 @@ namespace PL.Task
             window.ShowDialog();
         }
 
+        /// <summary>
+        /// Handles the selection of an engineer.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="args">The event arguments containing the selected engineer ID.</param>
         private void EngineerSelectedHandler(object sender, EngineerSelectedEventArgs args)
         {
             EngineerId = args.SelectedEngineerId;
         }
 
-
-
+        /// <summary>
+        /// Gets or sets the ID of the engineer.
+        /// </summary>
         public int EngineerId
         {
             get { return (int)GetValue(EngineerIdProperty); }
             set { SetValue(EngineerIdProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for EngineerId.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Dependency property for the EngineerId.
+        /// </summary>
         public static readonly DependencyProperty EngineerIdProperty =
             DependencyProperty.Register("EngineerId", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
-
 
     }
 }
