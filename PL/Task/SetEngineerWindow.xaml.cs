@@ -24,9 +24,8 @@ namespace PL.Task
         public SetEngineerWindow(BO.EngineerExperience? experience, EventHandler<EngineerSelectedEventArgs> EngineerSelectedHandler)
         {
             InitializeComponent();
-            EngineerList = s_bl?.Engineer.ReadAll(engineer => (int)engineer!.Level >= (int)experience)!;
+            EngineerList = s_bl?.Engineer.ReadAll(engineer => (int)engineer!.Level >= (int)experience!)!;
             EngineerSelected += EngineerSelectedHandler;
-
         }
 
         public IEnumerable<BO.Engineer> EngineerList // get list of all engineers
